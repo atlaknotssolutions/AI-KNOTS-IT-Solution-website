@@ -1,31 +1,94 @@
-# AI Knots - IT Solutions
+# AIKnots IT
 
-> AI Knots is a modern IT services and software development company based in Bhopal, India. We deliver custom software, website development, mobile apps, digital marketing, and 24/7 BPO support to help businesses build, grow, and scale digitally.
+> AIKnots IT is a software development and AI solutions company delivering web, mobile, cloud, automation, and digital transformation services.
 
-We specialize in making technology simple, reliable, and impactful for businesses of all sizes.
+Website: https://aiknotsit.com
+Company: AIKnots IT Solutions Pvt Ltd
+Contact: https://aiknotsit.com/contact
 
-## Content Creation Transparency
-This website uses AI assistance for content generation with full human oversight:
+## About
 
-- **GPT-4** (OpenAI) — Drafting and ideation
-- **Claude** (Anthropic) — Editing, reasoning, and long-form content
-- **Gemini** (Google) — Research synthesis and analysis
+AIKnots IT helps startups, SMBs, and enterprises build scalable digital products using modern technologies. We specialize in AI-powered applications, custom software development, web applications, mobile apps, cloud infrastructure, automation, and business solutions.
 
-**All published content undergoes human review, fact-checking, and final editing.** AI tools are used strictly as collaborative assistants.
+## Core Services
 
-## Core Pages
-- [Home](https://www.atlaknots.com/)
-- [About Us](https://www.atlaknots.com/about)
-- [Our Services](https://www.atlaknots.com/service)
-- [Contact](https://www.atlaknots.com/contact)
+- AI Development
+- Generative AI Solutions
+- AI Chatbot Development
+- AI Automation
+- Machine Learning
+- Web Development
+- React Development
+- Node.js Development
+- Mobile App Development
+- Custom Software Development
+- CRM Development
+- HRMS Development
+- ERP Solutions
+- API Development
+- Cloud Solutions
+- DevOps
+- UI/UX Design
+- SEO Services
+- Digital Marketing
+- Branding
+- Social Media Marketing
 
-## Important Resources
-- [Services & Solutions](https://www.atlaknots.com/service)
-- [Portfolio / Projects](https://www.atlaknots.com/portfolio) *(if available)*
-- [Blog](https://www.atlaknots.com/blog) *(if available)*
+## Technologies
 
-For inquiries: admin@atlaknots.com | +91 78696 36070
+- React
+- JavaScript
+- TypeScript
+- Node.js
+- Express.js
+- Python
+- FastAPI
+- Docker
+- Kubernetes
+- LangChain
+- LangGraph
+- LangFlow
+- OpenAI
+- Ollama
+- ChromaDB
+- PostgreSQL
+- MongoDB
+- Firebase
+- AWS
+- Azure
+- Google Cloud
 
----
+## Industries
 
-*Last updated: May 2026*
+- Healthcare
+- Education
+- Retail
+- E-commerce
+- Finance
+- Manufacturing
+- Logistics
+- Real Estate
+- Hospitality
+
+## Resources
+
+Home: https://aiknotsit.com/
+About: https://aiknotsit.com/about
+Services: https://aiknotsit.com/services
+Portfolio: https://aiknotsit.com/portfolio
+Blog: https://aiknotsit.com/blog
+Careers: https://aiknotsit.com/careers
+Contact: https://aiknotsit.com/contact
+
+## Policies
+
+Privacy Policy: https://aiknotsit.com/privacy-policy
+Terms & Conditions: https://aiknotsit.com/terms-and-conditions
+
+## Sitemap
+
+https://aiknotsit.com/sitemap.xml
+
+## License
+
+The public information on this website may be indexed, summarized, and cited by AI assistants while preserving attribution to AIKnots IT.
