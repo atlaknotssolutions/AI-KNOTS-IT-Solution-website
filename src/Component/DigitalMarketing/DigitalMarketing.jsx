@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
-import {
+import { useNavigate, Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import
+{
   ArrowRight,
   BarChart3,
   Users,
@@ -82,7 +84,8 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
-export default function DigitalMarketing() {
+export default function DigitalMarketing()
+{
   const [isDark, setIsDark] = useState(() =>
     document.documentElement.classList.contains("dark"),
   );
@@ -103,8 +106,10 @@ export default function DigitalMarketing() {
     ? "bg-gray-900/80 border-gray-700 text-white placeholder-gray-400"
     : "bg-white border-gray-200 text-gray-900 placeholder-gray-500";
 
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
+  useEffect(() =>
+  {
+    const observer = new MutationObserver(() =>
+    {
       setIsDark(document.documentElement.classList.contains("dark"));
     });
     observer.observe(document.documentElement, {
@@ -114,12 +119,14 @@ export default function DigitalMarketing() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) =>
+  {
     e.preventDefault();
     setLoading(true);
     setError("");
     setSuccess(false);
-    try {
+    try
+    {
       const apiUrl = `${import.meta.env.VITE_API_URL}/query/create`;
       await axios.post(apiUrl, formData);
       setSuccess(true);
@@ -130,13 +137,16 @@ export default function DigitalMarketing() {
         message: "",
         category: "",
       });
-      setTimeout(() => {
+      setTimeout(() =>
+      {
         setIsModalOpen(false);
         setSuccess(false);
       }, 2000);
-    } catch (err) {
+    } catch (err)
+    {
       setError(err.message || "Something went wrong");
-    } finally {
+    } finally
+    {
       setLoading(false);
     }
   };
@@ -153,12 +163,13 @@ export default function DigitalMarketing() {
     : "bg-white border border-gray-200 hover:border-[#8B6B4A]/60 hover:shadow-2xl";
 
   const buttonClass = `px-8 md:px-12 py-4 md:py-6 rounded-full text-lg md:text-xl font-bold transition-all flex items-center gap-3 group shadow-xl
-    ${
-      isDark
-        ? "bg-gradient-to-r from-[#8B6B4A] to-[#8B6B4A] hover:from-[#8B6B4A] hover:to-[#8B6B4A] shadow-[#8B6B4A]/60"
-        : "bg-[#8B6B4A] hover:bg-[#8B6B4A] text-white shadow-[#8B6B4A]/50"
+    ${isDark
+      ? "bg-gradient-to-r from-[#8B6B4A] to-[#8B6B4A] hover:from-[#8B6B4A] hover:to-[#8B6B4A] shadow-[#8B6B4A]/60"
+      : "bg-[#8B6B4A] hover:bg-[#8B6B4A] text-white shadow-[#8B6B4A]/50"
     }`;
 
+  const serviceLink =
+    "font-bold text-[#8B6B4A] hover:text-[#6B4F2A] transition-colors duration-200";
   return (
     <>
       <Helmet>
@@ -214,16 +225,26 @@ export default function DigitalMarketing() {
 
             <motion.p
               variants={fadeInUp}
-              className={`text-lg md:text-xl max-w-5xl mx-auto leading-relaxed mb-12 ${isDark ? "text-gray-300" : "text-white/90"}`}
+              className={`text-lg md:text-xl max-w-5xl mx-auto leading-relaxed mb-12 ${isDark ? "text-gray-300" : "text-white/90"
+                }`}
             >
               Partner with{" "}
               <span className="font-semibold text-[#8B6B4A]">
                 AI KNOTS IT SOLUTION
               </span>
               , one of India’s trusted digital marketing companies. We help
-              businesses increase their online presence, reach the right
-              audience, and generate quality leads through smart, result-driven
-              digital marketing campaigns.
+              businesses increase their{" "}
+              <Link to="/seo" className={serviceLink}>
+                online presence
+              </Link>
+              , reach the right audience, and generate quality leads through smart,
+              result-driven digital {" "}
+              <>
+                <HashLink smooth
+                  to="/digital-marketing#marketing-campaigns" className={serviceLink}>
+                  marketing campaigns
+                </HashLink>{" "}
+              </>.
             </motion.p>
 
             <motion.div
@@ -239,11 +260,10 @@ export default function DigitalMarketing() {
               </button>
               <button
                 className={`px-12 py-6 border-2 border-[#8B6B4A]/70 rounded-full text-xl font-bold transition-all
-                ${
-                  isDark
+                ${isDark
                     ? "text-[#8B6B4A] hover:bg-[#8B6B4A]/60 hover:border-[#8B6B4A]"
                     : "text-[#EFE5C8] hover:bg-[#8B6B4A] border-[#8B6B4A]"
-                }`}
+                  }`}
                 onClick={() => navigate("/contact")}
               >
                 Free Consultation
@@ -323,11 +343,10 @@ export default function DigitalMarketing() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className={`w-full py-4 rounded-lg font-bold text-lg text-white transition ${
-                        loading
-                          ? "bg-gray-700 cursor-not-allowed"
-                          : "bg-[#8B6B4A] hover:bg-[#8B6B4A] shadow-lg shadow-[#8B6B4A]/40"
-                      }`}
+                      className={`w-full py-4 rounded-lg font-bold text-lg text-white transition ${loading
+                        ? "bg-gray-700 cursor-not-allowed"
+                        : "bg-[#8B6B4A] hover:bg-[#8B6B4A] shadow-lg shadow-[#8B6B4A]/40"
+                        }`}
                     >
                       {loading ? "Sending..." : "Submit Inquiry"}
                     </button>
@@ -412,37 +431,85 @@ export default function DigitalMarketing() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className={`text-lg md:text-xl max-w-5xl mx-auto leading-relaxed text-center mb-16 ${isDark ? "text-gray-300" : "text-gray-700"}`}
+              className={`text-lg md:text-xl max-w-5xl mx-auto leading-relaxed text-center mb-16 ${isDark ? "text-gray-300" : "text-gray-700"
+                }`}
             >
-              At AI Knots, we create customized digital marketing strategies
+              At AI Knots, we create customized{" "}
+              <Link to="/seo" className={serviceLink}>
+                digital marketing strategies
+              </Link>{" "}
               that help businesses strengthen their brand presence, manage
               campaigns smoothly, and build long-term engagement with customers.
               <br />
               <br />
               As a trusted digital marketing company in India, we understand
-              that every business has different goals. That is why our team
+              that {" "}
+              <>
+                <HashLink smooth
+                  to="/digital-marketing#industries-we-serve" className={serviceLink}>
+                  every business
+                </HashLink>{" "}
+              </>
+              has different goals. That is why our team
               creates tailored marketing solutions that help generate leads,
-              increase website traffic, and improve customer connections.
+              increase{" "}
+              <Link to="/seo" className={serviceLink}>
+                website traffic
+              </Link>
+              , and improve customer connections.
               <br />
               <br />
-              Our strategies focus on helping businesses grow through practical,
+              <HashLink
+                smooth
+                to="/digital-marketing#our-process"
+                className={serviceLink}
+              >
+                Our strategies
+              </HashLink>{" "}
+              focus on helping businesses grow through practical,
               measurable, and result-focused marketing campaigns.
               <br />
               <br />
-              With years of experience in digital marketing services, our team
-              ensures smooth campaign management, data-driven decisions, and
-              continuous improvements.
+              With years of experience in{" "}
+              <>
+                <HashLink smooth
+                  to="/digital-marketing#marketing-campaigns" className={serviceLink}>
+                  digital marketing services
+                </HashLink>{" "}
+              </>
+              , our team ensures smooth campaign management, data-driven decisions,
+              and continuous improvements.
               <br />
               <br />
-              From strategy planning to campaign optimization, our services are
-              designed to support long-term business growth and build a strong
-              digital presence.
+              From{" "}
+              <HashLink
+                smooth
+                to="/digital-marketing#our-process"
+                className={serviceLink}
+              >
+                strategy planning
+              </HashLink>{" "}
+              to{" "}
+              <HashLink
+                smooth
+                to="/digital-marketing#our-process"
+                className={serviceLink}
+              >
+                campaign optimization
+              </HashLink>
+              , our services are
+              designed to support long-term business growth and build a strong{" "}
+              <Link to="/seo" className={serviceLink}>
+                digital presence
+              </Link>
+              .
             </motion.p>
           </div>
         </section>
 
         {/* ====================== SERVICES SECTION ====================== */}
         <section
+          id="marketing-campaigns"
           className={`py-12 md:py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-black" : "bg-white"}`}
         >
           <div className="max-w-7xl mx-auto">
@@ -495,6 +562,7 @@ export default function DigitalMarketing() {
 
         {/* ====================== INDUSTRIES WE SERVE ====================== */}
         <section
+          id="industries-we-serve"
           className={`py-12 md:py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-gray-950" : "bg-gray-50"}`}
         >
           <div className="max-w-7xl mx-auto">
@@ -552,6 +620,7 @@ export default function DigitalMarketing() {
 
         {/* ====================== PROCESS + FINAL CTA ====================== */}
         <section
+        id= "our-process"
           className={`py-12 md:py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-gray-950" : "bg-white"}`}
         >
           <div className="max-w-7xl mx-auto">
@@ -618,11 +687,10 @@ export default function DigitalMarketing() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className={`px-16 py-7 rounded-full text-2xl font-bold transition-all ${
-                  isDark
-                    ? "bg-[#8B6B4A] shadow-[#8B6B4A]/60"
-                    : "bg-[#8B6B4A] hover:bg-[#8B6B4A] text-white shadow-[#8B6B4A]/50"
-                }`}
+                className={`px-16 py-7 rounded-full text-2xl font-bold transition-all ${isDark
+                  ? "bg-[#8B6B4A] shadow-[#8B6B4A]/60"
+                  : "bg-[#8B6B4A] hover:bg-[#8B6B4A] text-white shadow-[#8B6B4A]/50"
+                  }`}
               >
                 <button
                   onClick={() => navigate("/contact")}

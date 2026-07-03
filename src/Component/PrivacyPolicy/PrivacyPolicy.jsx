@@ -21,7 +21,7 @@ const PrivacyPolicy = () => {
   }, []);
 
   // Dynamic Theme Classes
-  const accentClass = "text-red-500";
+  const accentClass = "text-[#8B6B4A]";
   const headingClass = isDark ? "text-white" : "text-gray-900";
   const bodyClass = isDark ? "text-gray-300" : "text-gray-700";
   const cardClass = isDark
@@ -37,11 +37,11 @@ const PrivacyPolicy = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-8 h-px bg-red-500"></div>
-            <span className="text-red-400 uppercase tracking-[3px] text-sm font-medium">
+            <div className="w-8 h-px bg-[#8B6B4A]"></div>
+            <span className="text-[#8B6B4A] uppercase tracking-[3px] text-sm font-medium">
               Legal
             </span>
-            <div className="w-8 h-px bg-red-500"></div>
+            <div className="w-8 h-px bg-[#8B6B4A]"></div>
           </div>
           <h1
             className={`text-5xl md:text-6xl font-bold tracking-tighter mb-3 ${headingClass}`}
@@ -56,7 +56,7 @@ const PrivacyPolicy = () => {
             className={`text-lg ${isDark ? "text-gray-200" : "text-gray-700"}`}
           >
             At{" "}
-            <span className="text-red-400 font-medium">
+            <span className="text-[#8B6B4A] font-medium">
               AI Knots IT Solution
             </span>
             , we respect your privacy and are committed to protecting your
@@ -77,15 +77,15 @@ const PrivacyPolicy = () => {
                 </h3>
                 <ul className={`space-y-3 ${bodyClass}`}>
                   <li className="flex gap-3">
-                    <span className="text-red-500 mt-1">•</span> Name, email
+                    <span className="text-[#8B6B4A] mt-1">•</span> Name, email
                     address, phone number, and company details
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-red-500 mt-1">•</span> Project
+                    <span className="text-[#8B6B4A] mt-1">•</span> Project
                     requirements, business needs, and inquiry details
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-red-500 mt-1">•</span> Payment and
+                    <span className="text-[#8B6B4A] mt-1">•</span> Payment and
                     billing information (processed securely via third-party
                     gateways)
                   </li>
@@ -98,15 +98,15 @@ const PrivacyPolicy = () => {
                 </h3>
                 <ul className={`space-y-3 ${bodyClass}`}>
                   <li className="flex gap-3">
-                    <span className="text-red-500 mt-1">•</span> IP address,
+                    <span className="text-[#8B6B4A] mt-1">•</span> IP address,
                     browser type, device, and operating system
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-red-500 mt-1">•</span> Website usage
+                    <span className="text-[#8B6B4A] mt-1">•</span> Website usage
                     data, pages visited, and session duration
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-red-500 mt-1">•</span> Cookies and
+                    <span className="text-[#8B6B4A] mt-1">•</span> Cookies and
                     similar tracking technologies
                   </li>
                 </ul>
@@ -131,7 +131,7 @@ const PrivacyPolicy = () => {
                 "Comply with legal obligations and ensure security",
               ].map((item, i) => (
                 <div key={i} className="flex gap-4">
-                  <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-400 text-sm font-medium shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-[#8B6B4A]/10 flex items-center justify-center text-[#8B6B4A] text-sm font-medium shrink-0 mt-0.5">
                     0{i + 1}
                   </div>
                   <p>{item}</p>
@@ -180,7 +180,7 @@ const PrivacyPolicy = () => {
                   key={i}
                   className={`p-5 rounded-xl flex items-start gap-3 ${cardClass}`}
                 >
-                  <span className="text-red-400 text-xl">✓</span>
+                  <span className="text-[#8B6B4A] text-xl">✓</span>
                   <p className={bodyClass}>{right}</p>
                 </div>
               ))}
@@ -189,7 +189,7 @@ const PrivacyPolicy = () => {
               To exercise any of these rights, email us at{" "}
               <a
                 href="mailto:support@atlaknots.com"
-                className="underline hover:text-red-300"
+                className="underline hover:text-[#3D220E]"
               >
                 support@atlaknots.com
               </a>
@@ -231,7 +231,7 @@ const PrivacyPolicy = () => {
 
           {/* Contact Box */}
           <div
-            className={`p-8 md:p-10 rounded-3xl mt-12 ${cardClass} border ${isDark ? "border-red-900/30" : "border-red-200"}`}
+            className={`p-8 md:p-10 rounded-3xl mt-12 ${cardClass} border ${isDark ? "border-[#8B6B4A]/30" : "border-[#E8D9C2]"}`}
           >
             <h3 className={`text-2xl font-semibold mb-6 ${headingClass}`}>
               Questions or Concerns?

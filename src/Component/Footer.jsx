@@ -3,8 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 
-import ATLAknotsDark from "./Mobile/img/logoimage5.png";
-import ATLAknotsLight from "../../src/assets/Images/ITLogo.png";
+import ATLAknotsDark from "../../src/assets/Images/logoimage5.webp";
+import ATLAknotsLight from "../../src/assets/Images/ITLogo.webp";
 import { useTheme } from "../context/ThemeContext";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,8 +26,8 @@ const SocialLink = ({ href, icon, label, isDark }) => {
       whileTap={{ scale: 0.95 }}
       className={`p-3 rounded-2xl flex items-center justify-center transition-all duration-300 ${
         isDark
-          ? "bg-zinc-900 hover:bg-red-950 border border-zinc-700 hover:border-red-600 text-white"
-          : "bg-white hover:bg-red-50 border border-gray-200 hover:border-red-500 text-gray-700"
+          ? "bg-zinc-900 hover:bg-[#3D220E]/60 border border-zinc-700 hover:border-[#8B6B4A] text-white"
+          : "bg-white hover:bg-[#F5EDE4] border border-gray-200 hover:border-[#8B6B4A] text-gray-700"
       }`}
       title={label}
     >
@@ -88,7 +88,7 @@ const Footer = () => {
     <footer
       className={`border-t text-gray-400 ${
         isDark
-          ? "bg-gradient-to-b from-black to-zinc-950 border-red-900/30"
+          ? "bg-gradient-to-b from-black to-zinc-950 border-[#8B6B4A]/30"
           : "bg-gradient-to-b from-gray-50 to-white border-gray-200"
       }`}
     >
@@ -216,7 +216,7 @@ const Footer = () => {
                 <Phone size={18} className="text-accent shrink-0" />
                 <a
                   href="tel:+917869636070"
-                  className={`transition-colors ${isDark ? "hover:text-red-400" : "hover:text-red-500"}`}
+                  className={`transition-colors ${isDark ? "hover:text-[#D9C5B5]" : "hover:text-[#8B6B4A]"}`}
                 >
                   +91 78696 36070
                 </a>
@@ -226,7 +226,7 @@ const Footer = () => {
                 <Mail size={18} className="text-accent shrink-0" />
                 <a
                   href="mailto:support@atlaknots.com"
-                  className={`transition-colors break-all ${isDark ? "hover:text-red-400" : "hover:text-red-500"}`}
+                  className={`transition-colors break-all ${isDark ? "hover:text-[#D9C5B5]" : "hover:text-[#8B6B4A]"}`}
                 >
                   support@atlaknots.com
                 </a>
@@ -238,7 +238,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div
-        className={`border-t py-6 text-center text-xs ${isDark ? "border-red-900/20 text-gray-500" : "border-gray-200 text-gray-500"}`}
+        className={`border-t py-6 text-center text-xs ${isDark ? "border-[#8B6B4A]/20 text-gray-500" : "border-gray-200 text-gray-500"}`}
       >
         <div className="max-w-7xl mx-auto px-5 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className={isDark ? "text-gray-500" : "text-gray-600"}>

@@ -4,37 +4,71 @@ import { removeFromCart, clearCart } from "../../Redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Trash2, ArrowLeft, ShoppingBag } from "lucide-react";
+import { useTheme } from "../../../context/ThemeContext";
 
-export default function Cart() {
+export default function Cart()
+{
+  const { isDark } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { cart, totalItems, totalAmount } = useSelector((state) => state.cart);
 
-  const handleRemove = (id) => {
+  const handleRemove = (id) =>
+  {
     dispatch(removeFromCart(id));
   };
 
-  const handleClearCart = () => {
-    if (window.confirm("Clear entire cart?")) {
+  const handleClearCart = () =>
+  {
+    if (window.confirm("Clear entire cart?"))
+    {
       dispatch(clearCart());
     }
   };
 
-  if (cart.length === 0) {
+  if (cart.length === 0)
+  {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950">
-        <div className="text-center">
-          <ShoppingBag className="w-24 h-24 mx-auto text-gray-400 mb-6" />
-          <h2 className="text-4xl font-bold mb-4">Your Cart is Empty</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">
-            Looks like you haven't added anything yet.
+      <div
+        className={`min-h-screen flex items-center justify-center px-6 ${isDark
+            ? "bg-gradient-to-b from-black via-gray-950 to-black"
+            : "bg-gradient-to-b from-[#faf7f3] via-white to-[#f8f4ef]"
+          }`}
+      >
+        <div className="text-center max-w-3xl mx-auto">
+
+          <div
+            className={`w-28 h-28 mx-auto mb-8 rounded-full flex items-center justify-center ${isDark
+                ? "bg-[#3D220E]/30 border border-[#8B6B4A]/30"
+                : "bg-[#F5EDE4] border border-[#E8D9C2]"
+              }`}
+          >
+            <ShoppingBag className="w-14 h-14 text-[#8B6B4A]" />
+          </div>
+
+          <h1
+            className={`text-5xl md:text-7xl font-black mb-6 ${isDark ? "text-white" : "text-[#3D220E]"
+              }`}
+          >
+            Your Cart is{" "}
+            <span className="text-[#8B6B4A]">Empty</span>
+          </h1>
+
+          <p
+            className={`text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed mb-12 ${isDark ? "text-gray-300" : "text-[#5C4635]"
+              }`}
+          >
+            Looks like you haven't added any packages yet. Browse our services and
+            find the perfect solution for your business.
           </p>
+
           <button
             onClick={() => navigate("/")}
-            className="px-8 py-4 bg-[#3D220E] text-white rounded-2xl font-bold hover:bg-red-900 transition-all"
+            className="px-12 py-6 md:px-14 md:py-7 bg-gradient-to-r from-[#3D220E] to-[#3D220E]/90 rounded-full text-xl md:text-3xl font-black shadow-2xl shadow-[#3D220E]/60 hover:shadow-[#3D220E]/80 transition-all text-white hover:scale-105"
           >
-            Browse Packages
+            Browse Packages →
           </button>
+
         </div>
       </div>
     );
@@ -86,7 +120,7 @@ export default function Cart() {
 
                 <button
                   onClick={() => handleRemove(item.id)}
-                  className="self-start p-3 text-red-600 hover:bg-red-50 dark:hover:bg-red-950/50 rounded-2xl transition-all"
+                  className="self-start p-3 text-[#8B6B4A] hover:text-[#3D220E] hover:bg-[#F5EDE4] dark:text-[#D9C5B5] dark:hover:text-white dark:hover:bg-[#3D220E]/40 rounded-2xl transition-all duration-300"
                 >
                   <Trash2 className="w-5 h-5" />
                 </button>
@@ -108,7 +142,7 @@ export default function Cart() {
                   <span>GST (18%)</span>
                   <span>₹{(totalAmount * 0.18).toFixed(0)}</span>
                 </div>
-                <hr className="border-red-200 dark:border-red-900" />
+                <hr className="border-[#E8D9C2] dark:border-[#8B6B4A]/30" />
                 <div className="flex justify-between text-2xl font-bold text-[#3D220E]">
                   <span>Total</span>
                   <span>₹{(totalAmount * 1.18).toFixed(0)}</span>
@@ -117,14 +151,14 @@ export default function Cart() {
 
               <button
                 onClick={() => navigate("/contact")}
-                className="w-full bg-[#3D220E] hover:bg-red-900 text-white py-5 rounded-2xl font-bold text-xl transition-all mb-4"
+                className="w-full bg-gradient-to-r from-[#3D220E] to-[#3D220E]/90 hover:from-[#4A2A12] hover:to-[#3D220E] text-white py-5 rounded-2xl font-bold text-xl shadow-xl shadow-[#3D220E]/30 hover:shadow-[#3D220E]/50 transition-all duration-300"
               >
                 Proceed to Checkout
               </button>
 
               <button
                 onClick={handleClearCart}
-                className="w-full py-4 text-red-600 hover:bg-red-50 dark:hover:bg-red-950/50 rounded-2xl font-medium transition-all"
+                className="w-full py-4 text-[#8B6B4A] hover:text-[#3D220E] hover:bg-[#F5EDE4] dark:text-[#D9C5B5] dark:hover:text-white dark:hover:bg-[#3D220E]/40 rounded-2xl font-medium transition-all duration-300"
               >
                 Clear Cart
               </button>

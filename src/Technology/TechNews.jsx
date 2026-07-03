@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from "../context/ThemeContext";
-import {
-  Newspaper,
-  ExternalLink,
-  Clock,
-  Cpu,
-  Zap,
-  Globe,
-  ArrowUp,
-} from "lucide-react";
+import
+  {
+    Newspaper,
+    ExternalLink,
+    Clock,
+    Cpu,
+    Zap,
+    Globe,
+    ArrowUp,
+  } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import DOMPurify from "dompurify";
 
-import {
-  fetchTechNews,
-  setSelectedCategory,
-} from "./techNewsSlice/techNewsSlice.js";
+import
+  {
+    fetchTechNews,
+    setSelectedCategory,
+  } from "./techNewsSlice/techNewsSlice.js";
 
-const TechNews = () => {
+const TechNews = () =>
+{
   const { isDark } = useTheme();
   const dispatch = useDispatch();
 
@@ -31,15 +34,19 @@ const TechNews = () => {
 
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  useEffect(() => {
-    if (status === "idle") {
+  useEffect(() =>
+  {
+    if (status === "idle")
+    {
       dispatch(fetchTechNews());
     }
   }, [status, dispatch]);
 
   // Scroll to top
-  useEffect(() => {
-    const handleScroll = () => {
+  useEffect(() =>
+  {
+    const handleScroll = () =>
+    {
       setShowScrollTop(window.scrollY > 400);
     };
 
@@ -47,7 +54,8 @@ const TechNews = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = () =>
+  {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -61,7 +69,8 @@ const TechNews = () => {
       ? newsItems
       : newsItems.filter((item) => item.category === selectedCategory);
 
-  const getIconForCategory = (category) => {
+  const getIconForCategory = (category) =>
+  {
     const cat = (category || "").toLowerCase();
     if (cat.includes("ai") || cat.includes("artificial intelligence"))
       return <Cpu className="w-5 h-5" />;
@@ -77,7 +86,7 @@ const TechNews = () => {
 
   // ====================== THEME CLASSES ======================
   const cardClass = isDark
-    ? "bg-gray-900 border border-gray-800 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/20"
+    ? "bg-gray-900 border border-gray-800 hover:border-[#8B6B4A]/50 hover:shadow-xl hover:shadow-primary/20"
     : "bg-white border border-gray-200 shadow-lg hover:shadow-2xl";
 
   const headingClass = isDark ? "text-white" : "text-primary";
@@ -85,7 +94,8 @@ const TechNews = () => {
   const accentClass = "text-accent";
 
   // Sanitize function
-  const sanitize = (html) => {
+  const sanitize = (html) =>
+  {
     return DOMPurify.sanitize(html, {
       ALLOWED_TAGS: [
         "b",
@@ -103,24 +113,25 @@ const TechNews = () => {
     });
   };
 
-  if (status === "loading") {
+  if (status === "loading")
+  {
     return (
       <div
         className={`min-h-screen flex flex-col items-center justify-center p-6 transition-colors duration-700
-        ${isDark ? "bg-gray-950 text-white" : "bg-gray-50 text-primary"}`}
+        ${isDark ? "bg-gray-950 text-white" : "bg-[#FCFAF8] text-[#3D220E]"}`}
       >
         {/* ... loading UI unchanged ... */}
         <div className="relative w-24 h-24">
-          <div className="absolute inset-0 border-4 border-gray-300 border-primary rounded-full animate-spin"></div>
+          <div className="absolute inset-0 border-4 border-gray-300 border-[#8B6B4A] rounded-full animate-spin"></div>
           <div
-            className="absolute inset-3 border-4 border-gray-300 border-primary rounded-full animate-spin"
+            className="absolute inset-3 border-4 border-gray-300 border-[#8B6B4A] rounded-full animate-spin"
             style={{ animationDuration: "1.5s", animationDirection: "reverse" }}
           ></div>
           <div
-            className="absolute inset-6 border-4 border-gray-300 border-primary rounded-full animate-spin"
+            className="absolute inset-6 border-4 border-gray-300 border-[#8B6B4A] rounded-full animate-spin"
             style={{ animationDuration: "2s" }}
           ></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-primary rounded-full animate-pulse shadow-lg"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-[#8B6B4A] rounded-full animate-pulse shadow-lg"></div>
         </div>
         <div className="mt-8 flex items-center gap-2">
           <Newspaper className="w-5 h-5 text-[#EFE5C8] animate-pulse" />
@@ -132,13 +143,14 @@ const TechNews = () => {
     );
   }
 
-  if (status === "failed") {
+  if (status === "failed")
+  {
     return (
       <div
         className={`min-h-screen flex items-center justify-center p-6 transition-colors duration-700
-        ${isDark ? "bg-gray-950 text-white" : "bg-gray-50 text-primary"}`}
+        ${isDark ? "bg-gray-950 text-white" : "bg-[#FCFAF8] text-[#3D220E]"}`}
       >
-        <div className="text-xl text-red-500">
+        <div className="text-xl text-[#8B6B4A]">
           {error || "Something went wrong"}
         </div>
       </div>
@@ -160,7 +172,7 @@ const TechNews = () => {
       </Helmet>
       <div
         className={`min-h-screen p-6 md:p-10 relative transition-colors duration-700
-      ${isDark ? "bg-gray-950 text-white" : "bg-gray-50 text-primary"}`}
+      ${isDark ? "bg-gray-950 text-white" : "bg-[#FCFAF8] text-[#3D220E]"}`}
       >
         <div className="max-w-5xl mx-auto">
           {/* Header */}
@@ -184,13 +196,12 @@ const TechNews = () => {
               <button
                 key={category}
                 onClick={() => dispatch(setSelectedCategory(category))}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  selectedCategory === category
-                    ? "btn-accent"
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === category
+                    ? "bg-[#8B6B4A] text-white shadow-lg shadow-[#8B6B4A]/40"
                     : isDark
-                      ? "bg-gray-900 text-gray-300 hover:bg-gray-800 hover:text-white border border-gray-700"
-                      : "bg-white text-primary hover:bg-gray-100 border border-gray-300 hover:border-primary"
-                }`}
+                      ? "bg-gray-900 text-gray-300 hover:bg-[#3D2A1E] hover:text-[#D9C5B5] border border-gray-700 hover:border-[#8B6B4A]/50"
+                      : "bg-white text-[#8B6B4A] hover:bg-[#F5EDE4] border border-gray-300 hover:border-[#8B6B4A] hover:text-[#3D220E]"
+                  }`}
               >
                 {category}
               </button>
@@ -209,7 +220,7 @@ const TechNews = () => {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg bg-muted text-accent`}>
+                      <div className={`p-2 rounded-lg ${isDark ? "bg-[#3D220E]/40 text-[#D9C5B5]" : "bg-[#F5EDE4] text-[#8B6B4A]"}`}>
                         {getIconForCategory(item.category)}
                       </div>
                       <span
@@ -257,7 +268,7 @@ const TechNews = () => {
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`inline-flex items-center gap-2 font-medium text-sm transition-colors ${accentClass} hover:text-accent`}
+                    className="inline-flex items-center gap-2 font-medium text-sm transition-colors text-[#8B6B4A] hover:text-[#3D220E]"
                   >
                     Read more
                     <ExternalLink className="w-4 h-4" />
@@ -275,7 +286,7 @@ const TechNews = () => {
         </div>
 
         {/* Scroll to Top Button */}
-       
+
       </div>
     </>
   );

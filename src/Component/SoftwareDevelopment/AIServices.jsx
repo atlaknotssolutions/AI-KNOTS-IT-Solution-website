@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import AIML from "../../assets/Images/AIML.png";
-import {
+import AIML from "../../assets/Images/AIML.webp";
+import
+{
   Brain,
   Users,
   LineChart,
@@ -21,10 +22,12 @@ import {
   ShieldAlert,
   Megaphone,
   Headphones,
+  ChevronDown,
 } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
-import aws from "../../assets/Images/aws.jpeg";
-import { useNavigate } from "react-router-dom";
+import aws from "../../assets/Images/aws.webp";
+import { useNavigate, Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 const images = {
   hero: aws,
   neural: AIML,
@@ -148,12 +151,14 @@ const faqs = [
   },
 ];
 
-export default function AIServices() {
+export default function AIServices()
+{
   const { isDark } = useTheme();
   const [openFaq, setOpenFaq] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const navigate = useNavigate();
-  useEffect(() => {
+  useEffect(() =>
+  {
     const handleScroll = () => setShowScrollTop(window.scrollY > 400);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -187,6 +192,10 @@ export default function AIServices() {
       ? "bg-gray-900 border border-gray-800"
       : "bg-white border border-gray-100 shadow-sm",
   };
+
+  const serviceLink =
+    "font-bold text-[#8B6B4A] hover:text-[#6B4F2A] transition-colors duration-200";
+
 
   return (
     <>
@@ -258,11 +267,53 @@ export default function AIServices() {
               <span className="text-[#d9c5b5] dark:text-[#af8360] font-semibold">
                 AI KNOTS IT SOLUTION
               </span>
-              , we provide advanced AI & Machine Learning Services that help
-              businesses automate processes, analyze data, and make smarter
-              decisions. In today's fast-growing digital world, using AI is no
-              longer optional — it's essential for staying ahead of the
-              competition.
+              , we provide advanced{" "}
+              <HashLink
+                smooth
+                to="/ai-mlservice#services"
+                className={serviceLink}
+              >
+                AI & Machine Learning Services
+              </HashLink>{" "}
+              that help businesses{" "}
+              <Link
+                to="/software"
+                className={serviceLink}
+              >
+                automate processes
+              </Link>
+              ,{" "}
+              <Link
+                to="/software"
+                className={serviceLink}
+              >
+                analyze data
+              </Link>
+              , and make smarter{" "}
+              <HashLink
+                smooth
+                to="/ai-mlservice#features"
+                className={serviceLink}
+              >
+                decisions
+              </HashLink>
+              . In today's fast-growing digital world, using{" "}
+              <HashLink
+                smooth
+                to="/ai-mlservice#about-ai"
+                className={serviceLink}
+              >
+                AI
+              </HashLink>{" "}
+              is no longer optional — it's essential for staying ahead of the{" "}
+              <HashLink
+                smooth
+                to="/ai-mlservice#industries"
+                className={serviceLink}
+              >
+                competition
+              </HashLink>
+              .
             </motion.p>
 
             <motion.ul
@@ -306,6 +357,7 @@ export default function AIServices() {
         </section>
         {/* What is AI & ML */}
         <section
+          id="about-ai"
           className={`py-20 px-4 sm:px-6 lg:px-8 ${t.sectionBg} transition-colors duration-300`}
         >
           <div className="max-w-7xl mx-auto text-center">
@@ -339,6 +391,7 @@ export default function AIServices() {
 
         {/* Our Services */}
         <section
+          // id="services"
           className={`py-24 px-4 sm:px-6 lg:px-8 ${t.sectionBg} transition-colors duration-300`}
         >
           <div className="max-w-7xl mx-auto">
@@ -376,6 +429,7 @@ export default function AIServices() {
 
         {/* Key Features */}
         <section
+          id="features"
           className={`py-20 px-4 sm:px-6 lg:px-8 ${t.sectionBg3} transition-colors duration-300`}
         >
           <div className="max-w-7xl mx-auto">
@@ -420,19 +474,66 @@ export default function AIServices() {
             >
               <motion.h2
                 variants={fadeInUp}
-                className={`text-4xl md:text-6xl font-black mb-8 ${isDark ? "text-white" : "text-[#3d220e]"}`}
+                className={`text-4xl md:text-6xl font-black mb-8 ${isDark ? "text-white" : "text-[#3d220e]"
+                  }`}
               >
                 Why Choose{" "}
-                <span className="text-[#3d220e] dark:text-[#9F714E]">AI Knots IT Solutions</span>?
+                <HashLink
+                  smooth
+                  to="/ai-mlservice#why-ai"
+                  className={serviceLink}
+                >
+                  <span className="text-[#3d220e] dark:text-[#9F714E]">
+                    AI Knots IT Solutions
+                  </span>
+                </HashLink>
+                ?
               </motion.h2>
+
               <motion.p
                 variants={fadeInUp}
                 className={`text-xl ${t.text} mb-8`}
               >
-                AI KNOTS IT SOLUTION is a trusted provider of AI & Machine
-                Learning Services in Bhopal, focused on delivering practical and
-                result-oriented solutions. We don't just build technology, we
-                build solutions that solve real business problems.
+                AI KNOTS IT SOLUTION is a trusted provider of{" "}
+                <HashLink
+                  smooth
+                  to="/ai-mlservice#services"
+                  className={serviceLink}
+                >
+                  AI & Machine Learning Services
+                </HashLink>{" "}
+                in{" "}
+                <Link
+                  to="/contact"
+                  className={serviceLink}
+                >
+                  Bhopal
+                </Link>
+                , focused on delivering practical and
+                result-oriented{" "}
+                <HashLink
+                  smooth
+                  to="/ai-mlservice#features"
+                  className={serviceLink}
+                >
+                  solutions
+                </HashLink>
+                . We don't just build{" "}
+                <Link
+                  to="/software"
+                  className={serviceLink}
+                >
+                  technology
+                </Link>
+                , we build{" "}
+                <HashLink
+                  smooth
+                  to="/ai-mlservice#use-cases"
+                  className={serviceLink}
+                >
+                  solutions that solve real business problems
+                </HashLink>
+                .
               </motion.p>
               <motion.ul
                 variants={fadeInUp}
@@ -466,6 +567,7 @@ export default function AIServices() {
 
         {/* Industries */}
         <section
+          id="industries"
           className={`py-24 px-4 sm:px-6 lg:px-8 ${t.sectionBg2} transition-colors duration-300`}
         >
           <div className="max-w-7xl mx-auto">
@@ -498,6 +600,7 @@ export default function AIServices() {
 
         {/* Use Cases */}
         <section
+          id="use-cases"
           className={`py-20 px-4 sm:px-6 lg:px-8 ${t.sectionBg} transition-colors duration-300`}
         >
           <div className="max-w-7xl mx-auto">
@@ -530,6 +633,7 @@ export default function AIServices() {
         </section>
 
         <section
+          id="services"
           className={`py-24 px-4 sm:px-6 lg:px-8 ${t.sectionBg5} transition-colors duration-300`}
         >
           <div className="max-w-5xl mx-auto text-center">
@@ -565,49 +669,41 @@ export default function AIServices() {
 
         {/* FAQ */}
         <section
-          className={`py-24 px-4 sm:px-6 lg:px-8 ${t.sectionBg4} transition-colors duration-300`}
+          id="faq"
+          className={`py-20 ${isDark ? "bg-gray-950" : "bg-gray-50"}`}
         >
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto px-6">
             <motion.h2
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className={`text-4xl md:text-6xl font-black text-center mb-16 ${isDark ? "text-white" : "text-[#3d220e]"}`}
+              className={`text-4xl md:text-5xl font-bold text-center mb-12 ${isDark ? "text-white" : "text-[#573010]"
+                }`}
             >
-              Frequently Asked <span className="text-[#3d220e] dark:text-[#9F714E]">Questions</span>
+              Frequently Asked <span className="text-[#8B6B4A]">Questions</span>
             </motion.h2>
+
             <div className="space-y-4">
               {faqs.map((faq, idx) => (
-                <motion.div
+                <details
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className={`${t.faqCard} rounded-xl overflow-hidden`}
+                  className={`group rounded-xl p-6 border ${isDark
+                      ? "bg-gray-900 border-gray-800"
+                      : "bg-white border-gray-100"
+                    }`}
                 >
-                  <button
-                    type="button"
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className={`w-full px-6 py-5 md:px-8 md:py-6 text-left flex justify-between items-center ${t.faqHover} transition-colors`}
+                  <summary
+                    className={`font-semibold text-lg cursor-pointer flex justify-between items-center gap-4 ${isDark ? "text-white" : "text-[#573010]"
+                      }`}
                   >
-                    <span className="text-lg md:text-xl font-bold pr-4">
-                      {faq.q}
-                    </span>
-                    <span
-                      className={`text-[#3d220e] dark:text-[#9F714E] text-xl transition-transform duration-300 ${openFaq === idx ? "rotate-180" : ""}`}
-                    >
-                      ▼
-                    </span>
-                  </button>
-                  {openFaq === idx && (
-                    <div
-                      className={`px-6 pb-6 md:px-8 ${t.text} text-base leading-relaxed`}
-                    >
-                      {faq.a}
-                    </div>
-                  )}
-                </motion.div>
+                    {faq.q}
+                    <ChevronDown className="w-5 h-5 transition-transform duration-300 group-open:rotate-180 flex-shrink-0" />
+                  </summary>
+
+                  <p className={`mt-4 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
+                    {faq.a}
+                  </p>
+                </details>
               ))}
             </div>
           </div>

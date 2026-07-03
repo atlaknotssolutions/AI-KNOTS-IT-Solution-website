@@ -1,11 +1,11 @@
-
-
 import React, { useState, useEffect } from "react";
 import { useTheme } from "../../context/ThemeContext"; // ← Added
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom"; // ← Added
-import {
+import { useNavigate, Link } from "react-router-dom"; // ← Added
+import { HashLink } from "react-router-hash-link";
+import
+{
   Layout,
   PenTool,
   MousePointer,
@@ -29,6 +29,7 @@ import {
   HeartPulse,
   GraduationCap,
   Plane,
+  ChevronDown
 } from "lucide-react";
 
 const images = {
@@ -219,14 +220,17 @@ const faqs = [
   },
 ];
 
-export default function UiUxDesign() {
+export default function UiUxDesign()
+{
   const { isDark } = useTheme(); // ← Theme Hook Added
-   const navigate = useNavigate(); // ← Navigation Hook Added
+  const navigate = useNavigate(); // ← Navigation Hook Added
   const [openFaq, setOpenFaq] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
+  useEffect(() =>
+  {
+    const handleScroll = () =>
+    {
       setShowScrollTop(window.scrollY > 400);
     };
 
@@ -234,7 +238,8 @@ export default function UiUxDesign() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = () =>
+  {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -250,455 +255,479 @@ export default function UiUxDesign() {
   const bodyClass = isDark ? "text-gray-300" : "text-gray-700";
   const accentClass = "text-[#462206] dark:text-[#826047]";
 
+  // service link for internal linking
+  const serviceLink =
+    "font-bold text-[#8B6B4A] hover:text-[#6B4F2A] transition-colors duration-200";
+
   return (
-     <>
-              <Helmet>
-                <title>	UI UX Design Services India | Atla IKS</title>
-                <meta
-                  name="description"
-                  content="User-friendly UI/UX design services focused on better experience & higher conversions."
-                />
-                <meta
-                  name="keywords"
-                  content="UI UX Design Services	UX Design Company, UI Design"
-                />
-              </Helmet>
+    <>
+      <Helmet>
+        <title>	UI UX Design Services India | Atla IKS</title>
+        <meta
+          name="description"
+          content="User-friendly UI/UX design services focused on better experience & higher conversions."
+        />
+        <meta
+          name="keywords"
+          content="UI UX Design Services	UX Design Company, UI Design"
+        />
+      </Helmet>
 
 
-    <div
-      className={`min-h-screen transition-colors duration-700 overflow-hidden
+      <div
+        className={`min-h-screen transition-colors duration-700 overflow-hidden
       ${isDark ? "bg-gradient-to-b from-gray-950 via-black to-gray-950 text-white" : "bg-gray-50 text-gray-900"}`}
-    >
-      {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
-  {/* Background Image */}
-  <div className="absolute inset-0">
-    <img
-      src={images.hero}
-      alt="Futuristic UI/UX Dashboard"
-      className="w-full h-full object-cover 
+      >
+        {/* Hero */}
+        <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20 overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img
+              src={images.hero}
+              alt="Futuristic UI/UX Dashboard"
+              className="w-full h-full object-cover 
                  brightness-75 contrast-110 
                  dark:brightness-50 dark:contrast-125
                  transition-all duration-700"
-      loading="lazy"
-    />
+              loading="lazy"
+            />
 
-    {/* Gradient Overlay - Optimized for both themes */}
-    <div className="absolute inset-0 bg-gradient-to-t 
+            {/* Gradient Overlay - Optimized for both themes */}
+            <div className="absolute inset-0 bg-gradient-to-t 
                     from-black/80 via-black/70 to-black/65 
                     dark:from-black/90 dark:via-black/85 dark:to-black/80" />
-  </div>
+          </div>
 
-  {/* Content */}
-  <motion.div
-    initial="hidden"
-    animate="visible"
-    variants={staggerContainer}
-    className="relative z-10 max-w-7xl mx-auto text-center"
-  >
-    <motion.h1
-      variants={fadeInUp}
-      className="text-5xl md:text-7xl font-black mb-6 tracking-tight leading-tight text-white"
-    >
-      Best UI/UX Design Company{" "}
-      <span className={`text-white bg-clip-text ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>
-        AI Knots IT Solution
-      </span>
-    </motion.h1>
-
-    <motion.p
-      variants={fadeInUp}
-      className="text-3xl md:text-5xl font-bold mb-8 bg-[#8d6140] dark:bg-[#826047] text-transparent bg-clip-text tracking-wide leading-snug"
-    >
-      Design Experiences That Convert Visitors Into Customers
-    </motion.p>
-
-    <motion.p
-      variants={fadeInUp}
-      className="text-xl md:text-2xl mb-10 max-w-5xl mx-auto leading-relaxed text-gray-200 dark:text-gray-300"
-    >
-      AI Knots IT Solution delivers high-performing UI/UX designs,
-      websites, and digital solutions tailored to grow your business in
-      2026 and beyond.
-    </motion.p>
-
-    <motion.p
-      variants={fadeInUp}
-      className="text-lg md:text-xl mb-12 max-w-4xl mx-auto leading-relaxed text-gray-200 dark:text-gray-300"
-    >
-      We specialize in intuitive, engaging interfaces enhanced by AI
-      personalization, immersive elements, and user psychology to boost
-      usability, engagement, and conversions.
-    </motion.p>
-
-    <motion.div
-      variants={fadeInUp}
-      className="flex flex-col sm:flex-row gap-6 justify-center"
-    >
-      {/* Primary Button */}
-      <button
-        onClick={() => navigate("/contact")}
-        className="px-12 py-6 bg-[#3d220e] text-white 
-                   hover:bg-[#5a351a] rounded-full text-xl md:text-2xl font-bold 
-                   shadow-xl shadow-black/60 hover:shadow-black/70
-                   hover:scale-105 transition-all duration-300 
-                   flex items-center gap-3 group"
-      >
-        Get Free Design Consultation
-        <ArrowRight className="w-7 h-7 group-hover:translate-x-2 transition-transform" />
-      </button>
-
-      {/* Secondary Button */}
-      <button
-        onClick={() => navigate("/contact")}   // Change route if needed
-        className="px-12 py-6 border-2 border-[#3d220e] text-[#3d220e] 
-                   hover:bg-[#3d220e] hover:text-white rounded-full 
-                   text-xl md:text-2xl font-bold transition-all duration-300"
-      >
-        Free UX Audit
-      </button>
-    </motion.div>
-  </motion.div>
-</section>
-
-      {/* Why Choose Us */}
-      <section
-        className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "" : "bg-white"}`}
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
+          {/* Content */}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+            className="relative z-10 max-w-7xl mx-auto text-center"
           >
-            Why Choose{" "}
-            <span className={accentClass}>AI KNOTS IT SOLUTION</span>?
-          </motion.h2>
+            <motion.h1
+              variants={fadeInUp}
+              className="text-5xl md:text-7xl font-black mb-6 tracking-tight leading-tight text-white"
+            >
+              Best UI/UX Design Company{" "}
+              <span className={`text-white bg-clip-text ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>
+                AI Knots IT Solution
+              </span>
+            </motion.h1>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {whyChoose.map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={cardClass}
+            <motion.p
+              variants={fadeInUp}
+              className="text-3xl md:text-5xl font-bold mb-8 bg-[#8d6140] dark:bg-[#826047] text-transparent bg-clip-text tracking-wide leading-snug"
+            >
+              Design Experiences That Convert Visitors Into Customers
+            </motion.p>
+
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl md:text-2xl mb-10 max-w-5xl mx-auto leading-relaxed text-gray-200 dark:text-gray-300"
+            >
+              AI Knots IT Solution delivers high-performing{" "}
+              <HashLink smooth to="/uidesign#uiservices" className={serviceLink}>
+                UI/UX designs
+              </HashLink>
+              ,{" "}
+              <Link to="/websitedesigndevelopment" className={serviceLink}>
+                websites
+              </Link>
+              , and{" "}
+              <Link to="/service" className={serviceLink}>
+                digital solutions
+              </Link>{" "}
+              tailored to{" "}
+              <HashLink smooth to="/uidesign#industries" className={serviceLink}>
+                grow your business
+              </HashLink>{" "}
+              in 2026 and beyond.
+            </motion.p>
+
+            <motion.p
+              variants={fadeInUp}
+              className="text-lg md:text-xl mb-12 max-w-4xl mx-auto leading-relaxed text-gray-200 dark:text-gray-300"
+            >
+              We specialize in intuitive, engaging interfaces enhanced by{" "}
+              <Link to="/ai-mlservice" className={serviceLink}>
+                AI personalization
+              </Link>
+              , immersive elements, and{" "}
+              <HashLink smooth to="/uidesign#expertise" className={serviceLink}>
+                user psychology
+              </HashLink>{" "}
+              to boost usability, engagement, and conversions.
+            </motion.p>
+
+            <motion.div
+              variants={fadeInUp}
+              className="flex flex-col sm:flex-row gap-6 justify-center"
+            >
+              {/* Primary CTA */}
+              <button
+                onClick={() => navigate("/contact")}
+                className="px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-[#3D220E] to-[#3D220E]/90 rounded-full text-lg md:text-xl font-bold text-white shadow-xl shadow-[#3D220E]/40 hover:shadow-[#3D220E]/60 hover:from-[#4A2A12] hover:to-[#3D220E] transition-all duration-300 hover:scale-105 flex items-center gap-3 group"
               >
-                <item.icon
-                  className={`w-16 h-16 ${accentClass} mb-6 group-hover:scale-110 transition-transform mx-auto`}
-                />
-                <h3
-                  className={`text-2xl font-bold mb-4 text-center ${headingClass}`}
+                Get Free Design Consultation
+                <ArrowRight className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-2" />
+              </button>
+
+              {/* Secondary CTA */}
+              <button
+                onClick={() => navigate("/contact")}
+                className="px-8 py-4 md:px-10 md:py-5 rounded-full text-lg md:text-xl font-bold border-2 border-[#8B6B4A] bg-[#F5EDE4] text-[#3D220E] hover:bg-[#EAD8C6] hover:border-[#3D220E] hover:shadow-lg hover:shadow-[#8B6B4A]/20 transition-all duration-300 hover:scale-105"
+              >
+                Free UX Audit
+              </button>
+            </motion.div>
+          </motion.div>
+        </section>
+
+        {/* Why Choose Us */}
+        <section
+          className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "" : "bg-white"}`}
+        >
+          <div className="max-w-7xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
+            >
+              Why Choose{" "}
+              <span className={accentClass}>AI KNOTS IT SOLUTION</span>?
+            </motion.h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {whyChoose.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={cardClass}
                 >
-                  {item.title}
-                </h3>
-                <p className={`text-center ${bodyClass}`}>{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section
-        className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-black/40" : "bg-gray-100"}`}
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
-          >
-            Our <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>UI/UX Design Services</span>
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((serv, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={cardClass}
-              >
-                <serv.icon
-                  className={`w-16 h-16 ${accentClass} mb-6 mx-auto group-hover:scale-110 transition-transform`}
-                />
-                <h3
-                  className={`text-2xl font-bold mb-4 text-center ${headingClass}`}
-                >
-                  {serv.title}
-                </h3>
-                <p className={`text-center ${bodyClass}`}>{serv.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Expertise & Tools */}
-      <section
-        className={`py-20 px-4 sm:px-6 lg:px-8 ${isDark ? "" : "bg-white"}`}
-      >
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`text-4xl md:text-5xl font-black mb-12 ${headingClass}`}
-          >
-            Our Expertise in <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>UI/UX Design</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`text-xl mb-10 max-w-4xl mx-auto ${bodyClass}`}
-          >
-            Strong capabilities in wireframing, prototyping, user research,
-            visual design, and branding – enhanced with 2026 trends like AI
-            collaboration and multimodal interfaces.
-          </motion.p>
-
-          <div className="flex flex-wrap justify-center gap-6 md:gap-10">
-            {tools.map((tool, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={`px-8 py-4 text-xl font-semibold rounded-xl border transition-all
-                  ${
-                    isDark
-                      ? "bg-gray-800/60 border-red-900/30 hover:border-red-500/50"
-                      : "bg-white border-gray-300 hover:border-red-500"
-                  }`}
-              >
-                {tool}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What Makes Us Trusted */}
-      <section
-        className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-black/50" : "bg-gray-100"}`}
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
-          >
-            What Makes AI Knots a{" "}
-            <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>Trusted UI/UX Partner</span>?
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {trustedPoints.map((point, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={cardClass}
-              >
-                <div className="flex items-center justify-center gap-4">
-                  <CheckCircle2
-                    className={`w-8 h-8 ${accentClass} flex-shrink-0`}
+                  <item.icon
+                    className={`w-16 h-16 ${accentClass} mb-6 group-hover:scale-110 transition-transform mx-auto`}
                   />
-                  <p className={`text-lg font-semibold ${bodyClass}`}>
-                    {point}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why UI/UX is Important */}
-      <section
-        className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "" : "bg-white"}`}
-      >
-        <div className="max-w-7xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
-          >
-            Why <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>UI/UX Design</span> Matters in
-            2026
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {importance.map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={cardClass}
-              >
-                <h3
-                  className={`text-2xl font-bold mb-4 text-center ${headingClass}`}
-                >
-                  {item.title}
-                </h3>
-                <p className={`text-center ${bodyClass}`}>{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Industries */}
-      <section
-        className={`py-20 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-black/40" : "bg-gray-100"}`}
-      >
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`text-4xl md:text-5xl font-black mb-12 ${headingClass}`}
-          >
-            Industries We <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>Serve</span>
-          </motion.h2>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {industries.map((ind, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={cardClass}
-              >
-                <ind.icon
-                  className={`w-16 h-16 ${accentClass} mb-6 group-hover:scale-110 transition-transform mx-auto`}
-                />
-                <h3 className={`text-2xl font-bold mb-4 ${headingClass}`}>
-                  {ind.title}
-                </h3>
-                <p className={`text-center ${bodyClass}`}>{ind.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section
-        className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-gradient-to-br from-red-950/30 to-black" : "bg-red-50"}`}
-      >
-        <div className="max-w-5xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`text-4xl md:text-6xl font-black mb-8 ${headingClass}`}
-          >
-            Let’s Build Something <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>Amazing</span>{" "}
-            Together
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`text-xl md:text-2xl mb-10 max-w-3xl mx-auto ${bodyClass}`}
-          >
-            Looking for a UI/UX design company that delivers creativity,
-            performance, and real business results? AI KNOTS IT SOLUTION is
-            your partner.
-          </motion.p>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            className="px-14 py-7 bg-[#3d220e] text-white rounded-full text-2xl md:text-3xl font-black shadow-2xl shadow-[#3d220e] hover:shadow-red-700/80 transition-all flex items-center gap-4 mx-auto"
-          >
-            <button onClick={() => navigate("/contact")} className="flex items-center gap-4">
-            Contact Us Today <ArrowRight className="w-8 h-8" />
-            </button>
-          </motion.button>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section
-        className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-gradient-to-b from-black to-gray-950" : "bg-white"}`}
-      >
-        <div className="max-w-4xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
-          >
-            Frequently Asked <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>Questions</span>
-          </motion.h2>
-
-          <div className="space-y-4">
-            {faqs.map((faq, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className={`border rounded-xl overflow-hidden transition-all
-                  ${
-                    isDark
-                      ? "border-red-900/40 bg-gray-900/30"
-                      : "border-gray-200 bg-white shadow"
-                  }`}
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className={`w-full px-8 py-6 text-left flex justify-between items-center transition-colors
-                    ${isDark ? "hover:bg-gray-800/50" : "hover:bg-gray-100"}`}
-                >
-                  <span className={`text-xl font-bold ${headingClass}`}>
-                    {faq.q}
-                  </span>
-                  <span
-                    className={`text-[#9F714E] text-2xl transition-transform ${openFaq === idx ? "rotate-180" : ""}`}
+                  <h3
+                    className={`text-2xl font-bold mb-4 text-center ${headingClass}`}
                   >
-                    ▼
-                  </span>
-                </button>
-                {openFaq === idx && (
-                  <div
-                    className={`px-8 pb-8 pt-2 leading-relaxed ${bodyClass}`}
+                    {item.title}
+                  </h3>
+                  <p className={`text-center ${bodyClass}`}>{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Services */}
+        <section
+          id="uiservices"
+          className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-black/40" : "bg-gray-100"}`}
+        >
+          <div className="max-w-7xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
+            >
+              Our <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>UI/UX Design Services</span>
+            </motion.h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((serv, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={cardClass}
+                >
+                  <serv.icon
+                    className={`w-16 h-16 ${accentClass} mb-6 mx-auto group-hover:scale-110 transition-transform`}
+                  />
+                  <h3
+                    className={`text-2xl font-bold mb-4 text-center ${headingClass}`}
+                  >
+                    {serv.title}
+                  </h3>
+                  <p className={`text-center ${bodyClass}`}>{serv.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Expertise & Tools */}
+        <section
+          id="expertise"
+          className={`py-20 px-4 sm:px-6 lg:px-8 ${isDark ? "" : "bg-white"}`}
+        >
+          <div className="max-w-7xl mx-auto text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-4xl md:text-5xl font-black mb-12 ${headingClass}`}
+            >
+              Our Expertise in <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>UI/UX Design</span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-xl mb-10 max-w-4xl mx-auto ${bodyClass}`}
+            >
+              Strong capabilities in wireframing, prototyping, user research,
+              visual design, and branding – enhanced with 2026 trends like AI
+              collaboration and multimodal interfaces.
+            </motion.p>
+
+            <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+              {tools.map((tool, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={`px-8 py-4 text-xl font-semibold rounded-xl border transition-all
+  ${isDark
+                      ? "bg-gray-800/60 border-[#8B6B4A]/30 hover:border-[#8B6B4A]/60"
+                      : "bg-white border-[#E8D9C2] hover:border-[#8B6B4A]"
+                    }`}
+                >
+                  {tool}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* What Makes Us Trusted */}
+        <section
+          className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-black/50" : "bg-gray-100"}`}
+        >
+          <div className="max-w-7xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
+            >
+              What Makes AI Knots a{" "}
+              <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>Trusted UI/UX Partner</span>?
+            </motion.h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {trustedPoints.map((point, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={cardClass}
+                >
+                  <div className="flex items-center justify-center gap-4">
+                    <CheckCircle2
+                      className={`w-8 h-8 ${accentClass} flex-shrink-0`}
+                    />
+                    <p className={`text-lg font-semibold ${bodyClass}`}>
+                      {point}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why UI/UX is Important */}
+        <section
+          id="why-uiux-matters"
+          className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "" : "bg-white"}`}
+        >
+          <div className="max-w-7xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
+            >
+              Why <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>UI/UX Design</span> Matters in
+              2026
+            </motion.h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {importance.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={cardClass}
+                >
+                  <h3
+                    className={`text-2xl font-bold mb-4 text-center ${headingClass}`}
+                  >
+                    {item.title}
+                  </h3>
+                  <p className={`text-center ${bodyClass}`}>{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Industries */}
+        <section
+          id="industries"
+          className={`py-20 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-black/40" : "bg-gray-100"}`}
+        >
+          <div className="max-w-7xl mx-auto text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-4xl md:text-5xl font-black mb-12 ${headingClass}`}
+            >
+              Industries We <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>Serve</span>
+            </motion.h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {industries.map((ind, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={cardClass}
+                >
+                  <ind.icon
+                    className={`w-16 h-16 ${accentClass} mb-6 group-hover:scale-110 transition-transform mx-auto`}
+                  />
+                  <h3 className={`text-2xl font-bold mb-4 ${headingClass}`}>
+                    {ind.title}
+                  </h3>
+                  <p className={`text-center ${bodyClass}`}>{ind.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-gradient-to-br from-red-950/30 to-black" : "bg-red-50"}`}
+        >
+          <div className="max-w-5xl mx-auto text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-4xl md:text-6xl font-black mb-8 ${headingClass}`}
+            >
+              Let’s Build Something <span className={`font-bold ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}>Amazing</span>{" "}
+              Together
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-xl md:text-2xl mb-10 max-w-3xl mx-auto ${bodyClass}`}
+            >
+              Looking for a{" "}
+              <HashLink
+                smooth
+                to="/uidesign#uiservices"
+                className={serviceLink}
+              >
+                UI/UX design company
+              </HashLink>{" "}
+              that delivers creativity, performance, and real{" "}
+              <HashLink
+                smooth
+                to="/uidesign#why-uiux-matters"
+                className={serviceLink}
+              >
+                business results
+              </HashLink>
+              ? AI KNOTS IT SOLUTION is your partner.
+            </motion.p>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => navigate("/contact")}
+              className="px-10 py-5 md:px-12 md:py-6 bg-gradient-to-r from-[#3D220E] to-[#3D220E]/90 rounded-full text-lg md:text-2xl font-bold text-white shadow-2xl shadow-[#3D220E]/50 hover:shadow-[#3D220E]/70 hover:from-[#4A2A12] hover:to-[#3D220E] transition-all duration-300 flex items-center gap-3 mx-auto"
+            >
+              Contact Us Today
+              <ArrowRight className="w-6 h-6 md:w-7 md:h-7" />
+            </motion.button>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section
+          id="faq"
+          className={`py-20 ${isDark ? "bg-gray-950" : "bg-gray-50"}`}
+        >
+          <div className="max-w-4xl mx-auto px-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-4xl md:text-5xl font-bold text-center mb-12 ${isDark ? "text-white" : "text-[#573010]"
+                }`}
+            >
+              Frequently Asked <span className="text-[#8B6B4A]">Questions</span>
+            </motion.h2>
+
+            <div className="space-y-4">
+              {faqs.map((faq, idx) => (
+                <details
+                  key={idx}
+                  className={`group rounded-xl p-6 border ${isDark
+                    ? "bg-gray-900 border-gray-800"
+                    : "bg-white border-gray-100"
+                    }`}
+                >
+                  <summary
+                    className={`font-semibold text-lg cursor-pointer flex justify-between items-center gap-4 ${isDark ? "text-white" : "text-[#573010]"
+                      }`}
+                  >
+                    {faq.q}
+
+                    <ChevronDown className="w-5 h-5 flex-shrink-0 transition-transform duration-300 group-open:rotate-180 text-[#8B6B4A]" />
+                  </summary>
+
+                  <p
+                    className={`mt-4 ${isDark ? "text-gray-400" : "text-gray-600"
+                      }`}
                   >
                     {faq.a}
-                  </div>
-                )}
-              </motion.div>
-            ))}
+                  </p>
+                </details>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+        {/* Final CTA */}
 
-      {/* Final CTA */}
-      
 
-      {/* Scroll to Top Button */}
-    
-    </div>
+        {/* Scroll to Top Button */}
+
+      </div>
     </>
   );
 }
