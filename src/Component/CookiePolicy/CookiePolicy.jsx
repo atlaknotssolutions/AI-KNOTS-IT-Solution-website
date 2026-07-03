@@ -2,15 +2,18 @@
 
 import React, { useState, useEffect } from "react";
 
-const CookiePolicy = () => {
+const CookiePolicy = () =>
+{
   const lastUpdated = "March 24, 2026";
 
   const [isDark, setIsDark] = useState(() =>
     document.documentElement.classList.contains("dark"),
   );
 
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
+  useEffect(() =>
+  {
+    const observer = new MutationObserver(() =>
+    {
       setIsDark(document.documentElement.classList.contains("dark"));
     });
     observer.observe(document.documentElement, {
@@ -21,7 +24,7 @@ const CookiePolicy = () => {
   }, []);
 
   // Dynamic Theme Classes
-  const accentClass = "text-red-500";
+  const accentClass = "text-[#8B6B4A]";
   const headingClass = isDark ? "text-white" : "text-gray-900";
   const bodyClass = isDark ? "text-gray-300" : "text-gray-700";
   const cardClass = isDark
@@ -37,18 +40,18 @@ const CookiePolicy = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-8 h-px bg-red-500"></div>
-            <span className="text-red-400 uppercase tracking-[3px] text-sm font-medium">
+            <div className="w-8 h-px bg-[#8B6B4A]"></div>
+            <span className="text-[#8B6B4A] uppercase tracking-[3px] text-sm font-medium">
               Legal
             </span>
-            <div className="w-8 h-px bg-red-500"></div>
+            <div className="w-8 h-px bg-[#8B6B4A]"></div>
           </div>
           <h1
             className={`text-5xl md:text-6xl font-bold tracking-tighter mb-3 ${headingClass}`}
           >
             Cookie Policy
           </h1>
-         
+
         </div>
 
         <div className="prose prose-invert max-w-none text-[15.8px] leading-relaxed space-y-12">
@@ -56,7 +59,7 @@ const CookiePolicy = () => {
             className={`text-lg ${isDark ? "text-gray-200" : "text-gray-700"}`}
           >
             At{" "}
-            <span className="text-red-400 font-medium">
+            <span className="text-[#8B6B4A] font-medium">
               AI Knots IT Solution
             </span>
             , we use cookies and similar tracking technologies to enhance your
@@ -193,7 +196,8 @@ const CookiePolicy = () => {
             </p>
 
             <div
-              className={`p-8 md:p-10 rounded-3xl ${cardClass} border ${isDark ? "border-red-900/30" : "border-red-200"}`}
+              className={`p-8 md:p-10 rounded-3xl ${cardClass} border ${isDark ? "border-[#8B6B4A]/30" : "border-[#E8D9C2]"
+                }`}
             >
               <div className="flex flex-col sm:flex-row gap-8 text-sm">
                 <div>

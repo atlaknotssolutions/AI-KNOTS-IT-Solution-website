@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown, ArrowUp } from "lucide-react";
-import serviceimg1 from "../assets/Images/service.jpeg";
-import serviceimg2 from "../assets/Images/service2.jpeg";
-import BPO from "../assets/Images/BPO.jpg";
+import serviceimg1 from "../assets/Images/service.webp";
+import serviceimg2 from "../assets/Images/service2.webp";
+import BPO from "../assets/Images/BPO.webp";
 import { Helmet } from "react-helmet-async";
 // Animation variants
 const fadeInUp = {
@@ -19,9 +19,8 @@ const staggerContainer = {
   },
 };
 
-const FAQAccordion = ({ isDark }) => {
-  const [openIndex, setOpenIndex] = useState(null);
-
+const FAQAccordion = ({ isDark }) =>
+{
   const faqs = [
     {
       question: "What kind of projects do you take?",
@@ -51,69 +50,44 @@ const FAQAccordion = ({ isDark }) => {
   ];
 
   return (
-    <div className="space-y-5">
-      {faqs.map((faq, index) => (
-        <div
-          key={index}
-          className={`group backdrop-blur-lg border rounded-2xl overflow-hidden shadow-xl transition-all duration-300
-            ${
-              isDark
-                ? "bg-gray-950/90 border-red-800/60 hover:border-red-700"
-                : "bg-white border-gray-200 hover:border-red-300 shadow-gray-100"
+    <div className="space-y-4">
+      {faqs.map((faq, idx) => (
+        <details
+          key={idx}
+          className={`group rounded-xl p-6 border ${isDark
+            ? "bg-gray-900 border-gray-800"
+            : "bg-white border-gray-100"
             }`}
         >
-          <button
-            onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            className={`w-full px-6 md:px-8 py-6 text-left flex items-center justify-between transition-all duration-300
-              ${isDark ? "hover:bg-red-950/50" : "hover:bg-red-50"}`}
-          >
-            <span
-              className={`text-xl md:text-2xl font-semibold transition-colors
-              ${
-                isDark
-                  ? "text-white group-hover:text-red-400"
-                  : "text-gray-900 group-hover:text-[#EFE5C8]"
+          <summary
+            className={`font-semibold text-lg cursor-pointer flex justify-between items-center gap-4 ${isDark ? "text-white" : "text-[#573010]"
               }`}
-            >
-              {faq.question}
-            </span>
-            <ChevronDown
-              className={`w-7 h-7 md:w-8 md:h-8 flex-shrink-0 transition-transform duration-400 text-red-500
-                ${openIndex === index ? "rotate-180" : ""}`}
-            />
-          </button>
-
-          <motion.div
-            initial={false}
-            animate={{
-              height: openIndex === index ? "auto" : 0,
-              opacity: openIndex === index ? 1 : 0,
-            }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="overflow-hidden"
           >
-            <div
-              className={`px-6 md:px-8 pb-6 pt-3 leading-relaxed text-base md:text-lg border-t
-              ${isDark ? "text-gray-300 border-red-900/50" : "text-gray-700 border-gray-200"}`}
-            >
-              {faq.answer}
-            </div>
-          </motion.div>
-        </div>
+            {faq.question}
+            <ChevronDown className="w-5 h-5 flex-shrink-0 transition-transform duration-300 group-open:rotate-180 text-[#8B6B4A]" />
+          </summary>
+
+          <p className={`mt-4 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
+            {faq.answer}
+          </p>
+        </details>
       ))}
     </div>
   );
 };
 
-const Service = () => {
+const Service = () =>
+{
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isDark, setIsDark] = useState(() =>
     document.documentElement.classList.contains("dark"),
   );
 
   // Dark mode observer
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
+  useEffect(() =>
+  {
+    const observer = new MutationObserver(() =>
+    {
       setIsDark(document.documentElement.classList.contains("dark"));
     });
     observer.observe(document.documentElement, {
@@ -124,19 +98,21 @@ const Service = () => {
   }, []);
 
   // Scroll to top
-  useEffect(() => {
+  useEffect(() =>
+  {
     const handleScroll = () => setShowScrollTop(window.scrollY > 400);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = () =>
+  {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <>
-      <Helmet>
+      <Helmet id="Our-Services">
         <title>IT & Digital Marketing Services | Atla IKS</title>
         <meta
           name="description"
@@ -147,10 +123,10 @@ const Service = () => {
           content="IT Services Company	Digital Marketing Services, Web Solutions, Software Development, Branding Services, SEO Services, App Development, BPO Services, IT Solutions Provider, Digital Marketing Agency, Custom Software, Website Development, Online Marketing, Business Growth Solutions"
         />
       </Helmet>
+
       <div
         className={`relative min-h-screen overflow-x-hidden transition-colors duration-500
-      ${isDark ? "bg-black text-gray-100" : "bg-gray-50 text-gray-900"}`}
-      >
+        ${isDark ? "bg-black text-gray-100" : "bg-gray-50 text-gray-900"}`}>
         {/* ==================== HERO SECTION WITH BACKGROUND IMAGE ==================== */}
         <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
           {/* Background Image - Only in Hero */}
@@ -162,18 +138,17 @@ const Service = () => {
             />
             <div
               className={`absolute inset-0 transition-all duration-700
-              ${
-                isDark
+        ${isDark
                   ? "bg-gradient-to-br from-black/85 via-black/75 to-black/90"
                   : "bg-gradient-to-br from-black/60 via-black/50 to-black/40"
-              }`}
+                }`}
             />
           </div>
 
           {/* Hero Content */}
           <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white">
-              <span className="bg-gradient-to-r from-red-500 via-rose-400 to-red-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#E7D3BE] via-[#C49A6C] to-[#8B6B4A] bg-clip-text text-transparent">
                 Our Services
               </span>
             </h1>
@@ -185,14 +160,14 @@ const Service = () => {
               business with innovation, reliability, and scale.
             </p>
 
-            <div className="mt-10 h-1.5 w-40 mx-auto rounded-full bg-gradient-to-r from-red-600 to-rose-600" />
+            <div className="mt-10 h-1.5 w-40 mx-auto rounded-full bg-gradient-to-r from-[#C49A6C] to-[#8B6B4A]" />
           </div>
         </section>
 
         {/* ==================== MAIN CONTENT (No Background Image) ==================== */}
         <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-16 md:py-24 lg:py-32">
           {/* IT Services Section */}
-          <section className="mb-24 md:mb-32">
+          <section id="website-Maintenance" className="mb-24 md:mb-32">
             <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
               <div className="w-full lg:w-1/2 rounded-3xl overflow-hidden border shadow-2xl relative group">
                 <div className="w-full aspect-[4/5] lg:aspect-auto lg:h-[720px] overflow-hidden">
@@ -207,17 +182,21 @@ const Service = () => {
 
               <div className="w-full lg:w-1/2 space-y-8">
                 <h2
-                  className={`text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent 
-                ${isDark ? "from-red-400 to-rose-500" : "from-red-600 via-red-700 to-rose-600"}`}
+                  className={`text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent
+          ${isDark
+                      ? "from-[#E7D3BE] via-[#C49A6C] to-[#8B6B4A]"
+                      : "from-[#3D220E] via-[#6E4E35] to-[#8B6B4A]"
+                    }`}
                 >
                   Information Technology Services
                 </h2>
 
                 <p
-                  className={`text-xl leading-relaxed ${isDark ? "text-gray-300" : "text-gray-700"}`}
+                  className={`text-xl leading-relaxed ${isDark ? "text-gray-300" : "text-gray-700"
+                    }`}
                 >
-                  Full-cycle development — from concept to deployment and
-                  long-term success.
+                  Full-cycle development — from concept to deployment and long-term
+                  success.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-5">
@@ -246,23 +225,25 @@ const Service = () => {
                     <div
                       key={i}
                       className={`group backdrop-blur-md border rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl
-                      ${
-                        isDark
-                          ? "bg-gray-950/80 border-red-900/40 hover:border-red-600/60"
-                          : "bg-white border-gray-200 hover:border-red-400"
-                      }`}
+              ${isDark
+                          ? "bg-gray-950/80 border-[#8B6B4A]/30 hover:border-[#8B6B4A]/60"
+                          : "bg-white border-[#E8D9C2] hover:border-[#8B6B4A]/50"
+                        }`}
                     >
                       <h4
-                        className={`text-xl font-semibold mb-3 transition-colors ${
-                          isDark
-                            ? "text-white group-hover:text-red-400"
-                            : "text-gray-900 group-hover:text-[#EFE5C8]"
-                        }`}
+                        className={`text-xl font-semibold mb-3 transition-colors ${isDark
+                          ? "text-white group-hover:text-[#D9C5B5]"
+                          : "text-gray-900 group-hover:text-[#8B6B4A]"
+                          }`}
                       >
                         {item.title}
                       </h4>
+
                       <p
-                        className={`transition-colors ${isDark ? "text-gray-400 group-hover:text-gray-300" : "text-gray-700 group-hover:text-gray-800"}`}
+                        className={`transition-colors ${isDark
+                          ? "text-gray-400 group-hover:text-gray-300"
+                          : "text-gray-700 group-hover:text-gray-800"
+                          }`}
                       >
                         {item.desc}
                       </p>
@@ -281,11 +262,10 @@ const Service = () => {
                     <span
                       key={tech}
                       className={`px-5 py-2 rounded-full text-sm font-medium border transition-colors
-                      ${
-                        isDark
-                          ? "bg-red-950/50 border-red-800 text-red-300 hover:bg-red-900/60"
-                          : "bg-red-100 border-red-200 text-red-700 hover:bg-red-200"
-                      }`}
+              ${isDark
+                          ? "bg-[#3D220E]/40 border-[#8B6B4A]/40 text-[#E7D3BE] hover:bg-[#3D220E]/60"
+                          : "bg-[#F5EDE4] border-[#E8D9C2] text-[#8B6B4A] hover:bg-[#EAD8C6]"
+                        }`}
                     >
                       {tech}
                     </span>
@@ -294,8 +274,11 @@ const Service = () => {
               </div>
             </div>
           </section>
+        </div>
 
-          {/* Digital Marketing Section */}
+        {/* Digital Marketing Section */}
+        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-16 md:py-24 lg:py-32">
+
           <section className="mb-24 md:mb-32">
             <div className="flex flex-col lg:flex-row-reverse items-center gap-10 lg:gap-16">
               <div className="w-full lg:w-1/2 rounded-3xl overflow-hidden border shadow-2xl relative group">
@@ -311,14 +294,18 @@ const Service = () => {
 
               <div className="w-full lg:w-1/2 space-y-8">
                 <h2
-                  className={`text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent 
-                ${isDark ? "from-red-400 to-rose-500" : "from-red-600 via-red-700 to-rose-600"}`}
+                  className={`text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent
+                  ${isDark
+                      ? "from-[#E7D3BE] via-[#C49A6C] to-[#8B6B4A]"
+                      : "from-[#3D220E] via-[#6E4E35] to-[#8B6B4A]"
+                    }`}
                 >
                   Digital Marketing
                 </h2>
 
                 <p
-                  className={`text-xl leading-relaxed ${isDark ? "text-gray-300" : "text-gray-700"}`}
+                  className={`text-xl leading-relaxed ${isDark ? "text-gray-300" : "text-gray-700"
+                    }`}
                 >
                   Boost your online presence with strategic digital marketing
                   solutions — driving traffic, engagement, and conversions.
@@ -354,23 +341,25 @@ const Service = () => {
                     <div
                       key={i}
                       className={`group backdrop-blur-md border rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl
-                      ${
-                        isDark
-                          ? "bg-gray-950/80 border-red-900/40 hover:border-red-600/60"
-                          : "bg-white border-gray-200 hover:border-red-400"
-                      }`}
+            ${isDark
+                          ? "bg-gray-950/80 border-[#8B6B4A]/30 hover:border-[#8B6B4A]/60"
+                          : "bg-white border-[#E8D9C2] hover:border-[#8B6B4A]/50"
+                        }`}
                     >
                       <h4
-                        className={`text-xl font-semibold mb-3 transition-colors ${
-                          isDark
-                            ? "text-white group-hover:text-red-400"
-                            : "text-gray-900 group-hover:text-[#EFE5C8]"
-                        }`}
+                        className={`text-xl font-semibold mb-3 transition-colors ${isDark
+                          ? "text-white group-hover:text-[#D9C5B5]"
+                          : "text-gray-900 group-hover:text-[#8B6B4A]"
+                          }`}
                       >
                         {item.title}
                       </h4>
+
                       <p
-                        className={`transition-colors ${isDark ? "text-gray-400 group-hover:text-gray-300" : "text-gray-700 group-hover:text-gray-800"}`}
+                        className={`transition-colors ${isDark
+                          ? "text-gray-400 group-hover:text-gray-300"
+                          : "text-gray-700 group-hover:text-gray-800"
+                          }`}
                       >
                         {item.desc}
                       </p>
@@ -389,11 +378,10 @@ const Service = () => {
                     <span
                       key={tech}
                       className={`px-5 py-2 rounded-full text-sm font-medium border transition-colors
-                      ${
-                        isDark
-                          ? "bg-red-950/50 border-red-800 text-red-300 hover:bg-red-900/60"
-                          : "bg-red-100 border-red-200 text-red-700 hover:bg-red-200"
-                      }`}
+            ${isDark
+                          ? "bg-[#3D220E]/40 border-[#8B6B4A]/40 text-[#E7D3BE] hover:bg-[#3D220E]/60"
+                          : "bg-[#F5EDE4] border-[#E8D9C2] text-[#8B6B4A] hover:bg-[#EAD8C6]"
+                        }`}
                     >
                       {tech}
                     </span>
@@ -403,13 +391,17 @@ const Service = () => {
             </div>
           </section>
 
+
           {/* BPO Section */}
           <section className="mb-24 md:mb-32">
             <div className="flex flex-col lg:flex-row-reverse items-center gap-10 lg:gap-16">
               <div className="w-full lg:w-1/2 space-y-8">
                 <h2
-                  className={`text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent 
-                ${isDark ? "from-red-400 to-rose-500" : "from-red-600 via-red-700 to-rose-600"}`}
+                  className={`text-4xl md:text-5xl font-bold bg-gradient-to-r bg-clip-text text-transparent
+                  ${isDark
+                      ? "from-[#E7D3BE] via-[#C49A6C] to-[#8B6B4A]"
+                      : "from-[#3D220E] via-[#6E4E35] to-[#8B6B4A]"
+                    }`}
                 >
                   Business Process Outsourcing (BPO)
                 </h2>
@@ -443,18 +435,16 @@ const Service = () => {
                     <div
                       key={i}
                       className={`group backdrop-blur-md border rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl
-                      ${
-                        isDark
-                          ? "bg-gray-950/80 border-red-900/40 hover:border-red-600/60"
-                          : "bg-white border-gray-200 hover:border-red-400"
-                      }`}
+                      ${isDark
+                          ? "bg-gray-950/80 border-[#8B6B4A]/30 hover:border-[#8B6B4A]/60"
+                          : "bg-white border-[#E8D9C2] hover:border-[#8B6B4A]/50"
+                        }`}
                     >
                       <h4
-                        className={`text-xl font-semibold mb-3 transition-colors ${
-                          isDark
-                            ? "text-white group-hover:text-red-400"
-                            : "text-gray-900 group-hover:text-[#EFE5C8]"
-                        }`}
+                        className={`text-xl font-semibold mb-3 transition-colors ${isDark
+                          ? "text-white group-hover:text-[#D9C5B5]"
+                          : "text-gray-900 group-hover:text-[#8B6B4A]"
+                          }`}
                       >
                         {item.title}
                       </h4>
@@ -479,56 +469,55 @@ const Service = () => {
               </div>
             </div>
           </section>
-
-          {/* FAQ Section */}
-          <section
-            className={`relative py-20 md:py-24 lg:py-28 px-5 sm:px-8 md:px-10 lg:px-16 overflow-hidden rounded-3xl my-12 md:my-16
-          ${isDark ? "bg-gray-950/90 border border-red-900/50" : "bg-white border border-gray-100 shadow-2xl"}`}
-          >
-            <div className="relative z-10 max-w-6xl mx-auto">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={staggerContainer}
-              >
-                <motion.h2
-                  variants={fadeInUp}
-                  className={`text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-6 md:mb-8 tracking-tight ${isDark ? "text-white" : "text-gray-900"}`}
-                >
-                  FREQUENTLY <span className="text-red-500">ASKED</span>{" "}
-                  QUESTIONS
-                </motion.h2>
-
-                <motion.p
-                  variants={fadeInUp}
-                  className={`text-lg sm:text-xl md:text-2xl text-center mb-12 md:mb-16 font-light max-w-4xl mx-auto ${isDark ? "text-gray-300" : "text-gray-700"}`}
-                >
-                  Got questions? We've got clear, straightforward answers.
-                </motion.p>
-
-                <FAQAccordion isDark={isDark} />
-              </motion.div>
-            </div>
-          </section>
         </div>
 
-        {/* Scroll to Top Button */}
-        {showScrollTop && (
-          <button
-            onClick={scrollToTop}
-            className={`fixed bottom-8 right-8 z-50 p-4 rounded-full shadow-xl border transition-all duration-300
-            ${
-              isDark
-                ? "bg-gray-900 border-gray-700 hover:bg-gray-800 text-white"
-                : "bg-white border-gray-200 hover:bg-gray-50 text-gray-900 shadow-lg"
-            }`}
-            aria-label="Scroll to top"
-          >
-            <ArrowUp size={24} />
-          </button>
-        )}
+
+        {/* FAQ Section */}
+        {/* FAQ */}
+        <section
+          id="faq"
+          className={`py-20 ${isDark ? "bg-gray-950" : "bg-gray-50"}`}
+        >
+          <div className="max-w-4xl mx-auto px-6">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-4xl md:text-5xl font-bold text-center mb-12 ${isDark ? "text-white" : "text-[#573010]"
+                }`}
+            >
+              Frequently Asked <span className="text-[#8B6B4A]">Questions</span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`text-lg md:text-xl text-center mb-12 max-w-4xl mx-auto ${isDark ? "text-gray-400" : "text-gray-600"
+                }`}
+            >
+              Got questions? We've got clear, straightforward answers.
+            </motion.p>
+
+            <FAQAccordion isDark={isDark} />
+          </div>
+        </section>
       </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className={`fixed bottom-8 right-8 z-50 p-4 rounded-full shadow-xl border transition-all duration-300
+            ${isDark
+              ? "bg-gray-900 border-gray-700 hover:bg-gray-800 text-white"
+              : "bg-white border-gray-200 hover:bg-gray-50 text-gray-900 shadow-lg"
+            }`}
+          aria-label="Scroll to top"
+        >
+          <ArrowUp size={24} />
+        </button>
+      )}
     </>
   );
 };

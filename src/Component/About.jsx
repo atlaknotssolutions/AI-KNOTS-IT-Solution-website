@@ -5,11 +5,14 @@ import React, {
   useState,
   Suspense,
 } from "react";
+import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import axios from "axios";
 import Particles from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import { Helmet } from "react-helmet-async";
-import {
+import
+{
   motion,
   useMotionValue,
   useTransform,
@@ -17,7 +20,8 @@ import {
   useInView,
   AnimatePresence,
 } from "framer-motion";
-import {
+import
+{
   ArrowRight,
   ChevronDown,
   Code,
@@ -46,7 +50,8 @@ import {
 } from "lucide-react";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
+import
+{
   OrbitControls,
   Float,
   Environment,
@@ -54,29 +59,31 @@ import {
   Sphere,
 } from "@react-three/drei";
 
-import img4 from "../Component/Mobile/img/Atlaimage2.jpg.png";
+import img4 from "../../src/assets/Images/Atlaimage2.jpg.webp";
 import MobileOnboarding from "./Mobile/Mobilebraing";
 import { useNavigate } from "react-router-dom";
-import img1 from "./Mobile/img/mobileviewpartnew1.png";
-import img6 from "./Mobile/img/mobileview2.png";
-import FounderImg from "./Mobile/img/nagar.jpg";
-import MdImg from "../assets/Images/managerdirector.jpeg";
-import CeoImg from "./Mobile/img/CEO.jpg";
-import CtoImg from "./Mobile/img/CTO.jpg";
-import OurTeam from "./Mobile/img/OurTeam.jpg";
-import OurTeam2 from "./Mobile/img/silder.jpeg";
-import OurTeam3 from "./Mobile/img/silder3.jpeg";
+import img1 from "../../src/assets/Images/mobileviewpartnew1.webp";
+import img6 from "../../src/assets/Images/mobileview2.webp";
+import FounderImg from "../../src/assets/Images/nagar.webp";
+import MdImg from "../../src/assets/Images/managerdirector.webp";
+import CeoImg from "../../src/assets/Images/CEO.webp";
+import CtoImg from "../../src/assets/Images/CTO.webp";
+import OurTeam from "../../src/assets/Images/OurTeam.webp";
+import OurTeam2 from "../../src/assets/Images/silder.webp";
+import OurTeam3 from "../../src/assets/Images/silder3.webp";
 
 import { useTheme } from "../context/ThemeContext";
 
 // ─── Counter Component ────────────────────────────────────────
-function Counter({ value, duration = 2.5 }) {
+function Counter({ value, duration = 2.5 })
+{
   const count = useMotionValue(0);
   const rounded = useTransform(count, Math.round);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     if (!isInView) return;
     const target = Number(value) || 0;
     const controls = animate(count, target, { duration, ease: "easeOut" });
@@ -91,10 +98,13 @@ function Counter({ value, duration = 2.5 }) {
 }
 
 // ─── Animated Sphere ──────────────────────────────────────────
-const AnimatedSphere = ({ position, color }) => {
+const AnimatedSphere = ({ position, color }) =>
+{
   const meshRef = useRef();
-  useFrame(() => {
-    if (meshRef.current) {
+  useFrame(() =>
+  {
+    if (meshRef.current)
+    {
       meshRef.current.rotation.x += 0.003;
       meshRef.current.rotation.y += 0.004;
       meshRef.current.position.y =
@@ -219,9 +229,8 @@ const GitHubIcon = () => (
 );
 
 // FAQ Accordion
-const FAQAccordion = ({ isDark }) => {
-  const [openIndex, setOpenIndex] = useState(null);
-
+const FAQAccordion = ({ isDark }) =>
+{
   const faqs = [
     {
       question: "What kind of projects do you take?",
@@ -251,46 +260,33 @@ const FAQAccordion = ({ isDark }) => {
   ];
 
   return (
-    <div className="space-y-5">
-      {faqs.map((faq, index) => (
-        <div
-          key={index}
-          className={`group backdrop-blur-lg border rounded-2xl overflow-hidden shadow-xl transition-all duration-300 ${isDark ? "bg-gray-950/75 border-red-900/50 hover:shadow-red-900/40" : "bg-white border-gray-200 hover:shadow-red-200/60 shadow-gray-200"}`}
+    <div className="space-y-4">
+      {faqs.map((faq, idx) => (
+        <details
+          key={idx}
+          className={`group rounded-xl p-6 border ${isDark
+            ? "bg-gray-900 border-gray-800"
+            : "bg-white border-gray-100"
+            }`}
         >
-          <button
-            onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            className={`w-full px-6 md:px-8 py-6 text-left flex items-center justify-between transition-colors duration-300 ${isDark ? "hover:bg-red-950/40" : "hover:bg-red-50"}`}
+          <summary
+            className={`font-semibold text-lg cursor-pointer flex justify-between items-center gap-4 ${isDark ? "text-white" : "text-[#573010]"
+              }`}
           >
-            <span
-              className={`text-xl md:text-2xl font-semibold transition-colors ${isDark ? "text-white group-hover:text-[#3D220E]" : "text-gray-900 group-hover:text-[#3D220E]"}`}
-            >
-              {faq.question}
-            </span>
-            <ChevronDown
-              className={`w-7 h-7 md:w-8 md:h-8 flex-shrink-0 text-[#3D220E] transition-transform duration-300 ${openIndex === index ? "rotate-180 scale-110" : "scale-100"}`}
-            />
-          </button>
+            {faq.question}
 
-          <motion.div
-            initial={false}
-            animate={{
-              height: openIndex === index ? "auto" : 0,
-              opacity: openIndex === index ? 1 : 0,
-            }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <div
-              className={`px-6 md:px-8 pb-6 pt-3 leading-relaxed text-base md:text-lg border-t ${isDark ? "text-[#866645] border-red-900/40" : "text-gray-700 border-gray-200"}`}
-            >
-              {faq.answer}
-            </div>
-          </motion.div>
-        </div>
+            <ChevronDown className="w-5 h-5 flex-shrink-0 transition-transform duration-300 group-open:rotate-180 text-[#8B6B4A]" />
+          </summary>
+
+          <p className={`mt-4 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
+            {faq.answer}
+          </p>
+        </details>
       ))}
     </div>
   );
 };
+
 
 // Leader Card
 const LeaderCard = ({
@@ -352,7 +348,8 @@ const LeaderCard = ({
   </motion.div>
 );
 
-export default function About() {
+export default function About()
+{
   const navigate = useNavigate();
   const { isDark } = useTheme();
 
@@ -373,7 +370,8 @@ export default function About() {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   // Auto rotate
-  useEffect(() => {
+  useEffect(() =>
+  {
     const timer = setInterval(
       () => setActiveTestimonial((prev) => (prev + 1) % 3),
       5000,
@@ -381,7 +379,8 @@ export default function About() {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     const interval = setInterval(
       () => setActiveImageIndex((prev) => (prev + 1) % teamImages.length),
       4800,
@@ -389,19 +388,22 @@ export default function About() {
     return () => clearInterval(interval);
   }, []);
 
-  const particlesInit = useCallback(async (engine) => {
+  const particlesInit = useCallback(async (engine) =>
+  {
     await loadSlim(engine);
   }, []);
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) =>
+  {
     e.preventDefault();
     setLoading(true);
     setError("");
     setSuccess(false);
-    try {
+    try
+    {
       const apiUrl = `${import.meta.env.VITE_API_URL}/api/query/create`;
       await axios.post(apiUrl, formData);
       setSuccess(true);
@@ -412,13 +414,16 @@ export default function About() {
         message: "",
         category: "",
       });
-      setTimeout(() => {
+      setTimeout(() =>
+      {
         setIsModalOpen(false);
         setSuccess(false);
       }, 2000);
-    } catch (err) {
+    } catch (err)
+    {
       setError(err.message || "Something went wrong");
-    } finally {
+    } finally
+    {
       setLoading(false);
     }
   };
@@ -453,6 +458,8 @@ export default function About() {
     ? "bg-gray-900/70 border-red-900/40 hover:border-red-700/60 hover:shadow-red-950/50"
     : "bg-white border-gray-200 hover:border-red-200 hover:shadow-xl";
 
+  const serviceLink =
+    "font-bold text-[#8B6B4A] hover:text-[#6B4F2A] transition-colors duration-200";
   return (
     <>
       <Helmet>
@@ -537,13 +544,53 @@ export default function About() {
             >
               We create modern,{" "}
               <span
-                className={`font-bold ${isDark ? "text-red-500" : "text-[#6d5d30c8]"}`}
+              // className={`font-bold ${isDark ? "text-red-500" : "text-[#6d5d30c8]"}`}
+              // className={`font-bold ${isDark ? "text-red-500" : "text-[#6d5d30c8]"}`}
               >
                 high-performance websites and provide complete digital solution,
               </span>{" "}
-              to help businesses grow online. Our services include website
-              development, SEO, digital marketing, social media management,
-              software development, and ERP solution
+              to help businesses grow online. Our services include Our services include{" "}
+              <Link
+                to="/websitedesigndevelopment"
+                className={serviceLink}
+              >
+                Website Development
+              </Link>
+              ,{" "}
+              <Link
+                to="/seo"
+                className={serviceLink}
+              >
+                SEO
+              </Link>
+              ,{" "}
+              <Link
+                to="/digital-marketing"
+                className={serviceLink}
+              >
+                Digital Marketing
+              </Link>
+              ,{" "}
+              <Link
+                to="/socialmediamarketing"
+                className={serviceLink}
+              >
+                Social Media Management
+              </Link>
+              ,{" "}
+              <Link
+                to="/software"
+                className={serviceLink}
+              >
+                Software Development
+              </Link>
+              , and{" "}
+              <Link
+                to="/erpdevelopment"
+                className={serviceLink}
+              >
+                ERP Solution
+              </Link>
             </motion.p>
 
             {/* Image Blocks */}
@@ -555,11 +602,10 @@ export default function About() {
               {/* Mission - Left Side */}
               <motion.div
                 variants={fadeInUp}
-                className={`group p-8 rounded-3xl border backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] ${
-                  isDark
-                    ? "bg-gray-900/80 border-red-900/30 hover:border-[#9F714E]"
-                    : "bg-white/90 border-red-200 hover:border-[#9F714E]"
-                }`}
+                className={`group p-8 rounded-3xl border backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] ${isDark
+                  ? "bg-gray-900/80 border-red-900/30 hover:border-[#9F714E]"
+                  : "bg-white/90 border-red-200 hover:border-[#9F714E]"
+                  }`}
               >
                 <div className="flex flex-col items-center text-center mb-8">
                   <h3
@@ -570,22 +616,37 @@ export default function About() {
                 </div>
 
                 <p className={`text-lg leading-relaxed text-center ${subText}`}>
-                  Our mission is to deliver high-quality website development,
-                  software solutions, SEO, digital marketing, and IT services
-                  that help businesses build a strong online presence, improve
-                  efficiency, and achieve their goals through smart, reliable,
-                  and result-driven technology solutions.
+                  Our mission is to deliver high-quality{" "}
+                  <Link to="/websitedesigndevelopment" className={serviceLink}>
+                    Website Development
+                  </Link>
+                  ,{" "}
+                  <Link to="/software" className={serviceLink}>
+                    Software Solutions
+                  </Link>
+                  ,{" "}
+                  <Link to="/seo" className={serviceLink}>
+                    SEO
+                  </Link>
+                  ,{" "}
+                  <Link to="/digital-marketing" className={serviceLink}>
+                    Digital Marketing
+                  </Link>
+                  , and{" "}
+                  <Link to="/service" className={serviceLink}>
+                    IT Services
+                  </Link>{" "}
+                  that help businesses strengthen their digital presence, improve operational efficiency, and achieve sustainable growth through innovative technology.
                 </p>
               </motion.div>
 
               {/* Vision - Right Side */}
               <motion.div
                 variants={fadeInUp}
-                className={`group p-8 rounded-3xl border backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] ${
-                  isDark
-                    ? "bg-gray-900/80 border-red-900/30 hover:border-[#9F714E]"
-                    : "bg-white/90 border-red-200 hover:border-[#9F714E]"
-                }`}
+                className={`group p-8 rounded-3xl border backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] ${isDark
+                  ? "bg-gray-900/80 border-red-900/30 hover:border-[#9F714E]"
+                  : "bg-white/90 border-red-200 hover:border-[#9F714E]"
+                  }`}
               >
                 <div className="flex flex-col items-center text-center mb-8">
                   <h3
@@ -596,10 +657,27 @@ export default function About() {
                 </div>
 
                 <p className={`text-lg leading-relaxed text-center ${subText}`}>
-                  To become a leading digital solutions company that empowers
-                  businesses with innovative technology, creative strategies,
-                  and future-ready digital experiences that drive long-term
-                  growth and success.
+                  Our vision is to become a trusted technology partner by delivering innovative{" "},{" "}
+                  <Link to="/software" className={serviceLink}>
+                    Software Solutions
+                  </Link>
+                  ,{" "}
+                  <Link to="/ai-mlservice" className={serviceLink}>
+                    AI Services
+                  </Link>
+                  ,{" "}
+                  <Link to="/cloudsolutions" className={serviceLink}>
+                    Cloud Solutions
+                  </Link>
+                  ,{" "}
+                  <Link to="/digital-marketing" className={serviceLink}>
+                    Digital Marketing
+                  </Link>
+                  , and{" "}
+                  <Link to="/erpdevelopment" className={serviceLink}>
+                    ERP Solutions
+                  </Link>{" "}
+                  that empower businesses to embrace digital transformation and achieve long-term success.
                 </p>
               </motion.div>
             </motion.div>
@@ -733,14 +811,21 @@ export default function About() {
                 >
                   Building the <span className="text-[#9F714E]">Business</span>
                 </h3>
-                <p
-                  className={`text-lg md:text-xl leading-relaxed mb-8 max-w-xl ${subText}`}
-                >
-                  We believe technology should empower businesses, simplify
-                  operations, and create new opportunities for growth — not
-                  complicate the journey. Through innovative digital solutions,
-                  smart strategies, and reliable IT services, we help businesses
-                  adapt, scale, and succeed in an ever-evolving digital world.
+                <p className={`text-lg md:text-xl leading-relaxed mb-8 max-w-xl ${subText}`}>
+                  We believe{" "}
+                  <Link to="/technology" className={serviceLink}>
+                    technology
+                  </Link>{" "}
+                  should empower businesses, simplify operations, and create new opportunities
+                  for growth — not complicate the journey. Through innovative{" "}
+                  <Link to="/service" className={serviceLink}>
+                    digital solutions
+                  </Link>
+                  , smart strategies, and reliable{" "}
+                  <Link to="/service" className={serviceLink}>
+                    IT services
+                  </Link>
+                  , we help businesses adapt, scale, and succeed in an ever-evolving digital world.
                 </p>
                 <button
                   onClick={() => setIsModalOpen(true)}
@@ -768,15 +853,38 @@ export default function About() {
                   Innovation Meets{" "}
                   <span className="text-[#9F714E]">Excellence</span>
                 </h3>
-                <p
-                  className={`text-lg md:text-xl leading-relaxed mb-8 max-w-xl ${subText}`}
-                >
-                  We transform businesses through smart, seamless, and
-                  future-ready digital solutions designed to drive growth and
-                  success. From website development and digital marketing to
-                  software and IT services, we help brands build a strong
-                  digital presence with innovation, creativity, and technology
-                  that delivers real results.
+                <p className={`text-lg md:text-xl leading-relaxed mb-8 max-w-xl ${subText}`}>
+                  We transform businesses through smart, seamless, and future-ready{" "}
+                  <Link to="/service" className={serviceLink}>
+                    digital solutions
+                  </Link>{" "}
+                  designed to drive growth and success. From{" "}
+                  <Link to="/websitedesigndevelopment" className={serviceLink}>
+                    website development
+                  </Link>{" "}
+                  and{" "}
+                  <Link to="/digital-marketing" className={serviceLink}>
+                    digital marketing
+                  </Link>{" "}
+                  to{" "}
+                  <Link to="/software" className={serviceLink}>
+                    software
+                  </Link>{" "}
+                  and{" "}
+                  <>
+                    <HashLink
+                      smooth
+                      to="/about#core-services"
+                      className={serviceLink}
+                    >
+                      IT Services
+                    </HashLink>
+                  </>{" "}
+                  , we help brands build a strong{" "}
+                  <Link to="/seo" className={serviceLink}>
+                    digital presence
+                  </Link>{" "}
+                  with innovation, creativity, and technology that delivers real results.
                 </p>
               </div>
               <div className="w-full md:w-7/12 relative group overflow-hidden order-1 md:order-2">
@@ -811,6 +919,7 @@ export default function About() {
             </div>
 
             <motion.div
+            id="Empowering-Business"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -825,11 +934,32 @@ export default function About() {
                   <span className="text-[#9F714E]"> Business Growth</span>
                 </h3>
                 <p className={`text-lg leading-relaxed ${subText}`}>
-                  We deliver cutting-edge technology solutions that help
-                  businesses grow, innovate, and succeed in the digital world.
-                  From websites and mobile apps to SEO and digital marketing,
-                  our solutions are designed to boost performance, strengthen
-                  your online presence, and drive long-term success.
+                  We deliver cutting-edge{" "}
+                  <Link to="/service" className={serviceLink}>
+                    technology solutions
+                  </Link>{" "}
+                  that help businesses grow, innovate, and succeed in the digital world.
+                  From{" "}
+                  <Link to="/websitedesigndevelopment" className={serviceLink}>
+                    websites
+                  </Link>{" "}
+                  and{" "}
+                  <Link to="/mobiledevelopment" className={serviceLink}>
+                    mobile apps
+                  </Link>{" "}
+                  to{" "}
+                  <Link to="/seo" className={serviceLink}>
+                    SEO
+                  </Link>{" "}
+                  and{" "},{" "}
+                  <Link to="/digital-marketing" className={serviceLink}>
+                    digital marketing
+                  </Link>
+                  , our solutions are designed to boost performance, strengthen your{" "}
+                  <Link to="/seo" className={serviceLink}>
+                    online presence
+                  </Link>
+                  , and drive long-term success.
                 </p>
                 <div className="grid grid-cols-2 gap-8 my-8">
                   <div>
@@ -887,7 +1017,8 @@ export default function About() {
                 { num: "24/7", label: "Support Coverage", icon: Headphones },
                 { num: "90%", label: "Uptime Commitment", icon: ShieldCheck },
                 { num: "99+", label: "Happy Clients", icon: Users },
-              ].map((item, index) => {
+              ].map((item, index) =>
+              {
                 const isAnimated = !item.num.includes("/");
                 const numericValue = isAnimated ? parseFloat(item.num) : null;
                 return (
@@ -896,11 +1027,10 @@ export default function About() {
                     variants={scaleIn}
                     whileHover={isDark ? { scale: 1.05, y: -8 } : {}}
                     className={`border rounded-2xl p-8 text-center flex flex-col items-center justify-center min-h-[220px] transition-all duration-300
-                    ${
-                      isDark
+                    ${isDark
                         ? "bg-gradient-to-br from-gray-900 to-black border-red-900/30"
                         : "bg-white border-gray-200 shadow-md"
-                    }`}
+                      }`}
                   >
                     <item.icon
                       className={`w-14 h-14 mx-auto mb-5 text-[#9F714E] ${isDark ? "text-[#765134]" : "text-[#9F714E]"}`}
@@ -1042,7 +1172,8 @@ export default function About() {
 
         {/* ====================== SERVICES SECTION ====================== */}
         <section
-          className={`py-24 relative overflow-hidden ${isDark ? "bg-gradient-to-b from-black to-gray-900" : "bg-gradient-to-b from-gray-50 to-white"}`}
+          id="core-services"
+          className={` py-24 relative overflow-hidden ${isDark ? "bg-gradient-to-b from-black to-gray-900" : "bg-gradient-to-b from-gray-50 to-white"}`}
         >
           <div className="container mx-auto px-6 lg:px-8 relative z-10">
             <div className="text-center mb-16">
@@ -1115,7 +1246,8 @@ export default function About() {
                     { text: "Project-based staffing", icon: ArrowRight },
                   ],
                 },
-              ].map((service, idx) => {
+              ].map((service, idx) =>
+              {
                 const ServiceIcon = service.icon;
                 return (
                   <div
@@ -1130,7 +1262,8 @@ export default function About() {
                         {service.title}
                       </h3>
                       <ul className="space-y-4">
-                        {service.items.map((item, i) => {
+                        {service.items.map((item, i) =>
+                        {
                           const ItemIcon = item.icon;
                           return (
                             <li
@@ -1211,7 +1344,8 @@ export default function About() {
                     { text: "Long-term support contracts", icon: CheckCircle2 },
                   ],
                 },
-              ].map((domain, idx) => {
+              ].map((domain, idx) =>
+              {
                 const DomainIcon = domain.icon;
                 return (
                   <div
@@ -1233,7 +1367,8 @@ export default function About() {
 
                       {/* List Items */}
                       <ul className="space-y-4">
-                        {domain.items.map((item, i) => {
+                        {domain.items.map((item, i) =>
+                        {
                           const ItemIcon = item.icon;
                           return (
                             <li
@@ -1317,7 +1452,7 @@ export default function About() {
           </p>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="px-12 py-6 rounded-full text-2xl font-bold shadow-2xl transition text-white bg-[#3D220E] hover:shadow-red-900/70"
+            className="px-12 py-6 md:px-14 md:py-7 bg-gradient-to-r from-[#3D220E] to-[#3D220E]/90 rounded-full text-xl md:text-3xl font-black shadow-2xl shadow-[#3D220E]/60 hover:shadow-[#3D220E]/80 hover:from-[#4A2A12] hover:to-[#3D220E] transition-all duration-300 text-white"
           >
             Let's Start Your Business →
           </button>
@@ -1325,7 +1460,7 @@ export default function About() {
 
         <hr className="border-t border-gray-300 my-12" />
         {/* ====================== FAQ + FINAL CTA ====================== */}
-        <div className="relative z-10 max-w-6xl mx-auto pb-16 px-4">
+        <div className="max-w-4xl mx-auto px-6 py-20">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -1334,13 +1469,15 @@ export default function About() {
           >
             <motion.h2
               variants={fadeInUp}
-              className={`text-4xl sm:text-5xl md:text-6xl font-extrabold text-center mb-6 md:mb-8 tracking-tight ${text}`}
+              className={`text-4xl md:text-5xl font-bold text-center mb-12 ${isDark ? "text-white" : "text-[#573010]"
+                }`}
             >
-              FREQUENTLY <span className="text-[#3D220E]">ASKED</span> QUESTIONS
+              Frequently Asked <span className="text-[#8B6B4A]">Questions</span>
             </motion.h2>
             <motion.p
               variants={fadeInUp}
-              className={`text-lg sm:text-xl md:text-2xl text-center mb-12 md:mb-16 font-light max-w-4xl mx-auto ${subText}`}
+              className={`text-lg md:text-xl text-center mb-12 max-w-4xl mx-auto ${isDark ? "text-gray-400" : "text-gray-600"
+                }`}
             >
               Got questions? We've got clear, straightforward answers.
             </motion.p>

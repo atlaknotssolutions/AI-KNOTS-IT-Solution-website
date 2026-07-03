@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import {
+import { useNavigate, Link } from "react-router-dom";
+import
+{
   Facebook,
   Instagram,
   Linkedin,
@@ -17,8 +18,10 @@ import {
   MapPin,
   ArrowRight,
   CheckCircle2,
+  ChevronDown,
 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { HashLink } from "react-router-hash-link";
 const images = {
   hero: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=2340", // High quality social media dashboard
   growth:
@@ -151,7 +154,8 @@ const faqs = [
   },
 ];
 
-export default function SocialMediaMarketing() {
+export default function SocialMediaMarketing()
+{
   const navigate = useNavigate();
 
   const [isDark, setIsDark] = useState(() =>
@@ -161,8 +165,10 @@ export default function SocialMediaMarketing() {
   const [openFaq, setOpenFaq] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
+  useEffect(() =>
+  {
+    const observer = new MutationObserver(() =>
+    {
       setIsDark(document.documentElement.classList.contains("dark"));
     });
     observer.observe(document.documentElement, {
@@ -180,9 +186,11 @@ export default function SocialMediaMarketing() {
     ? "bg-gray-900/70 backdrop-blur-sm border border-gray-800 hover:border-primary/60 hover:shadow-red-900/30"
     : "bg-white border border-gray-200 hover:border-primary hover:shadow-2xl";
 
-  const buttonClass = `px-12 py-6 rounded-full text-xl font-bold flex items-center gap-3 group shadow-xl ${
-    isDark ? "btn-accent" : "btn-accent"
-  }`;
+  const buttonClass = `px-12 py-6 rounded-full text-xl font-bold flex items-center gap-3 group shadow-xl ${isDark ? "btn-accent" : "btn-accent"
+    }`;
+
+  const serviceLink =
+    "font-bold text-[#8B6B4A] hover:text-[#6B4F2A] transition-colors duration-200";
 
   return (
     <>
@@ -239,15 +247,45 @@ export default function SocialMediaMarketing() {
 
             <motion.p
               variants={fadeInUp}
-              className={`text-lg md:text-xl max-w-5xl mx-auto leading-relaxed mb-12 ${isDark ? "text-gray-300" : "text-white/90"}`}
+              className={`text-lg md:text-xl max-w-5xl mx-auto leading-relaxed mb-12 ${isDark ? "text-gray-300" : "text-white/90"
+                }`}
             >
               At{" "}
               <span className="font-semibold text-[#8B6B4A]">
                 AI KNOTS IT SOLUTION
               </span>
-              , we are one of the most trusted Social Media Marketing agencies
-              in Bhopal. We create powerful strategies that deliver actual
-              results — more followers, better engagement, and quality leads.
+              , we are one of the most trusted{" "}
+              <HashLink
+                smooth
+                to="/socialmediamarketing#platforms"
+                className={serviceLink}
+              >
+                Social Media Marketing
+              </HashLink>{" "}
+              agencies in{" "}
+              <Link
+                to="/contact"
+                className={serviceLink}
+              >
+                Bhopal
+              </Link>
+              . We create powerful{" "}
+              <HashLink
+                smooth
+                to="/socialmediamarketing#strategies"
+                className={serviceLink}
+              >
+                strategies
+              </HashLink>{" "}
+              that deliver actual results — more{" "}
+              <HashLink
+                smooth
+                to="/socialmediamarketing#platforms"
+                className={serviceLink}
+              >
+                followers
+              </HashLink>
+              , better engagement, and quality leads.
             </motion.p>
 
             <motion.div
@@ -263,11 +301,10 @@ export default function SocialMediaMarketing() {
               </button>
 
               <button
-                className={`px-12 py-6 border-2 border-[#8B6B4A] rounded-full text-xl font-bold transition-all ${
-                  isDark
-                    ? "text-accent hover:bg-black/60 hover:border-[#8B6B4A]"
-                    : "text-muted hover:bg-muted border-[#8B6B4A] hover:border-[#8B6B4A] hover:text-white shadow-lg"
-                }`}
+                className={`px-12 py-6 border-2 border-[#8B6B4A] rounded-full text-xl font-bold transition-all ${isDark
+                  ? "text-accent hover:bg-black/60 hover:border-[#8B6B4A]"
+                  : "text-muted hover:bg-muted border-[#8B6B4A] hover:border-[#8B6B4A] hover:text-white shadow-lg"
+                  }`}
               >
                 Free Social Media Audit
               </button>
@@ -277,6 +314,7 @@ export default function SocialMediaMarketing() {
 
         {/* Platforms We Serve */}
         <section
+          id="platforms"
           className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-gray-950" : "bg-gray-50"}`}
         >
           <div className="max-w-7xl mx-auto">
@@ -350,6 +388,7 @@ export default function SocialMediaMarketing() {
 
         {/* Advantages */}
         <section
+          id="strategies"
           className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-gray-950" : "bg-gray-50"}`}
         >
           <div className="max-w-7xl mx-auto">
@@ -471,11 +510,10 @@ export default function SocialMediaMarketing() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className={`px-16 py-7 rounded-full text-2xl font-bold transition-all ${
-                isDark
-                  ? "bg-gradient-to-r from-[#8B6B4A] to-[#8B6B4A] hover:from-[#8B6B4A] hover:to-[#8B6B4A]"
-                  : "bg-[#8B6B4A] hover:bg-[#8B6B4A] text-white"
-              }`}
+              className={`px-16 py-7 rounded-full text-2xl font-bold transition-all ${isDark
+                ? "bg-gradient-to-r from-[#8B6B4A] to-[#8B6B4A] hover:from-[#8B6B4A] hover:to-[#8B6B4A]"
+                : "bg-[#8B6B4A] hover:bg-[#8B6B4A] text-white"
+                }`}
             >
               <button onClick={() => navigate("/contact")}>
                 Get Started Today →
@@ -492,55 +530,46 @@ export default function SocialMediaMarketing() {
 
         {/* FAQ */}
         <section
-          className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-gray-950" : "bg-white"}`}
+          id="faq"
+          className={`py-20 ${isDark ? "bg-gray-950" : "bg-gray-50"}`}
         >
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto px-6">
             <motion.h2
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
+              className={`text-4xl md:text-5xl font-bold text-center mb-12 ${isDark ? "text-white" : "text-[#573010]"
+                }`}
             >
-              Frequently Asked <span className={accentClass}>Questions</span>
+              Frequently Asked <span className="text-[#8B6B4A]">Questions</span>
             </motion.h2>
 
             <div className="space-y-4">
               {faqs.map((faq, idx) => (
-                <motion.div
+                <details
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className={`border rounded-2xl overflow-hidden ${isDark ? "border-gray-800 bg-gray-900/50" : "border-gray-200 bg-white"}`}
+                  className={`group rounded-xl p-6 border ${isDark
+                      ? "bg-gray-900 border-gray-800"
+                      : "bg-white border-gray-100"
+                    }`}
                 >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className="w-full px-8 py-6 text-left flex justify-between items-center hover:bg-gray-800/30 transition-colors"
+                  <summary
+                    className={`font-semibold text-lg cursor-pointer flex justify-between items-center gap-4 ${isDark ? "text-white" : "text-[#573010]"
+                      }`}
                   >
-                    <span className={`text-xl font-bold ${headingClass}`}>
-                      {faq.q}
-                    </span>
-                    <span
-                      className={`text-2xl text-[#8B6B4A] transition-transform ${openFaq === idx ? "rotate-180" : ""}`}
-                    >
-                      ▼
-                    </span>
-                  </button>
-                  {openFaq === idx && (
-                    <div className={`px-8 pb-8 text-lg ${bodyClass}`}>
-                      {faq.a}
-                    </div>
-                  )}
-                </motion.div>
+                    {faq.q}
+                    <ChevronDown className="w-5 h-5 transition-transform duration-300 group-open:rotate-180 flex-shrink-0" />
+                  </summary>
+
+                  <p className={`mt-4 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
+                    {faq.a}
+                  </p>
+                </details>
               ))}
             </div>
           </div>
         </section>
-
         {/* Final CTA */}
-
-        {/* Scroll to Top */}
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
+import
+{
   ArrowRight,
   Code,
   Globe,
@@ -9,15 +10,18 @@ import {
   Database,
   Cloud,
   Users,
+  ChevronDown,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 import { useTheme } from "../../context/ThemeContext";
 import { addToCart } from "../../Component/Redux/cart/cartSlice";
 import { useDispatch } from "react-redux";
-import {
+import
+{
   Play,
   Target,
   Instagram,
@@ -134,7 +138,8 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
-export default function SoftwareDevelopment() {
+export default function SoftwareDevelopment()
+{
   const { isDark } = useTheme();
   const dispatch = useDispatch();
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -143,8 +148,10 @@ export default function SoftwareDevelopment() {
   const [packagesError, setPackagesError] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleScroll = () => {
+  useEffect(() =>
+  {
+    const handleScroll = () =>
+    {
       setShowScrollTop(window.scrollY > 400);
     };
 
@@ -152,20 +159,25 @@ export default function SoftwareDevelopment() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const fetchPackages = async () => {
+  useEffect(() =>
+  {
+    const fetchPackages = async () =>
+    {
       setLoadingPackages(true);
       setPackagesError("");
 
-      try {
+      try
+      {
         const res = await axios.get(
           "http://localhost:8000/api/productforsells",
         );
         setPackages(res.data?.data || res.data || []);
-      } catch (error) {
+      } catch (error)
+      {
         console.error("Failed to load packages", error);
         setPackagesError("Unable to load packages. Please try again later.");
-      } finally {
+      } finally
+      {
         setLoadingPackages(false);
       }
     };
@@ -173,12 +185,16 @@ export default function SoftwareDevelopment() {
     fetchPackages();
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = () =>
+  {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
+
+  const serviceLink =
+    "font-bold text-[#8B6B4A] hover:text-[#6B4F2A] transition-colors duration-200";
 
   return (
     <>
@@ -237,11 +253,20 @@ export default function SoftwareDevelopment() {
 
             <motion.p
               variants={fadeInUp}
-              className={`text-lg md:text-xl mb-12 max-w-5xl mx-auto leading-relaxed ${isDark ? "text-gray-300" : "text-gray-200"}`}
+              className={`text-lg md:text-xl mb-12 max-w-5xl mx-auto leading-relaxed ${isDark ? "text-gray-300" : "text-gray-200"
+                }`}
             >
-              We provide high-quality software development services to
-              businesses by building secure, scalable, and high-performance
-              software solutions with excellent user experience.
+              We provide high-quality{" "}
+              <>
+                <HashLink smooth
+                  to="/software#software-development-services" className={serviceLink}>
+                  software development services
+                </HashLink>{" "}
+              </>
+              to businesses by building secure, scalable, and high-performance software solutions with excellent{" "}
+              <Link to="/uidesign" className={serviceLink}>
+                user experience
+              </Link>.
             </motion.p>
 
             <motion.div
@@ -253,7 +278,7 @@ export default function SoftwareDevelopment() {
                 onClick={() => navigate("/contact")}
                 className="px-12 py-6 bg-[#3d220e] text-white rounded-full text-xl md:text-2xl font-bold 
                   active:scale-95 transition-all duration-300 
-                   flex items-center gap-3 group"
+                  flex items-center gap-3 group"
               >
                 Get in Touch{" "}
                 <ArrowRight className="w-7 h-7 group-hover:translate-x-2 transition-transform" />
@@ -290,7 +315,7 @@ export default function SoftwareDevelopment() {
               viewport={{ once: true }}
               src={images.team}
               alt="Dedicated software development team collaborating"
-              className={`rounded-2xl shadow-2xl mx-auto max-w-4xl w-full object-cover mb-12 ${isDark ? "border border-red-900/30" : "border border-gray-200"}`}
+              className={`rounded-2xl shadow-2xl mx-auto max-w-4xl w-full object-cover mb-12 ${isDark ? "border border-[#8B6B4A]/30" : "border border-gray-200"}`}
             />
 
             <motion.p
@@ -299,24 +324,50 @@ export default function SoftwareDevelopment() {
               viewport={{ once: true }}
               className={`text-xl mb-12 max-w-5xl mx-auto leading-relaxed text-center ${isDark ? "text-gray-300" : "text-[#704d34]"}`}
             >
-              Access a skilled team of developers who can transform your
-              business and help you adapt to evolving technologies.
+              Access a skilled team of{" "}
+              <Link to="/software" >
+                developers
+              </Link>{" "}
+              who can transform your business and help you adapt to evolving{" "}
+              <Link to="/technology" className={serviceLink}>
+                technologies
+              </Link>
+              .
+
               <br />
               <br />
-              By partnering with AI Knots, businesses can gain a strong
-              competitive advantage. Our team delivers reliable and efficient
-              software development services that help increase productivity and
-              business growth.
+
+              By partnering with AI Knots, businesses can gain a strong competitive advantage.
+              Our team delivers reliable and efficient{" "}
+              <>
+                <HashLink smooth
+                  to="/software#software-development-services" className={serviceLink}>
+                  software development services
+                </HashLink>{" "}
+              </>{" "}
+              that help increase productivity and business growth.
+
               <br />
               <br />
-              We offer a wide range of services including software design,
-              custom development, software testing, legacy system migration,
-              product development, and many more solutions tailored to business
-              requirements.
-              <br />
-              <br />
-              Our dedicated team of developers ensures smooth business
-              processes, improved efficiency, and long-term profitability.
+
+              We offer a wide range of services including{" "}
+              <Link to="/uidesign" className={serviceLink}>
+                software design
+              </Link>
+              ,{" "}
+              <Link to="/software" >
+                custom development
+              </Link>
+              , software testing, legacy system migration,
+              {" "}
+              <>
+                <HashLink smooth
+                  to="/software#our-development-process" className={serviceLink}>
+                  product development
+                </HashLink>{" "}
+              </>
+              , and many more
+              solutions tailored to business requirements.
             </motion.p>
 
             <div className="grid md:grid-cols-4 gap-8 mb-16">
@@ -326,7 +377,7 @@ export default function SoftwareDevelopment() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className={`rounded-2xl p-10 text-center transition-all ${isDark ? "bg-gray-900/70 border border-red-900/40 hover:border-[#3D220E]" : "bg-white border border-gray-200 hover:border-[#3D220E] shadow-md"}`}
+                  className={`rounded-2xl p-10 text-center transition-all ${isDark ? "bg-gray-900/70 border border-[#8B6B4A]/30 hover:border-[#3D220E]" : "bg-white border border-gray-200 hover:border-[#3D220E] shadow-md"}`}
                 >
                   <div className="text-6xl md:text-7xl font-black text-[#3D220E] mb-4">
                     {num}
@@ -345,6 +396,7 @@ export default function SoftwareDevelopment() {
 
         {/* Services Grid with Code Workspace Photo */}
         <section
+          id="software-development-services"
           className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-black/50" : "bg-gray-50 text-[#462206]"}`}
         >
           <div className="max-w-7xl mx-auto">
@@ -366,7 +418,7 @@ export default function SoftwareDevelopment() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className={`backdrop-blur-sm rounded-2xl p-10 hover:shadow-2xl transition-all group ${isDark ? "bg-gray-900/70 border border-red-900/40 hover:border-red-600/60 hover:shadow-red-900/30" : "bg-white border border-gray-200 hover:border-red-500/60 hover:shadow-gray-200 shadow-md"}`}
+                  className={`backdrop-blur-sm rounded-2xl p-10 hover:shadow-2xl transition-all group ${isDark ? "bg-gray-900/70 border border-[#8B6B4A]/30 hover:border-[#8B6B4A]/60 hover:shadow-[#8B6B4A]/20" : "bg-white border border-gray-200 hover:border-[#8B6B4A]/60 hover:shadow-gray-200 shadow-md"}`}
                 >
                   <service.icon className="w-16 h-16 text-[#3D220E] mb-8 mx-auto group-hover:scale-110 transition-transform" />
                   <h3
@@ -421,7 +473,7 @@ export default function SoftwareDevelopment() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.15 }}
-                  className={`border rounded-2xl p-10 transition-all ${isDark ? "bg-gray-900/70 border-red-900/40 hover:border-red-600/60" : "bg-white border-gray-200 hover:border-red-500/60 shadow-md"}`}
+                  className={`border rounded-2xl p-10 transition-all ${isDark ? "bg-gray-900/70 border-[#8B6B4A]/30 hover:border-[#8B6B4A]/60" : "bg-white border-gray-200 hover:border-[#8B6B4A]/60 shadow-md"}`}
                 >
                   <h3
                     className={`text-2xl font-bold mb-6 ${isDark ? "text-[#3D220E]" : "text-[#3D220E]"}`}
@@ -473,11 +525,10 @@ export default function SoftwareDevelopment() {
                       y: -4,
                       transition: { duration: 0.2 },
                     }}
-                    className={`px-8 py-4 rounded-2xl text-base md:text-lg font-medium cursor-pointer transition-all duration-300 shadow-md ${
-                      isDark
-                        ? "bg-zinc-900 border border-red-800/60 text-gray-200 hover:border-[#3D220E] hover:bg-red-950/70 hover:shadow-red-900/30"
-                        : "bg-white border border-gray-200 text-gray-800 hover:border-[#3D220E] hover:bg-red-50 hover:shadow-lg hover:shadow-red-100"
-                    }`}
+                    className={`px-8 py-4 rounded-2xl text-base md:text-lg font-medium cursor-pointer transition-all duration-300 shadow-md ${isDark
+                      ? "bg-zinc-900 border border-[#8B6B4A]/40 text-gray-200 hover:border-[#3D220E] hover:bg-[#3D220E]/60 hover:shadow-[#8B6B4A]/20"
+                      : "bg-white border border-gray-200 text-gray-800 hover:border-[#3D220E] hover:bg-[#F5EDE4] hover:shadow-lg hover:shadow-[#E8D9C2]/40"
+                      }`}
                   >
                     {ind}
                   </motion.span>
@@ -495,125 +546,127 @@ export default function SoftwareDevelopment() {
               <span className="text-[#9F714E] : text-black">Stack</span>
             </motion.h2>
 
-           <section
-  className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-zinc-950" : "bg-gradient-to-br from-red-50 to-white"}`}
->
-  <div className="max-w-7xl mx-auto">
-    <motion.h2
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="text-4xl md:text-6xl font-black text-center mb-16 text-[#3D220E]"
-    >
-      Our Premium Digital Marketing Packages
-    </motion.h2>
-
-    {loadingPackages ? (
-      <div className="text-center py-20 text-lg font-medium text-[#3D220E]">
-        Loading packages...
-      </div>
-    ) : packagesError ? (
-      <div className="text-center py-20 text-lg font-medium text-red-600">
-        {packagesError}
-      </div>
-    ) : packages.length === 0 ? (
-      <div className="text-center py-20 text-lg font-medium text-[#3D220E]">
-        No packages available right now.
-      </div>
-    ) : (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {packages.map((pkg, idx) => {
-          const descriptionLines = pkg.description
-            ? pkg.description.split(/\r?\n/).filter(Boolean)
-            : [];
-          
-          const packageTitle =
-            pkg.category?.name || pkg.productname || "Digital Marketing Package";
-          
-          const packagePrice = pkg.price ?? 0;
-          const packageDuration = pkg.duration || "Contact for details";
-          
-          // Image fallback (change URL as needed)
-          const imageUrl = pkg.images || pkg.imageUrl || 
-            "https://via.placeholder.com/600x400/3D220E/white?text=Package+Image";
-
-          return (
-            <motion.div
-              key={pkg._id || `${pkg.productname}-${idx}`}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
-              className={`rounded-3xl overflow-hidden shadow-xl border border-red-200 ${isDark ? "bg-gray-950" : "bg-white"}`}
+            <section
+              className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-zinc-950" : "bg-gradient-to-br from-red-50 to-white"}`}
             >
-              {/* Image Section - Added Here */}
-              <div className="relative h-56 overflow-hidden">
-                <img
-                  src={imageUrl}
-                  alt={packageTitle}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                  onError={(e) => {
-                    e.target.src = "https://via.placeholder.com/600x400/3D220E/white?text=Package";
-                  }}
-                />
-                {/* Optional overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              </div>
+              <div className="max-w-7xl mx-auto">
+                <motion.h2
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-4xl md:text-6xl font-black text-center mb-16 text-[#3D220E]"
+                >
+                  Our Premium Digital Marketing Packages
+                </motion.h2>
 
-              {/* Header with Price */}
-              <div className="bg-gradient-to-br from-[#3D220E] to-red-800 text-white p-8 text-center -mt-1">
-                <h3 className="text-2xl font-black leading-tight">
-                  {packageTitle}
-                </h3>
-                <div className="text-5xl font-black mt-4">
-                  ₹{packagePrice}
-                </div>
-                <p className="text-sm opacity-90">
-                  {packageDuration}
-                </p>
-              </div>
-
-              <div className="p-8 space-y-4 text-lg">
-                {descriptionLines.length > 0 ? (
-                  descriptionLines.map((line, lineIndex) => (
-                    <div key={lineIndex}>✅ {line.trim()}</div>
-                  ))
+                {loadingPackages ? (
+                  <div className="text-center py-20 text-lg font-medium text-[#3D220E]">
+                    Loading packages...
+                  </div>
+                ) : packagesError ? (
+                  <div className="text-center py-20 text-lg font-medium text-[#8B6B4A]">
+                    {packagesError}
+                  </div>
+                ) : packages.length === 0 ? (
+                  <div className="text-center py-20 text-lg font-medium text-[#3D220E]">
+                    No packages available right now.
+                  </div>
                 ) : (
-                  <div>✅ Contact us for full package details.</div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {packages.map((pkg, idx) =>
+                    {
+                      const descriptionLines = pkg.description
+                        ? pkg.description.split(/\r?\n/).filter(Boolean)
+                        : [];
+
+                      const packageTitle =
+                        pkg.category?.name || pkg.productname || "Digital Marketing Package";
+
+                      const packagePrice = pkg.price ?? 0;
+                      const packageDuration = pkg.duration || "Contact for details";
+
+                      // Image fallback (change URL as needed)
+                      const imageUrl = pkg.images || pkg.imageUrl ||
+                        "https://via.placeholder.com/600x400/3D220E/white?text=Package+Image";
+
+                      return (
+                        <motion.div
+                          key={pkg._id || `${pkg.productname}-${idx}`}
+                          initial={{ opacity: 0, y: 50 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: idx * 0.08 }}
+                          className={`rounded-3xl overflow-hidden shadow-xl border border-[#E8D9C2] ${isDark ? "bg-gray-950" : "bg-white"}`}
+                        >
+                          {/* Image Section - Added Here */}
+                          <div className="relative h-56 overflow-hidden">
+                            <img
+                              src={imageUrl}
+                              alt={packageTitle}
+                              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                              onError={(e) =>
+                              {
+                                e.target.src = "https://via.placeholder.com/600x400/3D220E/white?text=Package";
+                              }}
+                            />
+                            {/* Optional overlay gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                          </div>
+
+                          {/* Header with Price */}
+                          <div className="bg-gradient-to-br from-[#3D220E] to-[#5A351A] text-white p-8 text-center -mt-1">
+                            <h3 className="text-2xl font-black leading-tight">
+                              {packageTitle}
+                            </h3>
+                            <div className="text-5xl font-black mt-4">
+                              ₹{packagePrice}
+                            </div>
+                            <p className="text-sm opacity-90">
+                              {packageDuration}
+                            </p>
+                          </div>
+
+                          <div className="p-8 space-y-4 text-lg">
+                            {descriptionLines.length > 0 ? (
+                              descriptionLines.map((line, lineIndex) => (
+                                <div key={lineIndex}>✅ {line.trim()}</div>
+                              ))
+                            ) : (
+                              <div>✅ Contact us for full package details.</div>
+                            )}
+                          </div>
+
+                          <div className="flex flex-col gap-4 p-8 pt-0 md:flex-row">
+                            <button
+                              onClick={() => navigate(`/productforsells/${pkg._id}`)}
+                              className="w-full bg-[#3D220E] hover:bg-[#5A351A] text-white py-4 rounded-2xl font-bold transition-all"
+                            >
+                              Details
+                            </button>
+                            <button
+                              onClick={() =>
+                                dispatch(
+                                  addToCart({
+                                    id: pkg._id || `${pkg.productname}-${idx}`,
+                                    name: pkg.productname || packageTitle,
+                                    price: packagePrice,
+                                    type: pkg.type || "custom",
+                                    duration: packageDuration,
+                                  })
+                                )
+                              }
+                              className="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-2xl font-bold transition-all"
+                            >
+                              Add to Cart
+                            </button>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
                 )}
               </div>
-
-              <div className="flex flex-col gap-4 p-8 pt-0 md:flex-row">
-                <button
-                  onClick={() => navigate(`/productforsells/${pkg._id}`)}
-                  className="w-full bg-[#3D220E] hover:bg-red-900 text-white py-4 rounded-2xl font-bold transition-all"
-                >
-                  Details
-                </button>
-                <button
-                  onClick={() =>
-                    dispatch(
-                      addToCart({
-                        id: pkg._id || `${pkg.productname}-${idx}`,
-                        name: pkg.productname || packageTitle,
-                        price: packagePrice,
-                        type: pkg.type || "custom",
-                        duration: packageDuration,
-                      })
-                    )
-                  }
-                  className="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-2xl font-bold transition-all"
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
-    )}
-  </div>
-</section>
+            </section>
             {/* <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {Object.entries(techStack).map(([category, techs], idx) => (
                 <motion.div
@@ -621,7 +674,7 @@ export default function SoftwareDevelopment() {
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className={`border rounded-2xl p-8 ${isDark ? "bg-gray-900/70 border-red-900/40" : "bg-white border-gray-200 shadow-md"}`}
+                  className={`border rounded-2xl p-8 ${isDark ? "bg-gray-900/70 border-[#8B6B4A]/30" : "bg-white border-gray-200 shadow-md"}`}
                 >
                   <h3
                     className={`text-2xl font-bold mb-6 capitalize ${isDark ? "text-[#ede1d8]" : "text-[#9F714E]"}`}
@@ -632,7 +685,7 @@ export default function SoftwareDevelopment() {
                     {techs.map((tech, i) => (
                       <span
                         key={i}
-                        className={`px-4 py-2 rounded-full text-sm ${isDark ? "bg-black/50 border text-[#ede1d8] border-red-900/30" : "bg-gray-100 text-[#9F714E] border border-gray-300"}`}
+                        className={`px-4 py-2 rounded-full text-sm ${isDark ? "bg-black/50 border text-[#ede1d8] border-[#8B6B4A]/30" : "bg-gray-100 text-[#9F714E] border border-gray-300"}`}
                       >
                         {tech}
                       </span>
@@ -656,11 +709,10 @@ export default function SoftwareDevelopment() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={staggerContainer}
-                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${
-                  isDark
-                    ? "bg-zinc-900 border-red-900/50 hover:border-[#3D220E]"
-                    : "bg-white border-red-200 hover:border-[#3D220E] hover:shadow-gray-200"
-                }`}
+                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${isDark
+                  ? "bg-zinc-900 border-[#8B6B4A]/40 hover:border-[#3D220E]"
+                  : "bg-white border-[#E8D9C2] hover:border-[#3D220E] hover:shadow-gray-200"
+                  }`}
               >
                 <h2
                   className={`text-3xl md:text-4xl font-black mb-8 ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}
@@ -695,11 +747,10 @@ export default function SoftwareDevelopment() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={staggerContainer}
-                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${
-                  isDark
-                    ? "bg-zinc-900 border-red-900/50 hover:border-[#3D220E]"
-                    : "bg-white border-red-200 hover:border-[#3D220E] hover:shadow-inner-gray-200"
-                }`}
+                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${isDark
+                  ? "bg-zinc-900 border-[#8B6B4A]/40 hover:border-[#3D220E]"
+                  : "bg-white border-[#E8D9C2] hover:border-[#3D220E] hover:shadow-inner-gray-200"
+                  }`}
               >
                 <h2
                   className={`text-3xl md:text-4xl font-black mb-8 ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}
@@ -734,11 +785,10 @@ export default function SoftwareDevelopment() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={staggerContainer}
-                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${
-                  isDark
-                    ? "bg-zinc-900 border-red-900/50 hover:border-[#3D220E]"
-                    : "bg-white border-red-200 hover:border-[#3D220E] hover:shadow-gray-200"
-                }`}
+                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${isDark
+                  ? "bg-zinc-900 border-[#8B6B4A]/40 hover:border-[#3D220E]"
+                  : "bg-white border-[#E8D9C2] hover:border-[#3D220E] hover:shadow-gray-200"
+                  }`}
               >
                 <h2
                   className={`text-3xl md:text-4xl font-black mb-8 ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}
@@ -771,6 +821,7 @@ export default function SoftwareDevelopment() {
 
         {/* Development Process + Final CTA with Growth Photo */}
         <section
+          id="our-development-process"
           className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "" : "bg-gray-50"}`}
         >
           <div className="max-w-7xl mx-auto">
@@ -795,7 +846,7 @@ export default function SoftwareDevelopment() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.15 }}
-                  className={`border rounded-2xl p-10 text-center transition-all ${isDark ? "bg-gray-900/70 border-red-900/40 hover:border-[#3D220E]" : "bg-white border-gray-200 hover:border-[#3D220E] hover:shadow-gray-200"}`}
+                  className={`border rounded-2xl p-10 text-center transition-all ${isDark ? "bg-gray-900/70 border-[#8B6B4A]/30 hover:border-[#3D220E]" : "bg-white border-gray-200 hover:border-[#3D220E] hover:shadow-gray-200"}`}
                 >
                   <div className="text-5xl font-black text-[#9F714E] mb-6">{`0${i + 1}`}</div>
                   <h3
@@ -830,7 +881,7 @@ export default function SoftwareDevelopment() {
                 viewport={{ once: true }}
                 src={images.growthChart}
                 alt="Business growth through software solutions"
-                className={`rounded-2xl shadow-2xl mx-auto max-w-4xl w-full object-cover mb-12 ${isDark ? "border border-red-900/30" : "border border-gray-200"}`}
+                className={`rounded-2xl shadow-2xl mx-auto max-w-4xl w-full object-cover mb-12 ${isDark ? "border border-[#8B6B4A]/30" : "border border-gray-200"}`}
               />
 
               <motion.h2
@@ -852,13 +903,13 @@ export default function SoftwareDevelopment() {
         </section>
 
         <section
-          className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-gradient-to-br from-red-950/30 to-black" : "bg-red-50"}`}
+          className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-gradient-to-br from-[#3D220E]/20 to-black" : "bg-[#F5EDE4]"}`}
         >
           <div className="max-w-5xl mx-auto text-center">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="px-14 py-7 bg-[#3d220e] text-white rounded-full text-2xl md:text-3xl font-black shadow-2xl shadow-red-900/60 hover:shadow-red-700/80 transition-all flex items-center gap-4 mx-auto"
+              className="px-14 py-7 bg-[#3d220e] text-white rounded-full text-2xl md:text-3xl font-black shadow-2xl shadow-[#3D220E]/50 hover:shadow-[#3D220E]/70 transition-all flex items-center gap-4 mx-auto"
             >
               <button onClick={() => navigate("/contact")}>Contact Us</button>
               <ArrowRight className="w-auto h-8" />
@@ -868,16 +919,18 @@ export default function SoftwareDevelopment() {
 
         {/* FAQ */}
         <section
-          className={`py-24 px-4 sm:px-6 lg:px-8 ${isDark ? "bg-black/60" : "bg-white/60"}`}
+          id="faq"
+          className={`py-20 ${isDark ? "bg-gray-950" : "bg-gray-50"}`}
         >
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-4xl mx-auto px-6">
             <motion.h2
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl md:text-5xl font-black text-center mb-16"
+              className={`text-4xl md:text-5xl font-bold text-center mb-12 ${isDark ? "text-white" : "text-[#573010]"
+                }`}
             >
-              Frequently Asked Questions
+              Frequently Asked <span className="text-[#8B6B4A]">Questions</span>
             </motion.h2>
 
             <div className="space-y-8">
@@ -903,25 +956,29 @@ export default function SoftwareDevelopment() {
                   a: "We serve industries such as healthcare, education, fintech, retail, logistics, and many others.",
                 },
               ].map((faq, idx) => (
-                <motion.div
+                <details
                   key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className={`border rounded-2xl p-8 ${isDark ? "bg-gray-900/70 border-red-900/40" : "bg-white border-gray-200 shadow-md"}`}
+                  className={`group rounded-xl p-6 border ${isDark
+                      ? "bg-gray-900 border-gray-800"
+                      : "bg-white border-gray-100"
+                    }`}
                 >
-                  <h3
-                    className={`text-2xl font-bold mb-4 ${isDark ? "text-[#a1814d]" : "text-[#a1814d]"}`}
+                  <summary
+                    className={`font-semibold text-lg cursor-pointer flex justify-between items-center gap-4 ${isDark ? "text-white" : "text-[#573010]"
+                      }`}
                   >
                     {faq.q}
-                  </h3>
+
+                    <ChevronDown className="w-5 h-5 flex-shrink-0 transition-transform duration-300 group-open:rotate-180 text-[#8B6B4A]" />
+                  </summary>
+
                   <p
-                    className={`text-lg leading-relaxed ${isDark ? "text-[#745625]" : "text-[#8d7146]"}`}
+                    className={`mt-4 ${isDark ? "text-gray-400" : "text-gray-600"
+                      }`}
                   >
                     {faq.a}
                   </p>
-                </motion.div>
+                </details>
               ))}
             </div>
           </div>

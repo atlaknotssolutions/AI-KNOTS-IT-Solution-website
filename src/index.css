@@ -85,3 +85,7 @@
   background-color: var(--accent);
   color: var(--text-light);
 }
+
+html {
+  scroll-behavior: smooth;
+}

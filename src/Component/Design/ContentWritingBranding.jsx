@@ -3,22 +3,24 @@ import { motion } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
-import contentimage from "../../assets/Images/contentimage2.jpg";
+import contentimage from "../../assets/Images/contentimage2.webp";
 
-import {
-  Pen,
-  FileText,
-  Newspaper,
-  Link,
-  BookOpen,
-  Megaphone,
-  Code,
-  Mail,
-  CheckCircle2,
-  ArrowRight,
-  Globe,
-  Zap,
-} from "lucide-react";
+import
+  {
+    Pen,
+    FileText,
+    Newspaper,
+    Link,
+    BookOpen,
+    Megaphone,
+    Code,
+    Mail,
+    CheckCircle2,
+    ArrowRight,
+    Globe,
+    Zap,
+    ChevronDown
+  } from "lucide-react";
 
 // Selected images
 const images = {
@@ -132,7 +134,8 @@ const faqs = [
   },
 ];
 
-export default function ContentWritingBranding() {
+export default function ContentWritingBranding()
+{
   const { isDark } = useTheme();
   const navigate = useNavigate();
 
@@ -238,11 +241,10 @@ export default function ContentWritingBranding() {
                 onClick={() => navigate("/contact")}
                 aria-label="Contact AI Knots for branding and SEO content"
                 className={`px-12 py-6 border-2 rounded-full text-xl md:text-2xl font-bold transition-all
-              ${
-                isDark
-                  ? "border-[#8B6B4A] text-[#EFE5C8] hover:bg-[#8B6B4A]/50"
-                  : "border-[#8B6B4A] text-[#8B6B4A] hover:bg-[#8B6B4A]/10"
-              }`}
+              ${isDark
+                    ? "border-[#8B6B4A] text-[#EFE5C8] hover:bg-[#8B6B4A]/50"
+                    : "border-[#8B6B4A] text-[#8B6B4A] hover:bg-[#8B6B4A]/10"
+                  }`}
               >
                 Contact Us
               </button>
@@ -384,11 +386,10 @@ export default function ContentWritingBranding() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.05 }}
                   className={`border rounded-full px-8 py-4 text-lg font-medium flex items-center gap-3 transition-all
-                  ${
-                    isDark
+                  ${isDark
                       ? "bg-red-950/40 border-red-800/50"
                       : "bg-white border-red-200 shadow"
-                  }`}
+                    }`}
                 >
                   <Globe className={`w-6 h-6 ${accentClass}`} /> {ind}
                 </motion.span>
@@ -433,59 +434,50 @@ export default function ContentWritingBranding() {
         </section>
 
         {/* FAQ */}
-        <section className={`py-24 px-4 sm:px-6 lg:px-8 ${faqBg}`}>
-          <div className="max-w-4xl mx-auto">
+        <section
+          id="faq"
+          className={`py-20 ${isDark ? "bg-gray-950" : "bg-gray-50"}`}
+        >
+          <div className="max-w-4xl mx-auto px-6">
             <motion.h2
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className={`text-4xl md:text-6xl font-black text-center mb-16 ${headingClass}`}
+              className={`text-4xl md:text-5xl font-bold text-center mb-12 ${isDark ? "text-white" : "text-[#573010]"
+                }`}
             >
-              Frequently Asked <span className={accentClass}>Questions</span>
+              Frequently Asked <span className="text-[#8B6B4A]">Questions</span>
             </motion.h2>
 
             <div className="space-y-4">
               {faqs.map((faq, idx) => (
-                <motion.div
+                <details
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className={`border rounded-xl overflow-hidden transition-all
-                  ${
-                    isDark
-                      ? "border-gray-800 bg-gray-900/30"
-                      : "border-gray-200 bg-white shadow"
-                  }`}
+                  className={`group rounded-xl p-6 border ${isDark
+                      ? "bg-gray-900 border-gray-800"
+                      : "bg-white border-gray-100"
+                    }`}
                 >
-                  <button
-                    onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                    className={`w-full px-8 py-6 text-left flex justify-between items-center transition-colors
-                    ${isDark ? "hover:bg-gray-800/50" : "hover:bg-gray-100"}`}
+                  <summary
+                    className={`font-semibold text-lg cursor-pointer flex justify-between items-center gap-4 ${isDark ? "text-white" : "text-[#573010]"
+                      }`}
                   >
-                    <span className={`text-xl font-bold ${headingClass}`}>
-                      {faq.q}
-                    </span>
-                    <span
-                      className={`text-[#8B6B4A] text-2xl transition-transform ${openFaq === idx ? "rotate-180" : ""}`}
-                    >
-                      ▼
-                    </span>
-                  </button>
-                  {openFaq === idx && (
-                    <div
-                      className={`px-8 pb-8 pt-2 leading-relaxed ${bodyClass}`}
-                    >
-                      {faq.a}
-                    </div>
-                  )}
-                </motion.div>
+                    {faq.q}
+
+                    <ChevronDown className="w-5 h-5 flex-shrink-0 transition-transform duration-300 group-open:rotate-180 text-[#8B6B4A]" />
+                  </summary>
+
+                  <p
+                    className={`mt-4 ${isDark ? "text-gray-400" : "text-gray-600"
+                      }`}
+                  >
+                    {faq.a}
+                  </p>
+                </details>
               ))}
             </div>
           </div>
         </section>
-
         {/* Final CTA */}
 
         {/* Scroll to Top Button */}

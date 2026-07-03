@@ -21,7 +21,7 @@ const TermsOfService = () => {
   }, []);
 
   // Dynamic Theme Classes
-  const accentClass = "text-red-500";
+  const accentClass = "text-[#8B6B4A]";
   const headingClass = isDark ? "text-white" : "text-gray-900";
   const bodyClass = isDark ? "text-gray-300" : "text-gray-700";
   const cardClass = isDark
@@ -37,11 +37,11 @@ const TermsOfService = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 mb-4">
-            <div className="w-8 h-px bg-red-500"></div>
-            <span className="text-red-400 uppercase tracking-[3px] text-sm font-medium">
+            <div className="w-8 h-px bg-[#8B6B4A]"></div>
+            <span className="text-[#8B6B4A] uppercase tracking-[3px] text-sm font-medium">
               Legal
             </span>
-            <div className="w-8 h-px bg-red-500"></div>
+            <div className="w-8 h-px bg-[#8B6B4A]"></div>
           </div>
           <h1
             className={`text-5xl md:text-6xl font-bold tracking-tighter mb-3 ${headingClass}`}
@@ -56,7 +56,7 @@ const TermsOfService = () => {
             className={`text-lg ${isDark ? "text-gray-200" : "text-gray-700"}`}
           >
             Welcome to{" "}
-            <span className="text-red-400 font-medium">
+            <span className="text-[#8B6B4A] font-medium">
               AI Knots IT Solution
             </span>
             . These Terms of Service govern your use of our website and the IT
@@ -96,7 +96,7 @@ const TermsOfService = () => {
                 "Website Design & Maintenance",
               ].map((service, i) => (
                 <li key={i} className="flex items-center gap-3">
-                  <span className="text-red-500">✔</span> {service}
+                  <span className="text-[#8B6B4A]">✔</span> {service}
                 </li>
               ))}
             </ul>
@@ -114,7 +114,7 @@ const TermsOfService = () => {
                 "Ensure you have the necessary rights to any content or materials provided to us",
               ].map((item, i) => (
                 <div key={i} className="flex gap-4">
-                  <div className="w-6 h-6 rounded-full bg-red-500/10 flex items-center justify-center text-red-400 text-sm font-medium shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-[#8B6B4A]/10 flex items-center justify-center text-[#8B6B4A] text-sm font-medium shrink-0 mt-0.5">
                     {i + 1}
                   </div>
                   <p className={bodyClass}>{item}</p>
@@ -234,7 +234,7 @@ const TermsOfService = () => {
 
           {/* Contact Box */}
           <div
-            className={`p-8 md:p-10 rounded-3xl mt-12 ${cardClass} border ${isDark ? "border-red-900/30" : "border-red-200"}`}
+            className={`p-8 md:p-10 rounded-3xl mt-12 ${cardClass} border ${isDark ? "border-[#8B6B4A]/30" : "border-[#E8D9C2]"}`}
           >
             <h3 className={`text-2xl font-semibold mb-6 ${headingClass}`}>
               Questions or Concerns?

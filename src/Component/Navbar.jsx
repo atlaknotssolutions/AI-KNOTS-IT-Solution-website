@@ -153,7 +153,7 @@
 // //                   <div
 // //                     className={`
 // //                       absolute left-0 top-full pt-2 w-56
-// //                       border rounded-lg shadow-xl transition-all duration-200 ease-out
+// //                       border rounded-lg shadow-lg transition-all duration-200 ease-out
 // //                       opacity-0 scale-95 pointer-events-none
 // //                       group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto
 // //                       ${
@@ -191,7 +191,7 @@
 // //                         {sub.hasDropdown && (
 // //                           <div
 // //                             className={`
-// //                               absolute left-full top-0 ml-1 w-52 border rounded-lg shadow-xl
+// //                               absolute left-full top-0 ml-1 w-52 border rounded-lg shadow-lg
 // //                               transition-all duration-200 ease-out
 // //                               opacity-0 scale-95 pointer-events-none
 // //                               group-hover/sub:opacity-100 group-hover/sub:scale-100 group-hover/sub:pointer-events-auto
@@ -487,7 +487,7 @@
 // //                 {item.hasDropdown && (
 // //                   <div
 // //                     className={`
-// //                       absolute left-0 top-full pt-2 w-56 border rounded-lg shadow-xl
+// //                       absolute left-0 top-full pt-2 w-56 border rounded-lg shadow-lg
 // //                       opacity-0 scale-95 pointer-events-none group-hover:opacity-100
 // //                       group-hover:scale-100 group-hover:pointer-events-auto transition-all
 // //                       ${isDark ? "bg-black/95 border-gray-700" : "bg-white border-gray-200 shadow-lg"}
@@ -516,7 +516,7 @@
 // //                         {sub.hasDropdown && (
 // //                           <div
 // //                             className={`
-// //                               absolute left-full top-0 ml-1 w-52 border rounded-lg shadow-xl
+// //                               absolute left-full top-0 ml-1 w-52 border rounded-lg shadow-lg
 // //                               opacity-0 scale-95 pointer-events-none
 // //                               group-hover/sub:opacity-100 group-hover/sub:scale-100
 // //                               group-hover/sub:pointer-events-auto transition-all
@@ -818,7 +818,7 @@
 //                 {item.hasDropdown && (
 //                   <div
 //                     className={`
-//                       absolute left-0 top-full pt-2 w-56 border rounded-lg shadow-xl 
+//                       absolute left-0 top-full pt-2 w-56 border rounded-lg shadow-lg 
 //                       transition-all
 //                       ${openDropdown === item.name ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}
 //                       ${isDark ? "bg-black/95 border-gray-700" : "bg-white border-gray-200 shadow-lg"}
@@ -851,7 +851,7 @@
 //                         {sub.hasDropdown && (
 //                           <div
 //                             className={`
-//                               absolute left-full top-0 ml-1 w-52 border rounded-lg shadow-xl
+//                               absolute left-full top-0 ml-1 w-52 border rounded-lg shadow-lg
 //                               transition-all
 //                               ${openSubDropdown === sub.name ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}
 //                               ${isDark ? "bg-black/95 border-gray-700" : "bg-white border-gray-200"}
@@ -1016,8 +1016,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X, ChevronDown, Sun, Moon, ShoppingCart } from "lucide-react";
-import ATLAknots from "./Mobile/img/logoimage5.png";
-import ATLAknots2 from "../../src/assets/Images/ITLogo.png";
+import ATLAknots from "../../src/assets/Images/logoimage5.webp";
+import ATLAknots2 from "../../src/assets/Images/ITLogo.webp";
 
 import { useTheme } from "../context/ThemeContext.jsx";
 import { useSelector } from "react-redux";
@@ -1082,7 +1082,8 @@ const navItems = [
   },
 ];
 
-export default function Navbar() {
+export default function Navbar()
+{
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openSubDropdown, setOpenSubDropdown] = useState(null);
@@ -1092,7 +1093,8 @@ export default function Navbar() {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  const closeAll = () => {
+  const closeAll = () =>
+  {
     setIsOpen(false);
     setOpenDropdown(null);
     setOpenSubDropdown(null);
@@ -1127,10 +1129,15 @@ export default function Navbar() {
               >
                 <NavLink
                   to={item.path}
-                  className={`
-                    px-4 py-5 flex items-center gap-1.5 transition-colors duration-150
-                    ${isDark ? "text-white hover:text-red-500" : "text-gray-800 hover:text-red-600 font-medium"}
-                  `}
+                  className={({ isActive }) => `
+  px-4 py-5 flex items-center gap-1.5 transition-colors duration-150
+  ${isActive
+                      ? "text-[#8B6B4A] font-semibold"
+                      : isDark
+                        ? "text-white hover:text-[#D9C5B5]"
+                        : "text-gray-800 hover:text-[#8B6B4A] font-medium"
+                    }
+`}
                   onClick={closeAll}
                 >
                   {item.name}
@@ -1146,7 +1153,7 @@ export default function Navbar() {
                 {item.hasDropdown && (
                   <div
                     className={`
-                      absolute left-0 top-full pt-2 w-56 border rounded-2xl shadow-xl 
+                      absolute left-0 top-full pt-2 w-56 border rounded-lg shadow-lg 
                       transition-all duration-200
                       ${openDropdown === item.name ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}
                       ${isDark ? "bg-zinc-950 border-gray-700" : "bg-white border-gray-200"}
@@ -1162,14 +1169,20 @@ export default function Navbar() {
                         <NavLink
                           to={sub.path}
                           className={`
-                            flex justify-between items-center px-4 py-3 transition-colors
-                            ${isDark ? "text-gray-200 hover:bg-red-900/40" : "text-gray-700 hover:bg-red-50"}
-                          `}
+    flex justify-between items-center px-4 py-2 transition-all duration-200
+    ${isDark
+                              ? "text-gray-200 hover:bg-[#2E1E14] hover:text-[#D2A679]"
+                              : "text-gray-700 hover:bg-[#E7D2BE] hover:text-[#6B4423]"
+                            }
+  `}
                           onClick={closeAll}
                         >
                           {sub.name}
                           {sub.hasDropdown && (
-                            <ChevronDown size={14} className="transition-transform" />
+                            <ChevronDown
+                              size={14}
+                              className="transition-transform duration-200"
+                            />
                           )}
                         </NavLink>
 
@@ -1177,25 +1190,37 @@ export default function Navbar() {
                         {sub.hasDropdown && (
                           <div
                             className={`
-                              absolute left-full top-0 ml-2 w-52 border rounded-2xl shadow-xl
-                              transition-all
-                              ${openSubDropdown === sub.name ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"}
-                              ${isDark ? "bg-zinc-950 border-gray-700" : "bg-white border-gray-200"}
-                            `}
+      absolute left-full top-0 pl-2 w-56
+      transition-all
+      ${openSubDropdown === sub.name
+                                ? "opacity-100 scale-100 pointer-events-auto"
+                                : "opacity-0 scale-95 pointer-events-none"
+                              }
+    `}
                           >
-                            {sub.dropdownItems.map((child) => (
-                              <NavLink
-                                key={child.path}
-                                to={child.path}
-                                onClick={closeAll}
-                                className={`
-                                  block px-4 py-3 transition-colors text-sm
-                                  ${isDark ? "text-gray-200 hover:bg-red-900/40" : "text-gray-700 hover:bg-red-50"}
-                                `}
-                              >
-                                {child.name}
-                              </NavLink>
-                            ))}
+                            <div
+                              className={`
+        border rounded-lg shadow-lg overflow-hidden
+        ${isDark ? "bg-zinc-950 border-gray-700" : "bg-white border-gray-200"}
+      `}
+                            >
+                              {sub.dropdownItems.map((child) => (
+                                <NavLink
+                                  key={child.path}
+                                  to={child.path}
+                                  onClick={closeAll}
+                                  className={`
+    block px-4 py-2 text-sm transition-all duration-200
+    ${isDark
+                                      ? "text-gray-200 hover:bg-[#2E1E14] hover:text-[#D2A679]"
+                                      : "text-gray-700 hover:bg-[#E7D2BE] hover:text-[#6B4423]"
+                                    }
+  `}
+                                >
+                                  {child.name}
+                                </NavLink>
+                              ))}
+                            </div>
                           </div>
                         )}
                       </div>
@@ -1213,11 +1238,12 @@ export default function Navbar() {
               to="/cart"
               onClick={closeAll}
               className={`
-                relative p-3 rounded-full transition-all duration-150
-                ${isDark 
-                  ? "text-white hover:bg-gray-800 hover:text-red-400" 
-                  : "text-gray-700 hover:bg-gray-100 hover:text-red-600"}
-              `}
+  relative p-3 rounded-full transition-all duration-150
+  ${isDark
+                  ? "text-white hover:bg-[#3D220E]/40 hover:text-[#D9C5B5]"
+                  : "text-gray-700 hover:bg-[#F5EDE4] hover:text-[#8B6B4A]"
+                }
+`}
               title="View Cart"
             >
               <ShoppingCart size={24} />
@@ -1256,16 +1282,16 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       {isOpen && (
         <div
-          className={`md:hidden px-5 py-6 space-y-2 border-t ${
-            isDark ? "bg-black border-gray-800" : "bg-white border-gray-200"
-          }`}
+          className={`md:hidden px-5 py-6 space-y-2 border-t ${isDark ? "bg-black border-gray-800" : "bg-white border-gray-200"
+            }`}
         >
           {navItems.map((item) => (
             <div key={item.name} className="border-b border-gray-700/30 last:border-none pb-3 last:pb-0">
               <div className="flex justify-between items-center">
                 <NavLink
                   to={item.path}
-                  onClick={(e) => {
+                  onClick={(e) =>
+                  {
                     if (item.hasDropdown) e.preventDefault();
                     else closeAll();
                   }}
@@ -1292,7 +1318,8 @@ export default function Navbar() {
                       <div className="flex justify-between items-center">
                         <NavLink
                           to={sub.path}
-                          onClick={(e) => {
+                          onClick={(e) =>
+                          {
                             if (sub.hasDropdown) e.preventDefault();
                             else closeAll();
                           }}

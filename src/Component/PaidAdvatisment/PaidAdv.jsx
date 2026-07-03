@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import report from "../../assets/report.pdf";
-import {
+import
+{
   ArrowRight,
   Target,
   BarChart3,
@@ -19,6 +20,8 @@ import {
   Globe,
   CheckCircle2,
 } from "lucide-react";
+import { HashLink } from "react-router-hash-link";
+
 
 const carouselImages = [
   "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1600&q=90",
@@ -37,7 +40,8 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.18 } },
 };
 
-function PaidAdvertising() {
+function PaidAdvertising()
+{
   const [isDark, setIsDark] = useState(() =>
     document.documentElement.classList.contains("dark"),
   );
@@ -45,8 +49,10 @@ function PaidAdvertising() {
   const [openFaq, setOpenFaq] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const navigate = useNavigate();
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
+  useEffect(() =>
+  {
+    const observer = new MutationObserver(() =>
+    {
       setIsDark(document.documentElement.classList.contains("dark"));
     });
     observer.observe(document.documentElement, {
@@ -56,26 +62,32 @@ function PaidAdvertising() {
     return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
+  useEffect(() =>
+  {
+    const handleScroll = () =>
+    {
       setShowScrollTop(window.scrollY > 400);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+  useEffect(() =>
+  {
+    const interval = setInterval(() =>
+    {
       setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
     }, 7000);
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToTop = () => {
+  const scrollToTop = () =>
+  {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const toggleFAQ = (index) => {
+  const toggleFAQ = (index) =>
+  {
     setOpenFaq(openFaq === index ? null : index);
   };
 
@@ -133,6 +145,9 @@ function PaidAdvertising() {
 
   const premiumButton = ` px-12 py-7 rounded-2xl text-xl font-bold transition-all flex items-center gap-3 group shadow-xl btn-accent hover:shadow-2xl hover:shadow-[#8B6B4A]/50`;
 
+  const serviceLink =
+    "font-bold text-[#8B6B4A] hover:text-[#6B4F2A] transition-colors duration-200";
+
   return (
     <>
       <Helmet>
@@ -167,11 +182,10 @@ function PaidAdvertising() {
 
               <div
                 className={`absolute inset-0 bg-gradient-to-b 
-          ${
-            isDark
-              ? "from-black/55 via-black/75 to-black/90"
-              : "from-black/45 via-black/70 to-black/85"
-          } 
+          ${isDark
+                    ? "from-black/55 via-black/75 to-black/90"
+                    : "from-black/45 via-black/70 to-black/85"
+                  } 
           flex items-center justify-center`}
               >
                 <motion.div
@@ -197,19 +211,71 @@ function PaidAdvertising() {
 
                   <motion.p
                     variants={fadeInUp}
-                    className={`text-xl sm:text-3xl max-w-4xl mx-auto leading-tight mb-10 ${isDark ? "text-gray-200" : "text-white/90"}`}
+                    className={`text-xl sm:text-3xl max-w-4xl mx-auto leading-tight mb-10 ${isDark ? "text-gray-200" : "text-white/90"
+                      }`}
                   >
-                    Driving High-Performance Ads Across India • Real Growth •
-                    Measurable ROI
+                    Driving High-Performance Ads Across{" "}
+                    <Link
+                      to="/contact"
+                      className={serviceLink}
+                    >
+                      India
+                    </Link>{" "}
+                    • Real{" "}
+                    <HashLink
+                      smooth
+                      to="/paidadv#benefits"
+                      className={serviceLink}
+                    >
+                      Growth
+                    </HashLink>{" "}
+                    • Measurable{" "}
+                    <HashLink
+                      smooth
+                      to="/paidadv#results"
+                      className={serviceLink}
+                    >
+                      ROI
+                    </HashLink>
                   </motion.p>
 
                   <motion.p
                     variants={fadeInUp}
-                    className={`text-lg md:text-2xl max-w-4xl mx-auto mb-12 leading-relaxed ${isDark ? "text-gray-300" : "text-white/90"}`}
+                    className={`text-lg md:text-2xl max-w-4xl mx-auto mb-12 leading-relaxed ${isDark ? "text-gray-300" : "text-white/90"
+                      }`}
                   >
-                    At AI Knots, a creative paid advertising agency in Bhopal,
-                    we go beyond clicks and impressions — we focus on real
-                    business growth.
+                    At AI Knots, a creative{" "}
+                    <HashLink
+                      smooth
+                      to="/paidadv#services"
+                      className={serviceLink}
+                    >
+                      paid advertising agency
+                    </HashLink>{" "}
+                    in{" "}
+                    <Link
+                      to="/contact"
+                      className={serviceLink}
+                    >
+                      Bhopal
+                    </Link>
+                    , we go beyond{" "}
+                    <HashLink
+                      smooth
+                      to="/paidadv#results"
+                      className={serviceLink}
+                    >
+                      clicks and impressions
+                    </HashLink>{" "}
+                    — we focus on real{" "}
+                    <HashLink
+                      smooth
+                      to="/paidadv#benefits"
+                      className={serviceLink}
+                    >
+                      business growth
+                    </HashLink>
+                    .
                   </motion.p>
 
                   <motion.div
@@ -225,11 +291,10 @@ function PaidAdvertising() {
 
                     <button
                       className={`px-12 py-7 border-2 border-[#8B6B4A] rounded-2xl text-2xl font-bold transition-all
-                ${
-                  isDark
-                    ? "text-[#8B6B4A] hover:bg-[#8B6B4A]/10 hover:border-[#8B6B4A]"
-                    : "text-[#8B6B4A] hover:bg-[#8B6B4A]/10 hover:border-[#8B6B4A]"
-                }`}
+                ${isDark
+                          ? "text-[#8B6B4A] hover:bg-[#8B6B4A]/10 hover:border-[#8B6B4A]"
+                          : "text-[#8B6B4A] hover:bg-[#8B6B4A]/10 hover:border-[#8B6B4A]"
+                        }`}
                       onClick={() => navigate("/contact")}
                     >
                       Get Started →
@@ -245,19 +310,19 @@ function PaidAdvertising() {
               <button
                 key={i}
                 onClick={() => setCurrentSlide(i)}
-                className={`w-3.5 h-3.5 rounded-full transition-all duration-700 ${
-                  i === currentSlide
-                    ? "bg-[#8B6B4A] scale-150 shadow-lg shadow-[#8B6B4A]/50"
-                    : isDark
-                      ? "bg-gray-600 hover:bg-[#8B6B4A]"
-                      : "bg-gray-400 hover:bg-[#8B6B4A]"
-                }`}
+                className={`w-3.5 h-3.5 rounded-full transition-all duration-700 ${i === currentSlide
+                  ? "bg-[#8B6B4A] scale-150 shadow-lg shadow-[#8B6B4A]/50"
+                  : isDark
+                    ? "bg-gray-600 hover:bg-[#8B6B4A]"
+                    : "bg-gray-400 hover:bg-[#8B6B4A]"
+                  }`}
               />
             ))}
           </div>
         </section>
 
         <main
+          id="benefits"
           className={`max-w-7xl mx-auto px-6 py-24 lg:py-32 space-y-40 ${isDark ? "" : "bg-white"}`}
         >
           {/* What We Do Section */}
@@ -278,10 +343,67 @@ function PaidAdvertising() {
               variants={fadeInUp}
               className={`text-2xl max-w-5xl mx-auto leading-relaxed mb-16 ${bodyClass}`}
             >
-              We create smart, result-driven ad campaigns that connect your
-              brand with the right audience at the right time. From Google Ads
-              to Meta Ads and performance marketing, our strategies are designed
-              to generate leads, sales, and measurable ROI across India.
+              We create smart, result-driven{" "}
+              <HashLink
+                smooth
+                to="/paidadv#services"
+                className={serviceLink}
+              >
+                ad campaigns
+              </HashLink>{" "}
+              that connect your brand with the right audience at the right time. From{" "}
+              <Link
+                to="/socialmediamarketing"
+                className={serviceLink}
+              >
+                Google Ads
+              </Link>{" "}
+              to{" "}
+              <Link
+                to="/socialmediamarketing"
+                className={serviceLink}
+              >
+                Meta Ads
+              </Link>{" "}
+              and{" "}
+              <Link
+                to="/digital-marketing"
+                className={serviceLink}
+              >
+                performance marketing
+              </Link>
+              , our{" "}
+              <HashLink
+                smooth
+                to="/paidadv#services"
+                className={serviceLink}
+              >
+                strategies
+              </HashLink>{" "}
+              are designed to generate{" "}
+              <HashLink
+                smooth
+                to="/paidadv#results"
+                className={serviceLink}
+              >
+                leads
+              </HashLink>
+              , sales, and measurable{" "}
+              <HashLink
+                smooth
+                to="/paidadv#results"
+                className={serviceLink}
+              >
+                ROI
+              </HashLink>{" "}
+              across{" "}
+              <Link
+                to="/contact"
+                className={serviceLink}
+              >
+                India
+              </Link>
+              .
             </motion.p>
             <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
               {[
@@ -324,6 +446,7 @@ function PaidAdvertising() {
 
           {/* Paid Advertising Solutions */}
           <motion.section
+            id="services"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -389,6 +512,7 @@ function PaidAdvertising() {
 
           {/* Why Choose Us */}
           <motion.section
+            id="results"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -406,9 +530,30 @@ function PaidAdvertising() {
               className={`text-2xl max-w-5xl mx-auto leading-relaxed mb-12 ${bodyClass}`}
             >
               AI Knots is not just another digital agency, we are your growth
-              partner. We combine creative strategy, data-driven marketing, and
-              performance ads to help your business grow faster. Whether you’re
-              a local business in Bhopal or targeting customers across India, we
+              partner. We combine creative strategy,{" "}
+              <Link
+                to="/digital-marketing"
+                className={serviceLink}
+              >
+                data-driven marketing
+              </Link>
+              , and{" "}
+              <HashLink
+                smooth
+                to="/paidadv#services"
+                className={serviceLink}
+              >
+                performance ads
+              </HashLink>{" "}
+              to help your business grow faster. Whether you’re
+              a local business in{" "}
+              <Link
+                to="/contact"
+                className={serviceLink}
+              >
+                Bhopal
+              </Link>{" "}
+              or targeting customers across India, we
               make sure your ads deliver real impact.
             </motion.p>
             <div className="grid md:grid-cols-3 gap-8">
@@ -438,58 +583,51 @@ function PaidAdvertising() {
             </div>
           </motion.section>
 
-          {/* FAQ Section */}
-          <motion.section
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="max-w-4xl mx-auto"
+          {/* FAQ */}
+          <section
+            id="faq"
+            className={`py-20 ${isDark ? "bg-gray-950" : "bg-gray-50"}`}
           >
-            <motion.h2
-              variants={fadeInUp}
-              className={`text-5xl sm:text-7xl font-black text-center mb-16 ${headingClass}`}
-            >
-              Frequently Asked Questions
-            </motion.h2>
-            <div className="space-y-5">
-              {faqs.map((faq, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={fadeInUp}
-                  className={`border rounded-2xl overflow-hidden ${isDark ? "border-gray-800 bg-gray-900/60" : "border-gray-200 bg-white"} ${cardClass}`}
-                >
-                  <button
-                    onClick={() => toggleFAQ(idx)}
-                    className={`w-full px-8 py-7 text-left flex justify-between items-center transition-all ${isDark ? "hover:bg-gray-800" : "hover:bg-gray-100"}`}
+            <div className="max-w-4xl mx-auto px-6">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className={`text-4xl md:text-5xl font-bold text-center mb-12 ${isDark ? "text-white" : "text-[#573010]"
+                  }`}
+              >
+                Frequently Asked <span className="text-[#8B6B4A]">Questions</span>
+              </motion.h2>
+
+              <div className="space-y-4">
+                {faqs.map((faq, idx) => (
+                  <details
+                    key={idx}
+                    className={`group rounded-xl p-6 border ${isDark
+                        ? "bg-gray-900 border-gray-800"
+                        : "bg-white border-gray-100"
+                      }`}
                   >
-                    <span className={`text-2xl font-bold ${headingClass}`}>
+                    <summary
+                      className={`font-semibold text-lg cursor-pointer flex justify-between items-center gap-4 ${isDark ? "text-white" : "text-[#573010]"
+                        }`}
+                    >
                       {faq.q}
-                    </span>
-                    <ChevronDown
-                      className={`w-7 h-7 ${accentClass} transition-transform ${openFaq === idx ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                  <AnimatePresence>
-                    {openFaq === idx && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className={`px-8 pb-8 text-lg leading-relaxed ${bodyClass}`}
-                      >
-                        {faq.a}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
+                      <ChevronDown className="w-5 h-5 transition-transform duration-300 group-open:rotate-180 flex-shrink-0" />
+                    </summary>
+
+                    <p className={`mt-4 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
+                      {faq.a}
+                    </p>
+                  </details>
+                ))}
+              </div>
             </div>
-          </motion.section>
+          </section>
         </main>
 
-       
-        
+
+
       </div>
     </>
   );
