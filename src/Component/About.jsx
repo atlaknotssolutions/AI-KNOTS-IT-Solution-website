@@ -463,14 +463,14 @@ export default function About()
   return (
     <>
       <Helmet>
-        <title>About Atla Inteligent Knots Solution</title>
+        <title>About AI Knots IT | IT Solutions Company Bhopal</title>
         <meta
           name="description"
           content="Learn about Atla Inteligent Knots Solution, a trusted IT company offering web, software & digital solution."
         />
         <meta
           name="keywords"
-          content="About IT Company Software Company, Digital Agency India, Web Development Company, Software Development Company, Digital Marketing Agency, SEO Services, Social Media Management, ERP Solutions"
+          content="IT company about us, software company Bhopal, technology company Bhopal"
         />
       </Helmet>
       <div

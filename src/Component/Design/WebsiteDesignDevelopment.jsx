@@ -189,14 +189,14 @@ export default function WebsiteDesignDevelopment()
   return (
     <>
       <Helmet>
-        <title>Website Development Company Bhopal | Atla IKS</title>
+        <title>Web Development Company in Bhopal | AI Knots IT</title>
         <meta
           name="description"
-          content="Professional website design & development company in Bhopal for businesses."
+          content="Custom website design & web development services in Bhopal — responsive, SEO-friendly websites for businesses of all sizes."
         />
         <meta
           name="keywords"
-          content="Website Development Company Bhopal, Web Design Company, Website Services"
+          content="web development company, website design company, custom web development, responsive website design, ecommerce website development"
         />
       </Helmet>
 

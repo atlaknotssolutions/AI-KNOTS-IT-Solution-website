@@ -217,14 +217,14 @@ export default function MobileAppDevelopment()
   return (
     <>
       <Helmet>
-        <title>Mobile App Development India | Atla IKS</title>
+        <title>Mobile App Development Company in Bhopal | AI Knots IT</title>
         <meta
           name="description"
-          content="Android & iOS mobile app development services for startups and businesses in India."
+          content="Android & iOS app development services — from concept to launch. Get a custom mobile app built for your business."
         />
         <meta
           name="keywords"
-          content="Mobile App Development Company, Android App Development, iOS Apps, Bhopal"
+          content="mobile app development company, android app development, iOS app development, app development services"
         />
       </Helmet>
 

@@ -173,14 +173,14 @@ export default function DigitalMarketing()
   return (
     <>
       <Helmet>
-        <title>Digital Marketing Company Bhopal | Atla IKS</title>
+        <title>Digital Marketing Agency in Bhopal | SEO, PPC & Social Media</title>
         <meta
           name="description"
-          content="Grow your business with digital marketing services including SEO, paid ads & social media marketing."
+          content="Grow your business online with our digital marketing services — SEO, social media marketing, PPC & content marketing."
         />
         <meta
           name="keywords"
-          content="Digital Marketing Company Bhopal	Online Marketing, Lead Generation, SEO Services, Social Media Marketing, Paid Advertising, Content Marketing, Digital Strategy, Online Growth, Bhopal Digital Agency, Business Promotion, Internet Marketing, Digital Campaigns"
+          content="digital marketing agency, SEO services, social media marketing, PPC management, digital marketing company Bhopal"
         />
       </Helmet>
       <div

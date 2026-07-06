@@ -123,14 +123,14 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact Atla Inteligent Knots Solution</title>
+        <title>Contact AI Knots IT | Get a Free Quote</title>
         <meta
           name="description"
           content="Contact us for website development, SEO, software & digital marketing services."
         />
         <meta
           name="keywords"
-          content="Contact IT Company	IT Services Contact, Marketing Agency"
+          content="IT company contact, web development quote, hire software developers Bhopal"
         />
       </Helmet>
       <div

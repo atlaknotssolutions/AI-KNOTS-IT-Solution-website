@@ -199,14 +199,14 @@ export default function SoftwareDevelopment()
   return (
     <>
       <Helmet>
-        <title>Best Software Development Company in India | Atla IKS</title>
+        <title>Custom Software Development Company | AI Knots IT Bhopal</title>
         <meta
           name="description"
-          content="Custom software development company for CRM, ERP and scalable business software solutions."
+          content="We build custom software solutions, enterprise software & SaaS products tailored to your business needs."
         />
         <meta
           name="keywords"
-          content="Software Development Company India	CRM Software, ERP Development"
+          content="software development company, custom software development, enterprise software development, SaaS development company"
         />
       </Helmet>
       <div
