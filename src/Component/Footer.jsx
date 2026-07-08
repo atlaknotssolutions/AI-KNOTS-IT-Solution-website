@@ -128,14 +128,14 @@ const Footer = () => {
               {/* Social Icons - Better Position & Smaller */}
               <div className="flex gap-3 mt-10">
                 <SocialLink
-                  href="https://www.facebook.com/aiknotsitsolution/"
+                  href="https://www.facebook.com/aiknotsitsolution"
                   icon={<FontAwesomeIcon icon={faFacebookF} size={16} />}
                   label="Facebook"
                   isDark={isDark}
                 />
 
                 <SocialLink
-                  href="https://www.instagram.com/aiknotsitsolution"
+                  href="https://www.instagram.com/aiknotsitsolution/"
                   icon={<FontAwesomeIcon icon={faInstagram} size={16} />}
                   label="Instagram"
                   isDark={isDark}
@@ -154,6 +154,8 @@ const Footer = () => {
                   label="Pinterest"
                   isDark={isDark}
                 />
+
+                
               </div>
             </div>
 
