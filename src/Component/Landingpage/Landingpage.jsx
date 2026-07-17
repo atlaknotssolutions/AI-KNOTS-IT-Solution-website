@@ -225,12 +225,12 @@ function Landingpage() {
             {[
               {
                 icon: "⚙",
-                title: "Website Design",
+                title: "Web Design",
                 desc: "Craft modern, responsive websites with intuitive navigation, clear messaging, and a polished visual identity.",
               },
               {
                 icon: "↺",
-                title: "Website Development",
+                title: "Web Development",
                 desc: "Build fast, secure, and scalable websites with clean code, optimized performance, and SEO-friendly architecture.",
               },
               {
