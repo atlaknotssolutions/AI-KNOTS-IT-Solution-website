@@ -169,7 +169,7 @@ function Landingpage() {
             </div>
           </div>
 
-          <div className="relative w-[700px] h-[320px] sm:h-[480px] lg:h-[760px]  rounded-3xl shadow-2xl overflow-hidden reveal">
+          <div className="reveal">
             <InteractiveFolderGallery />
           </div>
         </div>
@@ -255,8 +255,7 @@ function Landingpage() {
         className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-[#EFE7DC]/60 to-[#F8F5F0]"
       >
         <div className="max-w-[1380px] mx-auto px-4 sm:px-5 grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          <div className="relative h-[920px] sm:h-[1220px] lg:h-[900px] rounded-3xl shadow-2xl overflow-hidden reveal">
-            <div className="absolute inset-0 bg-[repeating-linear-gradient(90deg,transparent,transparent_28px,#8B6B4A05_29px,transparent_30px)]" />
+          <div className="reveal w-full overflow-visible">
             <RadialOrbitalTimeline />
           </div>
           <div>
@@ -311,19 +310,19 @@ function Landingpage() {
           </div>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-12 gap-4 sm:gap-6">
-            {/* Tall Card - Healthcare AI Portal */}
+            {/* Tall Card - Edu-Hawk Worldwide – MBBS Abroad Consultancy Website */}
             <div className="sm:col-span-2 md:col-span-4 md:row-span-2 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden h-full flex flex-col">
                 <div className="h-[380px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center relative">
                   <div className="w-4/5 h-40 bg-white/70 rounded-2xl shadow-sm"></div>
                   <div className="absolute bottom-8 left-8 bg-white px-4 py-2 rounded-xl text-sm font-medium shadow">
-                    Healthcare AI Portal
+                    Edu-Hawk Worldwide – MBBS Abroad Consultancy Website
                   </div>
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
                   <div className="flex-1">
-                    <h3 className="font-bold text-xl">Healthcare AI Portal</h3>
-                    <p className="text-[#6C6259]">Web Application</p>
+                    <h3 className="font-bold text-xl">Edu-Hawk Worldwide – MBBS Abroad Consultancy Website</h3>
+                    <p className="text-[#6C6259]">Educational Consultancy Platform</p>
                   </div>
                   <a
                     href="#contact"
@@ -335,15 +334,44 @@ function Landingpage() {
               </div>
             </div>
 
-            {/* Retail Growth Store */}
+            {/* Edu-Hawk Worldwide – MBBS Abroad Consultancy Website */}
             <div className="md:col-span-4 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
                 <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
                   <div className="w-4/5 h-28 bg-white/70 rounded-2xl"></div>
                 </div>
                 <div className="p-8">
-                  <h3 className="font-bold text-xl">Retail Growth Store</h3>
-                  <p className="text-[#6C6259]">Ecommerce</p>
+                  <h3 className="font-bold text-xl">IncorpNow - Consulting</h3>
+                  <p className="text-[#6C6259]">Consulting Services Platform</p>
+       
+               
+                </div>
+              </div>
+            </div>
+
+            {/* Highlight Enterprises - Event services Website */}
+            <div className="md:col-span-4 group">
+              <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
+                <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
+                  <div className="w-4/5 h-28 bg-white/70 rounded-2xl"></div>
+                </div>
+                <div className="p-8">
+                  <h3 className="font-bold text-xl">Highlight Enterprises - Event services Website</h3>
+                  <p className="text-[#6C6259]">Event Management Platform</p>
+                
+                </div>
+              </div>
+            </div>
+
+            {/* Craze Craft Interiors - Social Media and GMB Handling*/}
+            <div className="md:col-span-4 group">
+              <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
+                <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
+                  <div className="w-4/5 h-28 bg-white/70 rounded-2xl"></div>
+                </div>
+                <div className="p-8">
+                  <h3 className="font-bold text-xl">Craze Craft Interiors - Social Media and GMB Handling</h3>
+                  <p className="text-[#6C6259]">Social Media Management and Google My Business Optimization</p>
                   <a
                     href="#contact"
                     className="text-[#8B6B4A] font-bold flex items-center gap-2 hover:gap-3 transition-all mt-6"
@@ -354,59 +382,16 @@ function Landingpage() {
               </div>
             </div>
 
-            {/* Finance Dashboard */}
+            {/* Hot Cafe plus - E-Commerece */}
             <div className="md:col-span-4 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
                 <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
                   <div className="w-4/5 h-28 bg-white/70 rounded-2xl"></div>
                 </div>
                 <div className="p-8">
-                  <h3 className="font-bold text-xl">Finance Dashboard</h3>
-                  <p className="text-[#6C6259]">Custom Software</p>
-                  <a
-                    href="#contact"
-                    className="text-[#8B6B4A] font-bold flex items-center gap-2 hover:gap-3 transition-all mt-6"
-                  >
-                    View Project →
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Real Estate Leads */}
-            <div className="md:col-span-4 group">
-              <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
-                <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
-                  <div className="w-4/5 h-28 bg-white/70 rounded-2xl"></div>
-                </div>
-                <div className="p-8">
-                  <h3 className="font-bold text-xl">Real Estate Leads</h3>
-                  <p className="text-[#6C6259]">SEO Campaign</p>
-                  <a
-                    href="#contact"
-                    className="text-[#8B6B4A] font-bold flex items-center gap-2 hover:gap-3 transition-all mt-6"
-                  >
-                    View Project →
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Education Mobile App */}
-            <div className="md:col-span-4 group">
-              <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
-                <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
-                  <div className="w-4/5 h-28 bg-white/70 rounded-2xl"></div>
-                </div>
-                <div className="p-8">
-                  <h3 className="font-bold text-xl">Education Mobile App</h3>
+                  <h3 className="font-bold text-xl">Hot Cafe plus - E-Commerece</h3>
                   <p className="text-[#6C6259]">Flutter App</p>
-                  <a
-                    href="#contact"
-                    className="text-[#8B6B4A] font-bold flex items-center gap-2 hover:gap-3 transition-all mt-6"
-                  >
-                    View Project →
-                  </a>
+                
                 </div>
               </div>
             </div>
@@ -416,7 +401,7 @@ function Landingpage() {
 
       {/* Process Section */}
       <section className="py-16 sm:py-20 lg:py-24 bg-[#F8F5F0]">
-        <div className="max-w-[1180px] mx-auto px-4 sm:px-5">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-5  ">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-12">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
               A clear process from idea to launch

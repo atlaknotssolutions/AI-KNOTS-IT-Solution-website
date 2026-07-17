@@ -1,5 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowRight, Link as LinkIcon, Zap, Calendar, Code, FileText, User, Clock } from "lucide-react";
+import {
+  ArrowRight,
+  Link as LinkIcon,
+  Zap,
+  Calendar,
+  Code,
+  FileText,
+  User,
+  Clock,
+} from "lucide-react";
 
 const RadialOrbitalTimeline = () => {
   const [expandedItems, setExpandedItems] = useState({});
@@ -11,11 +20,56 @@ const RadialOrbitalTimeline = () => {
   const containerRef = useRef(null);
 
   const timelineData = [
-    { id: 1, title: "Planning", date: "Jan 2024", content: "Project planning and requirements gathering phase.", icon: Calendar, relatedIds: [2], status: "completed", energy: 100 },
-    { id: 2, title: "Design", date: "Feb 2024", content: "UI/UX design and system architecture.", icon: FileText, relatedIds: [1, 3], status: "completed", energy: 90 },
-    { id: 3, title: "Development", date: "Mar 2024", content: "Core features implementation and testing.", icon: Code, relatedIds: [2, 4], status: "in-progress", energy: 60 },
-    { id: 4, title: "Testing", date: "Apr 2024", content: "User testing and bug fixes.", icon: User, relatedIds: [3, 5], status: "pending", energy: 30 },
-    { id: 5, title: "Release", date: "May 2024", content: "Final deployment and release.", icon: Clock, relatedIds: [4], status: "pending", energy: 10 },
+    {
+      id: 1,
+      title: "Planning",
+      date: "Jan 2024",
+      content: "Project planning and requirements gathering phase.",
+      icon: Calendar,
+      relatedIds: [2],
+      status: "completed",
+      energy: 100,
+    },
+    {
+      id: 2,
+      title: "Design",
+      date: "Feb 2024",
+      content: "UI/UX design and system architecture.",
+      icon: FileText,
+      relatedIds: [1, 3],
+      status: "completed",
+      energy: 90,
+    },
+    {
+      id: 3,
+      title: "Development",
+      date: "Mar 2024",
+      content: "Core features implementation and testing.",
+      icon: Code,
+      relatedIds: [2, 4],
+      status: "in-progress",
+      energy: 60,
+    },
+    {
+      id: 4,
+      title: "Testing",
+      date: "Apr 2024",
+      content: "User testing and bug fixes.",
+      icon: User,
+      relatedIds: [3, 5],
+      status: "pending",
+      energy: 30,
+    },
+    {
+      id: 5,
+      title: "Release",
+      date: "May 2024",
+      content: "Final deployment and release.",
+      icon: Clock,
+      relatedIds: [4],
+      status: "pending",
+      energy: 10,
+    },
   ];
 
   // Auto rotation
@@ -32,7 +86,7 @@ const RadialOrbitalTimeline = () => {
   const toggleItem = (id) => {
     setExpandedItems((prev) => {
       const newState = { ...prev };
-      Object.keys(newState).forEach(key => {
+      Object.keys(newState).forEach((key) => {
         if (parseInt(key) !== id) newState[key] = false;
       });
       newState[id] = !prev[id];
@@ -40,8 +94,11 @@ const RadialOrbitalTimeline = () => {
       if (!prev[id]) {
         setActiveNodeId(id);
         setAutoRotate(false);
-        const related = timelineData.find(item => item.id === id)?.relatedIds || [];
-        setPulseEffect(related.reduce((acc, rid) => ({ ...acc, [rid]: true }), {}));
+        const related =
+          timelineData.find((item) => item.id === id)?.relatedIds || [];
+        setPulseEffect(
+          related.reduce((acc, rid) => ({ ...acc, [rid]: true }), {}),
+        );
       } else {
         setActiveNodeId(null);
         setAutoRotate(true);
@@ -60,12 +117,14 @@ const RadialOrbitalTimeline = () => {
     return { x, y, angle };
   };
 
-  const isRelatedToActive = (id) => activeNodeId && timelineData.find(i => i.id === activeNodeId)?.relatedIds.includes(id);
+  const isRelatedToActive = (id) =>
+    activeNodeId &&
+    timelineData.find((i) => i.id === activeNodeId)?.relatedIds.includes(id);
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      className="w-full h-screen flex items-center justify-center overflow-hidden relative"
+      className="w-full min-h-[860px] sm:min-h-[960px] flex items-center justify-center overflow-visible relative py-10 sm:py-14"
       onClick={() => {
         setExpandedItems({});
         setActiveNodeId(null);
@@ -73,7 +132,7 @@ const RadialOrbitalTimeline = () => {
         setAutoRotate(true);
       }}
     >
-      <div className="relative w-[800px] h-[800px] flex items-center justify-center">
+      <div className="relative w-[760px] h-[760px] sm:w-[800px] sm:h-[800px] flex items-center justify-center">
         {/* Central Core */}
         <div className="absolute w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 via-blue-500 to-teal-500 flex items-center justify-center z-20 shadow-2xl animate-pulse">
           <div className="w-8 h-8 bg-white/90 rounded-full" />
@@ -108,17 +167,24 @@ const RadialOrbitalTimeline = () => {
               )}
 
               {/* Node */}
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300
-                ${isExpanded ? "bg-white text-black scale-125 shadow-xl" : 
-                  isRelated ? "bg-white/60 text-black border-white animate-pulse" : 
-                  "bg-[#2F2A26] text-gray-300 border-white/40 hover:border-white/70"}`}
+              <div
+                className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300
+                ${
+                  isExpanded
+                    ? "bg-white text-black scale-125 shadow-xl"
+                    : isRelated
+                      ? "bg-white/60 text-black border-white animate-pulse"
+                      : "bg-[#2F2A26] text-gray-300 border-white/40 hover:border-white/70"
+                }`}
               >
                 <Icon size={18} />
               </div>
 
               {/* Label */}
-              <div className={`absolute top-14 left-1/2 -translate-x-1/2 text-xs font-semibold tracking-widest text-center whitespace-nowrap transition-all
-                ${isExpanded ? "text-gray-500 scale-110" : "text-gray-500"}`}>
+              <div
+                className={`absolute top-14 left-1/2 -translate-x-1/2 text-xs font-semibold tracking-widest text-center whitespace-nowrap transition-all
+                ${isExpanded ? "text-gray-500 scale-110" : "text-gray-500"}`}
+              >
                 {item.title}
               </div>
 
@@ -126,25 +192,45 @@ const RadialOrbitalTimeline = () => {
               {isExpanded && (
                 <div className="absolute top-24 left-1/2 -translate-x-1/2 w-72 bg-zinc-950/95 backdrop-blur-xl border border-white/20 rounded-xl p-5 shadow-2xl z-50">
                   <div className="flex justify-between items-start mb-4">
-                    <div className={`px-3 py-1 text-xs font-bold rounded-full border
-                      ${item.status === "completed" ? "bg-white text-black" : 
-                        item.status === "in-progress" ? "bg-white/90 text-black" : "bg-zinc-800 text-white"}`}>
+                    <div
+                      className={`px-3 py-1 text-xs font-bold rounded-full border
+                      ${
+                        item.status === "completed"
+                          ? "bg-white text-black"
+                          : item.status === "in-progress"
+                            ? "bg-white/90 text-black"
+                            : "bg-zinc-800 text-white"
+                      }`}
+                    >
                       {item.status.toUpperCase()}
                     </div>
-                    <span className="text-xs text-white/50 font-mono">{item.date}</span>
+                    <span className="text-xs text-white/50 font-mono">
+                      {item.date}
+                    </span>
                   </div>
 
-                  <h3 className="text-lg font-semibold text-white mb-3">{item.title}</h3>
-                  <p className="text-sm text-white/70 leading-relaxed mb-5">{item.content}</p>
+                  <h3 className="text-lg font-semibold text-white mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-white/70 leading-relaxed mb-5">
+                    {item.content}
+                  </p>
 
                   {/* Energy */}
                   <div className="mb-5">
                     <div className="flex items-center justify-between text-xs mb-1.5">
-                      <span className="flex items-center gap-1 text-white/70"><Zap size={14} /> Energy</span>
-                      <span className="font-mono text-white">{item.energy}%</span>
+                      <span className="flex items-center gap-1 text-white/70">
+                        <Zap size={14} /> Energy
+                      </span>
+                      <span className="font-mono text-white">
+                        {item.energy}%
+                      </span>
                     </div>
                     <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all" style={{ width: `${item.energy}%` }} />
+                      <div
+                        className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all"
+                        style={{ width: `${item.energy}%` }}
+                      />
                     </div>
                   </div>
 
@@ -155,12 +241,15 @@ const RadialOrbitalTimeline = () => {
                         <LinkIcon size={14} /> Connected
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {item.relatedIds.map(relId => {
-                          const rel = timelineData.find(i => i.id === relId);
+                        {item.relatedIds.map((relId) => {
+                          const rel = timelineData.find((i) => i.id === relId);
                           return (
                             <button
                               key={relId}
-                              onClick={(e) => { e.stopPropagation(); toggleItem(relId); }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleItem(relId);
+                              }}
                               className="flex items-center gap-1 text-xs px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/20 rounded-lg text-white/80 hover:text-white transition-all"
                             >
                               {rel?.title} <ArrowRight size={12} />
