@@ -225,13 +225,13 @@ function Landingpage() {
             {[
               {
                 icon: "⚙",
-                title: "Business Process Automation",
-                desc: "Automate repetitive tasks and streamline operations with intelligent workflows that save time and reduce manual effort.",
+                title: "Website Design",
+                desc: "Craft modern, responsive websites with intuitive navigation, clear messaging, and a polished visual identity.",
               },
               {
                 icon: "↺",
-                title: "Flow Management System",
-                desc: "Design and deploy task flows, delegation systems, and process controls for smooth execution across teams.",
+                title: "Website Development",
+                desc: "Build fast, secure, and scalable websites with clean code, optimized performance, and SEO-friendly architecture.",
               },
               {
                 icon: "⌘",
@@ -356,12 +356,7 @@ function Landingpage() {
                       Educational Consultancy Platform
                     </p>
                   </div>
-                  <a
-                    href="#contact"
-                    className="text-[#8B6B4A] font-bold flex items-center gap-2 hover:gap-3 transition-all mt-6"
-                  >
-                    View Project →
-                  </a>
+               
                 </div>
               </div>
             </div>
@@ -419,12 +414,7 @@ function Landingpage() {
                   <p className="text-[#6C6259]">
                     Social Media Management and Google My Business Optimization
                   </p>
-                  <a
-                    href="#contact"
-                    className="text-[#8B6B4A] font-bold flex items-center gap-2 hover:gap-3 transition-all mt-6"
-                  >
-                    View Project →
-                  </a>
+                 
                 </div>
               </div>
             </div>
