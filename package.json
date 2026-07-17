@@ -17,6 +17,7 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@reduxjs/toolkit": "^2.11.2",
+    "@splinetool/react-spline": "^4.1.0",
     "@tailwindcss/vite": "^4.1.18",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
@@ -36,6 +37,7 @@
     "react-router-dom": "^7.13.0",
     "react-router-hash-link": "^2.4.3",
     "react-toastify": "^11.0.5",
+    "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.1.18",
     "three": "^0.182.0"
   },
