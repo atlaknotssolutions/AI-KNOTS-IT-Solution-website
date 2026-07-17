@@ -101,6 +101,29 @@ function Landingpage() {
     return () => observer.disconnect();
   }, []);
 
+  const socialLinks = [
+    {
+      href: "https://www.linkedin.com/company/ai-knots-it/?viewAsMember=true",
+      label: "LinkedIn",
+      icon: "in",
+    },
+    {
+      href: "https://www.facebook.com/aiknotsitsolution",
+      label: "Facebook",
+      icon: "f",
+    },
+    {
+      href: "https://www.instagram.com/aiknotsitsolution/",
+      label: "Instagram",
+      icon: "ig",
+    },
+    {
+      href: "https://in.pinterest.com/aiknotsitsolution/",
+      label: "Pinterest",
+      icon: "P",
+    },
+  ];
+
   return (
     <div className="font-['Manrope'] bg-[#F8F5F0] text-[#2F2A26]">
       {/* NAV */}
@@ -1009,13 +1032,16 @@ function Landingpage() {
 
               {/* Social Icons */}
               <div className="flex gap-3 mt-8">
-                {["in", "f", "x", "ig"].map((social, i) => (
+                {socialLinks.map((social, i) => (
                   <a
                     key={i}
-                    href="#"
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={social.label}
                     className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-colors"
                   >
-                    {social}
+                    {social.icon}
                   </a>
                 ))}
               </div>
