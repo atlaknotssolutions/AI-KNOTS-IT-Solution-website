@@ -13,6 +13,15 @@ import ReCAPTCHA from "react-google-recaptcha";
 import InteractiveFolderGallery from "./InteractiveFolderGallery";
 // import SplineSceneBasic from "./Spotlight/SplineSceneBasic";
 import RadialOrbitalTimeline from "./Spotlight/RadialOrbitalTimeline";
+import portfolio from "../../assets/Image_landingpage/portfolio/portfolioimage.png";
+import portfolio2 from "../../assets/Image_landingpage/portfolio/portfolio2.jpeg";
+import portfolio3 from "../../assets/Image_landingpage/portfolio/portfolio3.jpeg";
+import portfolio4 from "../../assets/Image_landingpage/portfolio/portfolio4.jpeg";
+import portfolio5 from "../../assets/Image_landingpage/portfolio/portfolio5.png";
+
+
+
+
 
 function Landingpage() {
   const [formData, setFormData] = useState({
@@ -314,10 +323,12 @@ function Landingpage() {
             <div className="sm:col-span-2 md:col-span-4 md:row-span-2 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden h-full flex flex-col">
                 <div className="h-[380px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center relative">
-                  <div className="w-4/5 h-40 bg-white/70 rounded-2xl shadow-sm"></div>
-                  <div className="absolute bottom-8 left-8 bg-white px-4 py-2 rounded-xl text-sm font-medium shadow">
+                
+                    <img src={portfolio} alt="Portfolio Item" className="w-full h-full " />
+                
+                  {/* <div className="absolute bottom-8 left-8 bg-white px-4 py-2 rounded-xl text-sm font-medium shadow">
                     Edu-Hawk Worldwide – MBBS Abroad Consultancy Website
-                  </div>
+                  </div> */}
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
                   <div className="flex-1">
@@ -338,7 +349,9 @@ function Landingpage() {
             <div className="md:col-span-4 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
                 <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
-                  <div className="w-4/5 h-28 bg-white/70 rounded-2xl"></div>
+                 
+                  <img src={portfolio2} alt="Portfolio Item" className="w-full h-full " />
+                
                 </div>
                 <div className="p-8">
                   <h3 className="font-bold text-xl">IncorpNow - Consulting</h3>
@@ -352,8 +365,10 @@ function Landingpage() {
             {/* Highlight Enterprises - Event services Website */}
             <div className="md:col-span-4 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
-                <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
-                  <div className="w-4/5 h-28 bg-white/70 rounded-2xl"></div>
+                <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[hsl(38,41%,88%)] flex items-center justify-center">
+                 
+                    <img src={portfolio5} alt="Portfolio Item" className="w-full h-full " />
+                 
                 </div>
                 <div className="p-8">
                   <h3 className="font-bold text-xl">Highlight Enterprises - Event services Website</h3>
@@ -367,7 +382,9 @@ function Landingpage() {
             <div className="md:col-span-4 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
                 <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
-                  <div className="w-4/5 h-28 bg-white/70 rounded-2xl"></div>
+                  
+                    <img src={portfolio4} alt="Portfolio Item" className="w-full h-full " />
+               
                 </div>
                 <div className="p-8">
                   <h3 className="font-bold text-xl">Craze Craft Interiors - Social Media and GMB Handling</h3>
@@ -386,11 +403,13 @@ function Landingpage() {
             <div className="md:col-span-4 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
                 <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
-                  <div className="w-4/5 h-28 bg-white/70 rounded-2xl"></div>
+                  
+                  <img src={portfolio3} alt="Portfolio Item" className="w-full h-full " />
+              
                 </div>
                 <div className="p-8">
                   <h3 className="font-bold text-xl">Hot Cafe plus - E-Commerece</h3>
-                  <p className="text-[#6C6259]">Flutter App</p>
+                  <p className="text-[#6C6259]">E-Commerce Platform</p>
                 
                 </div>
               </div>
