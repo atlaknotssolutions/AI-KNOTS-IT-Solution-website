@@ -18,7 +18,7 @@ import portfolio2 from "../../assets/Image_landingpage/portfolio/portfolio2.jpeg
 import portfolio3 from "../../assets/Image_landingpage/portfolio/portfolio3.jpeg";
 import portfolio4 from "../../assets/Image_landingpage/portfolio/portfolio4.jpeg";
 import portfolio5 from "../../assets/Image_landingpage/portfolio/portfolio5.png";
-import logoImage from "../../assets/Images/logoimage5.webp";
+import logoImage from "../../assets/Images/ITLogo.webp";
 
 function Landingpage() {
   const [formData, setFormData] = useState({
