@@ -18,10 +18,7 @@ import portfolio2 from "../../assets/Image_landingpage/portfolio/portfolio2.jpeg
 import portfolio3 from "../../assets/Image_landingpage/portfolio/portfolio3.jpeg";
 import portfolio4 from "../../assets/Image_landingpage/portfolio/portfolio4.jpeg";
 import portfolio5 from "../../assets/Image_landingpage/portfolio/portfolio5.png";
-
-
-
-
+import logoImage from "../../assets/Images/logoimage5.webp";
 
 function Landingpage() {
   const [formData, setFormData] = useState({
@@ -113,9 +110,11 @@ function Landingpage() {
             href="#home"
             className="flex items-center gap-2 sm:gap-3 font-bold text-sm sm:text-xl min-w-0"
           >
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-[#8B6B4A] to-[#C0A080] text-white flex items-center justify-center shadow-xl shrink-0">
-              AK
-            </div>
+            <img
+              src={logoImage}
+              alt="AI Knots IT Solution logo"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl object-contain bg-white shadow-xl shrink-0"
+            />
             <span className="truncate">AI Knots IT Solution</span>
           </a>
 
@@ -145,15 +144,16 @@ function Landingpage() {
         <div className="max-w-[1180px] mx-auto px-4 sm:px-5 grid gap-10 lg:grid-cols-2 lg:gap-12 items-center">
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 border border-[#DED5CA] bg-white/70 rounded-full text-sm font-bold text-[#6C6259]">
-              Premium digital growth partner
+              AI-powered business automation & digital growth
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mt-6">
-              Transform Your Business with Smart Digital Solutions
+              Transform Your Ideas Into Intelligent Solutions
             </h1>
             <p className="text-base sm:text-lg text-[#6C6259] mt-6 max-w-lg mx-auto lg:mx-0">
-              AI Knots IT Solution helps businesses grow through cutting-edge
-              websites, AI automation, SEO, mobile applications, digital
-              marketing, and custom software.
+              AI Knots IT Solution helps businesses automate repetitive work,
+              streamline complex operations, and strengthen their digital
+              presence with smart websites, custom software, SEO, and marketing
+              systems.
             </p>
 
             <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 mt-8">
@@ -161,19 +161,19 @@ function Landingpage() {
                 href="#contact"
                 className="bg-[#8B6B4A] text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold hover:bg-[#75563B] transition-all flex items-center justify-center gap-2"
               >
-                Book Free Consultation <ArrowRight className="w-5 h-5" />
+                Schedule a Free Demo <ArrowRight className="w-5 h-5" />
               </a>
               <a
-                href="#portfolio"
+                href="#services"
                 className="border border-[#DED5CA] bg-white/70 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold hover:bg-white transition-all text-center"
               >
-                View Portfolio
+                Explore Our Services
               </a>
             </div>
 
             <div className="flex flex-wrap justify-center lg:justify-start gap-4 sm:gap-8 mt-10 text-sm font-bold text-[#6C6259]">
-              <div>150+ projects</div>
-              <div>98% satisfaction</div>
+              <div>Workflow automation</div>
+              <div>Scalable digital systems</div>
               <div>24×7 support</div>
             </div>
           </div>
@@ -185,18 +185,6 @@ function Landingpage() {
       </header>
 
       {/* Trusted */}
-      <section className="py-8 border-y border-[#DED5CA] bg-[#EFE7DC]/40">
-        <div className="max-w-[1180px] mx-auto px-5 grid grid-cols-2 md:grid-cols-5 gap-4">
-          {["NOVA", "VERTO", "AXION", "KERNEL", "ORBIT"].map((n) => (
-            <div
-              key={n}
-              className="h-20 bg-white/60 border border-[#DED5CA] rounded-2xl flex items-center justify-center font-bold text-[#8D847D]"
-            >
-              {n}
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Services */}
       <section id="services" className="py-16 sm:py-20 lg:py-24">
@@ -213,34 +201,34 @@ function Landingpage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
               {
-                icon: "⌁",
-                title: "Website Development",
-                desc: "Fast, polished, SEO-ready websites designed to convert visitors into leads.",
+                icon: "⚙",
+                title: "Business Process Automation",
+                desc: "Automate repetitive tasks and streamline operations with intelligent workflows that save time and reduce manual effort.",
               },
               {
-                icon: "▣",
-                title: "Mobile App Development",
-                desc: "Elegant Android and iOS experiences with reliable architecture.",
-              },
-              {
-                icon: "↗",
-                title: "SEO Optimization",
-                desc: "Technical SEO, content structure, and performance work.",
-              },
-              {
-                icon: "◐",
-                title: "Digital Marketing",
-                desc: "Campaign strategy, funnels, and analytics.",
-              },
-              {
-                icon: "✦",
-                title: "AI Automation",
-                desc: "Smart workflows that reduce manual effort.",
+                icon: "↺",
+                title: "Flow Management System",
+                desc: "Design and deploy task flows, delegation systems, and process controls for smooth execution across teams.",
               },
               {
                 icon: "⌘",
                 title: "Custom Software Development",
-                desc: "Purpose-built platforms, portals, CRMs, dashboards, and integrations.",
+                desc: "Build tailored platforms, CRMs, dashboards, and business tools that fit your exact workflow.",
+              },
+              {
+                icon: "◐",
+                title: "Digital Marketing",
+                desc: "Create strategy-led campaigns, paid ads, social campaigns, and lead funnels that drive measurable results.",
+              },
+              {
+                icon: "🔎",
+                title: "SEO & Online Visibility",
+                desc: "Improve search rankings, website performance, content structure, and local presence to grow qualified traffic.",
+              },
+              {
+                icon: "🛠",
+                title: "QA, Support & Optimization",
+                desc: "From testing and issue resolution to ongoing support, we keep your digital systems reliable and efficient.",
               },
             ].map((s, i) => (
               <div
@@ -272,17 +260,18 @@ function Landingpage() {
               Why choose AI Knots
             </h2>
             <p className="mt-4 text-[#6C6259] reveal text-sm sm:text-base">
-              We connect technology, automation, and growth so your digital
-              presence works as a business asset.
+              We empower businesses with innovative, scalable, and result-driven
+              technology solutions that improve efficiency, strengthen digital
+              presence, and support long-term growth.
             </p>
             <div className="grid gap-4 mt-10">
               {[
-                "Experienced Developers",
-                "AI-Powered Solutions",
-                "SEO-Friendly Development",
-                "Fast Delivery",
-                "Affordable Pricing",
-                "24x7 Support",
+                "Innovative & scalable solutions",
+                "End-to-end business automation",
+                "SEO-friendly development",
+                "Reliable support & maintenance",
+                "Clear communication & fast delivery",
+                "Growth-focused digital strategy",
               ].map((item, i) => (
                 <div
                   key={i}
@@ -308,14 +297,16 @@ function Landingpage() {
       {/* Portfolio Showcase Section */}
       <section id="portfolio" className="py-16 sm:py-20 lg:py-24 bg-[#F8F5F0]">
         <div className="max-w-[1180px] mx-auto px-4 sm:px-5">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              Portfolio showcase
-            </h2>
-            <p className="text-[#6C6259] max-w-md mt-3 md:mt-0 text-sm sm:text-base">
-              Modern digital products crafted for clarity, performance, and
-              measurable impact.
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-10">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                Portfolio showcase
+              </h2>
+              <p className="text-[#6C6259] mt-3 text-sm sm:text-base">
+                Modern digital products crafted for clarity, performance, and
+                measurable impact.
+              </p>
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-12 gap-4 sm:gap-6">
@@ -323,17 +314,24 @@ function Landingpage() {
             <div className="sm:col-span-2 md:col-span-4 md:row-span-2 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden h-full flex flex-col">
                 <div className="h-[380px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center relative">
-                
-                    <img src={portfolio} alt="Portfolio Item" className="w-full h-full " />
-                
+                  <img
+                    src={portfolio}
+                    alt="Portfolio Item"
+                    className="w-full h-full "
+                  />
+
                   {/* <div className="absolute bottom-8 left-8 bg-white px-4 py-2 rounded-xl text-sm font-medium shadow">
                     Edu-Hawk Worldwide – MBBS Abroad Consultancy Website
                   </div> */}
                 </div>
                 <div className="p-8 flex-1 flex flex-col">
                   <div className="flex-1">
-                    <h3 className="font-bold text-xl">Edu-Hawk Worldwide – MBBS Abroad Consultancy Website</h3>
-                    <p className="text-[#6C6259]">Educational Consultancy Platform</p>
+                    <h3 className="font-bold text-xl">
+                      Edu-Hawk Worldwide – MBBS Abroad Consultancy Website
+                    </h3>
+                    <p className="text-[#6C6259]">
+                      Educational Consultancy Platform
+                    </p>
                   </div>
                   <a
                     href="#contact"
@@ -349,15 +347,15 @@ function Landingpage() {
             <div className="md:col-span-4 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
                 <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
-                 
-                  <img src={portfolio2} alt="Portfolio Item" className="w-full h-full " />
-                
+                  <img
+                    src={portfolio2}
+                    alt="Portfolio Item"
+                    className="w-full h-full "
+                  />
                 </div>
                 <div className="p-8">
                   <h3 className="font-bold text-xl">IncorpNow - Consulting</h3>
                   <p className="text-[#6C6259]">Consulting Services Platform</p>
-       
-               
                 </div>
               </div>
             </div>
@@ -366,14 +364,17 @@ function Landingpage() {
             <div className="md:col-span-4 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
                 <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[hsl(38,41%,88%)] flex items-center justify-center">
-                 
-                    <img src={portfolio5} alt="Portfolio Item" className="w-full h-full " />
-                 
+                  <img
+                    src={portfolio5}
+                    alt="Portfolio Item"
+                    className="w-full h-full "
+                  />
                 </div>
                 <div className="p-8">
-                  <h3 className="font-bold text-xl">Highlight Enterprises - Event services Website</h3>
+                  <h3 className="font-bold text-xl">
+                    Highlight Enterprises - Event services Website
+                  </h3>
                   <p className="text-[#6C6259]">Event Management Platform</p>
-                
                 </div>
               </div>
             </div>
@@ -382,13 +383,19 @@ function Landingpage() {
             <div className="md:col-span-4 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
                 <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
-                  
-                    <img src={portfolio4} alt="Portfolio Item" className="w-full h-full " />
-               
+                  <img
+                    src={portfolio4}
+                    alt="Portfolio Item"
+                    className="w-full h-full "
+                  />
                 </div>
                 <div className="p-8">
-                  <h3 className="font-bold text-xl">Craze Craft Interiors - Social Media and GMB Handling</h3>
-                  <p className="text-[#6C6259]">Social Media Management and Google My Business Optimization</p>
+                  <h3 className="font-bold text-xl">
+                    Craze Craft Interiors - Social Media and GMB Handling
+                  </h3>
+                  <p className="text-[#6C6259]">
+                    Social Media Management and Google My Business Optimization
+                  </p>
                   <a
                     href="#contact"
                     className="text-[#8B6B4A] font-bold flex items-center gap-2 hover:gap-3 transition-all mt-6"
@@ -403,14 +410,17 @@ function Landingpage() {
             <div className="md:col-span-4 group">
               <div className="bg-white border border-[#DED5CA] rounded-3xl overflow-hidden">
                 <div className="h-[220px] bg-gradient-to-br from-[#F5F0E8] to-[#EDE4D4] flex items-center justify-center">
-                  
-                  <img src={portfolio3} alt="Portfolio Item" className="w-full h-full " />
-              
+                  <img
+                    src={portfolio3}
+                    alt="Portfolio Item"
+                    className="w-full h-full "
+                  />
                 </div>
                 <div className="p-8">
-                  <h3 className="font-bold text-xl">Hot Cafe plus - E-Commerece</h3>
+                  <h3 className="font-bold text-xl">
+                    Hot Cafe plus - E-Commerece
+                  </h3>
                   <p className="text-[#6C6259]">E-Commerce Platform</p>
-                
                 </div>
               </div>
             </div>
@@ -421,24 +431,50 @@ function Landingpage() {
       {/* Process Section */}
       <section className="py-16 sm:py-20 lg:py-24 bg-[#F8F5F0]">
         <div className="max-w-[1180px] mx-auto px-4 sm:px-5  ">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              A clear process from idea to launch
-            </h2>
-            <p className="text-[#6C6259] max-w-md mt-4 md:mt-0 text-sm sm:text-base">
-              Simple enough to move quickly, structured enough to keep quality
-              high.
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-10">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                A clear process from idea to launch
+              </h2>
+              <p className="text-[#6C6259] mt-3 text-sm sm:text-base">
+                Simple enough to move quickly, structured enough to keep quality
+                high.
+              </p>
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6">
             {[
-              { num: "1", title: "Discovery", desc: "Goals, users, scope." },
-              { num: "2", title: "Planning", desc: "Roadmap and priorities." },
-              { num: "3", title: "Design", desc: "Wireframes and UI." },
-              { num: "4", title: "Development", desc: "Build and integrate." },
-              { num: "5", title: "Testing", desc: "QA and refinement." },
-              { num: "6", title: "Launch", desc: "Deploy and support." },
+              {
+                num: "1",
+                title: "Process Mapping",
+                desc: "We study your workflows and identify the best areas to automate.",
+              },
+              {
+                num: "2",
+                title: "Implementation",
+                desc: "Our team integrates the right systems, tools, and automation logic.",
+              },
+              {
+                num: "3",
+                title: "Training",
+                desc: "We guide your team to use the solution confidently and efficiently.",
+              },
+              {
+                num: "4",
+                title: "Monitoring",
+                desc: "We continuously track performance and improve the process over time.",
+              },
+              {
+                num: "5",
+                title: "Customization",
+                desc: "We adapt the solution to fit your business needs as they evolve.",
+              },
+              {
+                num: "6",
+                title: "Support",
+                desc: "Ongoing assistance ensures your operations stay smooth and reliable.",
+              },
             ].map((step, index) => (
               <div
                 key={index}
@@ -506,13 +542,15 @@ function Landingpage() {
           {/* Testimonials */}
           <div className="mb-12">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-                Trusted by founders and growing teams
-              </h2>
-              <p className="text-[#6C6259] max-w-md mt-4 md:mt-0 text-sm sm:text-base">
-                Clients choose AI Knots for thoughtful execution, transparent
-                communication, and dependable delivery.
-              </p>
+              <div className="max-w-2xl">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                  Trusted by founders and growing teams
+                </h2>
+                <p className="text-[#6C6259] mt-3 text-sm sm:text-base">
+                  Clients choose AI Knots for thoughtful execution, transparent
+                  communication, and dependable delivery.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -522,14 +560,16 @@ function Landingpage() {
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#B08A67] to-[#7E8775]"></div>
                 <div>
-                  <h4 className="font-bold">Riya Sharma</h4>
-                  <p className="text-[#6C6259] text-sm">Nova Health</p>
+                  <h4 className="font-bold">Swadesh Jyoti Lalwani</h4>
+                  <p className="text-[#6C6259] text-sm">
+                    Business Growth Partner
+                  </p>
                 </div>
               </div>
               <div className="text-[#8B6B4A] text-2xl mb-4">★★★★★</div>
               <p className="text-[#6C6259] leading-relaxed">
-                "The team transformed our patient portal into a fast, elegant
-                experience and automated several admin workflows."
+                "A reliable digital marketing partner. AI Knots understands
+                business needs and delivers with clarity."
               </p>
             </div>
 
@@ -538,14 +578,16 @@ function Landingpage() {
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#B08A67] to-[#7E8775]"></div>
                 <div>
-                  <h4 className="font-bold">Aman Verma</h4>
-                  <p className="text-[#6C6259] text-sm">Verto Retail</p>
+                  <h4 className="font-bold">Pathik Shah</h4>
+                  <p className="text-[#6C6259] text-sm">
+                    Growth-focused Client
+                  </p>
                 </div>
               </div>
               <div className="text-[#8B6B4A] text-2xl mb-4">★★★★★</div>
               <p className="text-[#6C6259] leading-relaxed">
-                "Our website finally feels premium, and the SEO structure
-                started improving qualified traffic within weeks."
+                "Working with AI Knots has been a great decision. Their team
+                delivered a solution that truly supports our business growth."
               </p>
             </div>
 
@@ -554,14 +596,14 @@ function Landingpage() {
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#B08A67] to-[#7E8775]"></div>
                 <div>
-                  <h4 className="font-bold">Neha Mehta</h4>
-                  <p className="text-[#6C6259] text-sm">Orbit Labs</p>
+                  <h4 className="font-bold">Bharat e-Filing</h4>
+                  <p className="text-[#6C6259] text-sm">Operations Client</p>
                 </div>
               </div>
               <div className="text-[#8B6B4A] text-2xl mb-4">★★★★★</div>
               <p className="text-[#6C6259] leading-relaxed">
-                "AI Knots delivered with clarity from planning to launch. The
-                dashboard is clean, fast, and easy for our team."
+                "AI Knots has helped us improve our digital visibility and
+                simplify how we manage day-to-day operations."
               </p>
             </div>
           </div>
@@ -573,14 +615,16 @@ function Landingpage() {
         <div className="max-w-[1180px] mx-auto px-5">
           {/* Industries We Serve */}
           <div className="mb-20">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-                Industries we serve
-              </h2>
-              <p className="text-[#6C6259] max-w-md mt-4 md:mt-0 text-sm sm:text-base">
-                Digital systems for organizations that need reliable execution
-                and a refined customer experience.
-              </p>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-10">
+              <div className="max-w-2xl">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                  Industries we serve
+                </h2>
+                <p className="text-[#6C6259] mt-3 text-sm sm:text-base">
+                  Digital systems for organizations that need reliable execution
+                  and a refined customer experience.
+                </p>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
@@ -609,14 +653,16 @@ function Landingpage() {
 
           {/* Technologies We Use */}
           <div>
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-                Technologies we use
-              </h2>
-              <p className="text-[#6C6259] max-w-md mt-4 md:mt-0 text-sm sm:text-base">
-                A modern, scalable stack selected around speed, security, and
-                long-term maintainability.
-              </p>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-10">
+              <div className="max-w-2xl">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
+                  Technologies we use
+                </h2>
+                <p className="text-[#6C6259] mt-3 text-sm sm:text-base">
+                  A modern, scalable stack selected around speed, security, and
+                  long-term maintainability.
+                </p>
+              </div>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
@@ -659,13 +705,13 @@ function Landingpage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
               <a
-                href="mailto:info@aiknots.com"
+                href="mailto:support@atlaknots.com"
                 className="bg-white text-black font-bold px-10 py-4 rounded-full"
               >
                 Book Free Consultation
               </a>
               <a
-                href="tel:7869636070"
+                href="tel:+917869636070"
                 className="border border-white/40 px-10 py-4 rounded-full hover:bg-white/10"
               >
                 Contact Us
@@ -899,28 +945,28 @@ function Landingpage() {
           <div className="max-w-3xl mx-auto space-y-4">
             {[
               {
-                q: "How is pricing decided?",
-                a: "Pricing depends on project scope, timeline, integrations, and required support. A free consultation helps define the right package.",
+                q: "What is AI KNOTS?",
+                a: "AI KNOTS is a business automation platform designed to streamline operations, automate repetitive tasks, and improve digital workflows.",
               },
               {
-                q: "How long does a typical project take?",
-                a: "Landing pages can be delivered quickly, while custom software and apps follow a milestone-based timeline after planning.",
+                q: "Who can use AI KNOTS?",
+                a: "It is ideal for small and medium-sized businesses that want to save time, reduce manual effort, and scale their operations efficiently.",
               },
               {
-                q: "Do you provide support after launch?",
-                a: "Yes, AI Knots offers maintenance, monitoring, improvements, and technical support after deployment.",
+                q: "Can AI KNOTS integrate with other systems?",
+                a: "Yes, AI KNOTS can be connected with other business tools and systems to support a more connected workflow.",
               },
               {
-                q: "Will the website be SEO-friendly?",
-                a: "Yes, performance, structure, metadata, schema readiness, and responsive behavior are considered during development.",
+                q: "Do you provide ongoing support?",
+                a: "Yes, we offer training, monitoring, optimization, and continued assistance after implementation.",
               },
               {
-                q: "Can you maintain an existing website?",
-                a: "Yes, the team can improve, maintain, redesign, or extend existing websites and software systems.",
+                q: "Can you also help with marketing and SEO?",
+                a: "Absolutely. We provide SEO, social media marketing, paid advertising, and website strategies that support business growth.",
               },
               {
-                q: "What AI solutions can you build?",
-                a: "AI chatbots, workflow automation, content systems, internal tools, data assistants, and custom integrations can be planned around your business process.",
+                q: "What industries do you serve?",
+                a: "We support businesses across healthcare, education, real estate, retail, finance, manufacturing, hospitality, and startups.",
               },
             ].map((item, index) => (
               <details
@@ -949,9 +995,11 @@ function Landingpage() {
             {/* Brand Column */}
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-[#8B6B4A] to-[#C0A080] rounded-2xl flex items-center justify-center font-bold text-xl">
-                  AK
-                </div>
+                <img
+                  src={logoImage}
+                  alt="AI Knots IT Solution logo"
+                  className="w-10 h-10 rounded-2xl object-contain bg-white shadow-sm"
+                />
                 <span className="font-bold text-xl">AI Knots IT Solution</span>
               </div>
               <p className="text-white/70 leading-relaxed">
@@ -1040,16 +1088,16 @@ function Landingpage() {
               </h3>
               <div className="space-y-3 text-white/70">
                 <a
-                  href="tel:7869636070"
+                  href="tel:+917869636070"
                   className="block hover:text-white transition"
                 >
-                  7869636070
+                  +91 78696 36070
                 </a>
                 <a
-                  href="mailto:info@aiknots.com"
+                  href="mailto:support@atlaknots.com"
                   className="block hover:text-white transition"
                 >
-                  info@aiknots.com
+                  support@atlaknots.com
                 </a>
                 <a
                   href="#contact"
