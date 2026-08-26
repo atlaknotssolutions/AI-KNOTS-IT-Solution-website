@@ -50,11 +50,17 @@ import TermsOfService from "../Component/TermsOfService/TermsOfService";
 import Cart from "../Component/SoftwareDevelopment/Cart/Cart";
 import ProductForSells from "../Component/ProductForSells/ProductForSells";
 import ProductForSellsDetail from "../Component/ProductForSells/ProductForSellsDetail";
+import Landingpage from "../Component/Landingpage/Landingpage";
 
 export const router = createBrowserRouter([
   {
+    path: "/landingpage",
+    element: <Landingpage />,
+  },
+  {
     path: "/",
     element: <MainLayout />,
+
     children: [
       { index: true, element: <Home /> },
       { path: "home", element: <Home /> },
@@ -144,5 +150,6 @@ export const routeList = [
   "/uidesign",
   "/privacypolicy",
   "/termsofservice",
+  "/landingpage",
   // Add more dynamic routes if needed
 ];

@@ -132,6 +132,17 @@ const Contact = () => {
           name="keywords"
           content="IT company contact, web development quote, hire software developers Bhopal"
         />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPoint",
+            telephone: "+91-78696-36070",
+            contactType: "Customer Service",
+            contactOption: "TollFree",
+            areaServed: "Bhopal",
+            availableLanguage: ["en", "hi"],
+          })}
+        </script>
       </Helmet>
       <div
         className={`relative min-h-screen overflow-hidden transition-colors duration-700
