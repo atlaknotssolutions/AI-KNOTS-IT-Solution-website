@@ -107,7 +107,7 @@ export default function Navbar()
           </NavLink>
 
           {/* DESKTOP MENU */}
-          <div className="hidden md:flex items-center gap-0.5">
+          <div className="hidden md:flex items-center gap-2">
             {navItems.map((item) => (
               <div
                 key={item.name}
@@ -265,21 +265,7 @@ export default function Navbar()
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
 
-            {/* Get Started CTA */}
-            <NavLink
-              to="/contact"
-              onClick={closeAll}
-              className={`
-                hidden md:inline-flex items-center px-5 py-2 rounded-full font-semibold
-                transition-all duration-200 shadow-sm
-                ${isDark
-                  ? "bg-[#8B6B4A] text-white hover:bg-[#A07D5A]"
-                  : "bg-[#3D220E] text-white hover:bg-[#5A351A]"
-                }
-              `}
-            >
-              Get Started
-            </NavLink>
+            
 
             {/* Mobile Menu Button */}
             <button

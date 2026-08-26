@@ -356,7 +356,6 @@ function Landingpage() {
                       Educational Consultancy Platform
                     </p>
                   </div>
-               
                 </div>
               </div>
             </div>
@@ -414,7 +413,6 @@ function Landingpage() {
                   <p className="text-[#6C6259]">
                     Social Media Management and Google My Business Optimization
                   </p>
-                 
                 </div>
               </div>
             </div>
@@ -718,7 +716,7 @@ function Landingpage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
               <a
-                href="mailto:support@atlaknots.com"
+                href="mailto:Support@aiknotsit.com"
                 className="bg-white text-black font-bold px-10 py-4 rounded-full"
               >
                 Book Free Consultation
@@ -798,10 +796,10 @@ function Landingpage() {
                     </h3>
                     <p className="mt-1.5 text-gray-600">
                       <a
-                        href="mailto:support@atlaknots.com"
+                        href="mailto:Support@aiknotsit.com"
                         className="hover:text-accent transition"
                       >
-                        support@atlaknots.com
+                        Support@aiknotsit.com
                       </a>
                     </p>
                   </div>
@@ -1110,10 +1108,10 @@ function Landingpage() {
                   +91 78696 36070
                 </a>
                 <a
-                  href="mailto:support@atlaknots.com"
+                  href="mailto:Support@aiknotsit.com"
                   className="block hover:text-white transition"
                 >
-                  support@atlaknots.com
+                  Support@aiknotsit.com
                 </a>
                 <a
                   href="#contact"

@@ -103,7 +103,7 @@ const Footer = () => {
               addressCountry: "IN",
             },
             telephone: "+91-78696-36070",
-            email: "support@atlaknots.com",
+            email: "Support@aiknotsit.com",
           })}
         </script>
       </Helmet>
@@ -154,8 +154,6 @@ const Footer = () => {
                   label="Pinterest"
                   isDark={isDark}
                 />
-
-                
               </div>
             </div>
 
@@ -249,10 +247,10 @@ const Footer = () => {
                 <li className="flex items-center gap-3">
                   <Mail size={18} className="text-accent shrink-0" />
                   <a
-                    href="mailto:support@atlaknots.com"
+                    href="mailto:Support@aiknotsit.com"
                     className={`transition-colors break-all ${isDark ? "hover:text-[#D9C5B5]" : "hover:text-[#8B6B4A]"}`}
                   >
-                    support@atlaknots.com
+                    Support@aiknotsit.com
                   </a>
                 </li>
               </ul>
