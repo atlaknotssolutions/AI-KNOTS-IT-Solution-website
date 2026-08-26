@@ -1,0 +1,1425 @@
+
+
+// const imagekit = require("../../utils/imagekit.js");
+// const Product = require("../../module/homemodule/homemodule");
+// const Category = require("../../module/BlogModule/caetgorymodule.js");
+// const slugify = require("slugify");        // ← npm install slugify
+// const nodemailer = require("nodemailer");
+// const otpGenerator = require("otp-generator");
+// const PopUser = require("../../module/popmodule.js");
+
+// // ==================== SLUG HELPER ====================
+// const generateUniqueSlug = async (name, excludeId = null) => {
+//   let baseSlug = slugify(name || "", { lower: true, strict: true });
+//   if (!baseSlug) baseSlug = `blog-${Date.now()}`;
+
+//   let slug = baseSlug;
+//   let counter = 1;
+
+//   while (true) {
+//     const existing = await Product.findOne({
+//       slug,
+//       _id: { $ne: excludeId }
+//     });
+//     if (!existing) break;
+
+//     slug = `${baseSlug}-${counter}`;
+//     counter++;
+//   }
+//   return slug;
+// };
+
+
+
+
+
+// // ============================ CREATE ============================
+// const createContent = async (req, res) => {
+//   try {
+//     const { name, description, category, author } = req.body;
+
+//     if (!name || !description || !category) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Name, description & category are required",
+//       });
+//     }
+
+//     const categoryExists = await Category.findById(category);
+//     if (!categoryExists) {
+//       return res.status(404).json({ success: false, message: "Category not found" });
+//     }
+
+//     const slug = await generateUniqueSlug(name);
+
+//     // Image Handling
+//     const getFiles = () => {
+//       if (!req.files) return null;
+//       const keys = ["images", "image", "files", "images[]"];
+//       for (const key of keys) {
+//         if (req.files[key]) return req.files[key];
+//       }
+//       const firstKey = Object.keys(req.files)[0];
+//       return firstKey ? req.files[firstKey] : null;
+//     };
+
+//     const incomingFiles = getFiles();
+//     if (!incomingFiles) {
+//       return res.status(400).json({ success: false, message: "Image is required" });
+//     }
+
+//     const files = Array.isArray(incomingFiles) ? incomingFiles : [incomingFiles];
+//     const uploadedImages = [];
+
+//     for (let file of files) {
+//       const uploadResponse = await imagekit.upload({
+//         file: file.data.toString("base64"),
+//         fileName: `blog-${Date.now()}-${file.name}`,
+//         folder: "/blogImages",
+//       });
+//       uploadedImages.push(uploadResponse.url);
+//     }
+
+//     const newProduct = new Product({
+//       name,
+//       slug,
+//       description,
+//       category,
+//       author: author || "Admin",
+//       images: uploadedImages,
+//     });
+
+//     await newProduct.save();
+
+//     return res.status(201).json({
+//       success: true,
+//       message: "Blog created successfully",
+//       data: newProduct,
+//     });
+//   } catch (error) {
+//     console.error("Create Error:", error);
+//     return res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+
+// // ============================ GET SINGLE BY SLUG ============================
+// const getSingleContent = async (req, res) => {
+//   try {
+//     const { slug } = req.params;
+
+//     const product = await Product.findOne({ slug })
+//       .populate("category", "name slug")
+//       .populate({
+//         path: "comments.user",
+//         select: "name email avatar",
+//       })
+//       .lean();
+
+//     if (!product) {
+//       return res.status(404).json({ success: false, message: "Blog not found" });
+//     }
+
+//     return res.status(200).json({
+//       success: true,
+//       data: product,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+
+// // ============================ UPDATE ============================
+// const updateHomeData = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { name, description, author, category, updateSlug = true } = req.body;
+
+//     const updateFields = {};
+
+//     if (name?.trim()) {
+//       updateFields.name = name.trim();
+//       if (updateSlug) {
+//         updateFields.slug = await generateUniqueSlug(name.trim(), id);
+//       }
+//     }
+
+//     if (description?.trim()) updateFields.description = description.trim();
+//     if (author?.trim()) updateFields.author = author.trim();
+
+//     if (category) {
+//       const catExists = await Category.findById(category);
+//       if (!catExists) return res.status(404).json({ success: false, message: "Category not found" });
+//       updateFields.category = category;
+//     }
+
+//     // Image update (same as before)
+//     if (req.files?.images) {
+//       const files = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
+//       const uploadedImages = [];
+//       for (const file of files) {
+//         const uploadRes = await imagekit.upload({
+//           file: file.data.toString("base64"),
+//           fileName: `blog-update-${Date.now()}-${file.name}`,
+//           folder: "/blogImages",
+//         });
+//         uploadedImages.push(uploadRes.url);
+//       }
+//       updateFields.images = uploadedImages;
+//     }
+
+//     const updated = await Product.findByIdAndUpdate(id, updateFields, { new: true })
+//       .populate("category", "name");
+
+//     if (!updated) return res.status(404).json({ success: false, message: "Blog not found" });
+
+//     res.status(200).json({ success: true, data: updated });
+//   } catch (error) {
+//     res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+
+// // ============================ GET ALL ============================
+// const getHomeData = async (req, res) => {
+//   try {
+//     const products = await Product.find()
+//       .populate("category", "name slug")
+//       .select("name slug description images views likes createdAt author")
+//       .sort({ createdAt: -1 })
+//       .lean();
+
+//     return res.status(200).json({ success: true, data: products });
+//   } catch (error) {
+//     return res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+// const getAdminProducts = async (req, res) => {
+//   try {
+//     const { limit = 15, page = 1, search = "", category = "" } = req.query;
+
+//     // Validate and sanitize query parameters
+//     const limitNum = parseInt(limit, 10);
+//     const pageNum = parseInt(page, 10);
+
+//     if (isNaN(limitNum) || limitNum < 1 || limitNum > 100) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid limit parameter. Must be a number between 1 and 100.",
+//       });
+//     }
+
+//     if (isNaN(pageNum) || pageNum < 1) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid page parameter. Must be a number greater than 0.",
+//       });
+//     }
+
+//     let query = {};
+
+//     // Search Filter
+//     if (search && typeof search === "string" && search.trim()) {
+//       const searchTerm = search.trim();
+//       query.$or = [
+//         { name: { $regex: searchTerm, $options: "i" } },
+//         { title: { $regex: searchTerm, $options: "i" } },
+//         { description: { $regex: searchTerm, $options: "i" } },
+//       ];
+//     }
+
+//     // Category Filter
+//     if (category && typeof category === "string" && category.trim()) {
+//       const categoryId = category.trim();
+//       // Validate ObjectId format
+//       if (!/^[0-9a-fA-F]{24}$/.test(categoryId)) {
+//         return res.status(400).json({
+//           success: false,
+//           message: "Invalid category ID format.",
+//         });
+//       }
+//       query.category = categoryId;
+//     }
+
+//     const products = await Product.find(query)
+//       .populate("category", "name slug")
+//       .select(
+//         "name title category author description images views likes content createdAt updatedAt comments",
+//       )
+//       .sort({ createdAt: -1 })
+//       .limit(limitNum)
+//       .skip((pageNum - 1) * limitNum)
+//       .lean();
+
+//     const total = await Product.countDocuments(query);
+
+//     const data = products.map((p) => ({
+//       _id: p._id, // Include _id for admin operations
+//       name: p.name,
+//       title: p.title,
+//       category: p.category,
+//       author: p.author,
+//       description: p.description,
+//       thumbnail: p.images && p.images.length > 0 ? p.images[0] : null,
+//       imagesCount: p.images ? p.images.length : 0,
+//       views: p.views || 0,
+//       likes: p.likes || 0,
+//       totalComments: p.comments ? p.comments.length : 0,
+//       createdAt: p.createdAt,
+//       updatedAt: p.updatedAt,
+//       status: p.content && p.content.trim().length > 50 ? "Published" : "Draft",
+//       readingTime: p.content
+//         ? Math.ceil(p.content.split(/\s+/).length / 200) + " min"
+//         : "N/A",
+//     }));
+
+//     return res.status(200).json({
+//       success: true,
+//       data: data,
+//       pagination: {
+//         total,
+//         currentPage: pageNum,
+//         totalPages: Math.ceil(total / limitNum),
+//         limit: limitNum,
+//       },
+//       message: "Admin products data fetched successfully",
+//     });
+//   } catch (error) {
+//     console.error("Error in getAdminProducts:", error);
+//     return res.status(500).json({
+//       success: false,
+//       message: "Server error while fetching products",
+//       error: error.message,
+//     });
+//   }
+// };
+// // ============================
+// // GET ALL PRODUCTS
+// // ============================
+// // const getHomeData = async (req, res) => {
+// //   try {
+// //     const products = await Product.find()
+// //       .populate("category")
+// //       .sort({ createdAt: -1 })
+// //       .lean();
+
+// //     // Ensure old products also have slug
+// //     const normalized = products.map(p => {
+// //       if (!p.slug && p.name) {
+// //         p.slug = slugify(p.name, { lower: true, strict: true }) || `product-${p._id}`;
+// //       }
+// //       return p;
+// //     });
+
+// //     return res.status(200).json({ success: true, data: normalized });
+// //   } catch (error) {
+// //     return res.status(500).json({ success: false, message: error.message });
+// //   }
+// // };
+
+// // // ============================
+// // // GET SINGLE PRODUCT BY SLUG (Recommended for Frontend)
+// // // ============================
+// // const getSingleContent = async (req, res) => {
+// //   try {
+// //     const { slug } = req.params;
+
+// //     if (!slug) {
+// //       return res.status(400).json({ success: false, message: "Slug is required" });
+// //     }
+
+// //     const product = await Product.findOne({ slug })
+// //       .populate({
+// //         path: "category",
+// //         select: "name description slug",
+// //       })
+// //       .populate({
+// //         path: "comments.user",
+// //         select: "name email avatar",
+// //       })
+// //       .lean();
+
+// //     if (!product) {
+// //       return res.status(404).json({ success: false, message: "Product not found" });
+// //     }
+
+// //     // Optional: Increase view count
+// //     // await Product.findByIdAndUpdate(product._id, { $inc: { views: 1 } });
+
+// //     return res.status(200).json({
+// //       success: true,
+// //       message: "Product fetched successfully",
+// //       data: product,
+// //     });
+// //   } catch (error) {
+// //     console.error("GET SINGLE PRODUCT ERROR:", error);
+// //     return res.status(500).json({ success: false, message: error.message });
+// //   }
+// // };
+
+// // // ============================
+// // // UPDATE PRODUCT
+// // // ============================
+// // const updateHomeData = async (req, res) => {
+// //   try {
+// //     const { id } = req.params;
+// //     const { name, description, author, category, updateSlug = false } = req.body;
+
+// //     const updateFields = {};
+
+// //     if (name?.trim()) {
+// //       updateFields.name = name.trim();
+// //       if (updateSlug) {
+// //         updateFields.slug = await generateUniqueSlug(name.trim(), id);
+// //       }
+// //     }
+
+// //     if (description?.trim()) updateFields.description = description.trim();
+// //     if (author?.trim()) updateFields.author = author.trim();
+
+// //     if (category?.trim()) {
+// //       const categoryExists = await Category.findById(category);
+// //       if (!categoryExists) {
+// //         return res.status(404).json({ success: false, message: "Category not found" });
+// //       }
+// //       updateFields.category = category;
+// //     }
+
+// //     // Image Update
+// //     if (req.files?.images) {
+// //       const files = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
+// //       const uploadedImages = [];
+
+// //       for (const file of files) {
+// //         const uploadRes = await imagekit.upload({
+// //           file: file.data.toString("base64"),
+// //           fileName: `product-update-${Date.now()}-${file.name}`,
+// //           folder: "/productImages",
+// //         });
+// //         uploadedImages.push(uploadRes.url);
+// //       }
+// //       updateFields.images = uploadedImages;
+// //     }
+
+// //     if (Object.keys(updateFields).length === 0) {
+// //       return res.status(400).json({ success: false, message: "No fields to update" });
+// //     }
+
+// //     const updatedProduct = await Product.findByIdAndUpdate(
+// //       id,
+// //       { $set: updateFields },
+// //       { new: true, runValidators: true }
+// //     ).populate("category", "name");
+
+// //     if (!updatedProduct) {
+// //       return res.status(404).json({ success: false, message: "Product not found" });
+// //     }
+
+// //     return res.status(200).json({
+// //       success: true,
+// //       message: "Product updated successfully",
+// //       data: updatedProduct,
+// //     });
+// //   } catch (error) {
+// //     console.error("Update Error:", error);
+// //     return res.status(500).json({ success: false, message: error.message });
+// //   }
+// // };
+
+// // ============================
+// // DELETE + Other Functions (Unchanged)
+// // ============================
+// const deletedContent = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const deletedProduct = await Product.findByIdAndDelete(id);
+
+//     if (!deletedProduct) {
+//       return res.status(404).json({ success: false, message: "Product not found" });
+//     }
+
+//     return res.status(200).json({
+//       success: true,
+//       message: "Product deleted successfully",
+//       data: deletedProduct,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+
+// // export default getSingleProduct;
+
+// // const getSingleContent = async (req, res) => {
+// //   try {
+// //     const { id } = req.params;
+
+// //     // Validate MongoDB ObjectId format (optional but good practice)
+// //     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+// //       return res.status(400).json({
+// //         success: false,
+// //         message: "Invalid product ID format",
+// //       });
+// //     }
+
+// //     const product = await Product.findById(id)
+// //       .populate({
+// //         path: "category",
+// //         select: "name description", // bring only needed fields (add more if required)
+// //       })
+// //       .populate({
+// //         path: "comments.user",
+// //         select: "user email",
+// //       })
+// //       .lean(); // faster + plain object (good for API responses)
+
+// //     if (!product) {
+// //       return res.status(404).json({
+// //         success: false,
+// //         message: "Product not found",
+// //       });
+// //     }
+
+// //     return res.status(200).json({
+// //       success: true,
+// //       message: "Product fetched successfully",
+// //       data: product,
+// //     });
+// //   } catch (error) {
+// //     console.error("GET SINGLE PRODUCT ERROR:", error);
+// //     return res.status(500).json({
+// //       success: false,
+// //       message: "Failed to fetch product details",
+// //       error: error.message,
+// //     });
+// //   }
+// // };
+
+// // Nodemailer Setup
+// const transporter = nodemailer.createTransport({
+//   host: "smtpout.secureserver.net", // domain SMTP
+//   port: 465,
+//   secure: true,
+//   auth: {
+//     user: process.env.EMAIL_USER,
+//     pass: process.env.EMAIL_PASS,
+//   },
+// });
+
+// // ======================
+// // INCREMENT VIEW
+// // ======================
+// const incrementView = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+
+//     const updated = await Product.findByIdAndUpdate(
+//       id,
+//       { $inc: { views: 1 } },
+//       { new: true },
+//     ).populate("category", "name");
+
+//     if (!updated) {
+//       return res
+//         .status(404)
+//         .json({ success: false, message: "Post not found" });
+//     }
+
+//     res.status(200).json({ success: true, views: updated.views });
+//   } catch (error) {
+//     res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+
+// const addComment = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { comment, userEmail, userId, email, otp } = req.body;
+//     const resolvedEmail = userEmail || email;
+
+//     if (!comment || (!resolvedEmail && !userId)) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Comment and userEmail/email/userId are required",
+//       });
+//     }
+
+//     let user = null;
+//     if (userId) {
+//       user = await PopUser.findById(userId);
+//     } else if (resolvedEmail) {
+//       user = await PopUser.findOne({
+//         email: resolvedEmail.toLowerCase().trim(),
+//       });
+//     }
+
+//     if (!user) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "User not found. Send OTP first to register your email.",
+//       });
+//     }
+
+//     if (otp) {
+//       if (!user.otp || !user.expires || user.expires < Date.now()) {
+//         return res.status(400).json({
+//           success: false,
+//           message: "OTP expired or invalid",
+//         });
+//       }
+//       if (user.otp !== otp) {
+//         return res.status(400).json({ success: false, message: "Invalid OTP" });
+//       }
+//       user.otp = null;
+//       user.expires = null;
+//       await user.save();
+//     }
+
+//     const post = await Product.findById(id);
+//     if (!post) {
+//       return res
+//         .status(404)
+//         .json({ success: false, message: "Post not found" });
+//     }
+
+//     post.comments.push({
+//       user: user._id,
+//       comment: comment.trim(),
+//     });
+
+//     await post.save();
+
+//     user.comments.push({ postId: post._id, comment: comment.trim() });
+//     await user.save();
+
+//     res.status(201).json({
+//       success: true,
+//       message: "Comment added",
+//       comments: post.comments,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+
+// const verifyOtp = async (req, res) => {
+//   try {
+//     const { email, otp } = req.body;
+
+//     if (!email || !otp) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Email and OTP are required",
+//       });
+//     }
+
+//     const user = await PopUser.findOne({ email: email.toLowerCase().trim() });
+//     if (!user || !user.otp || !user.expires || user.expires < Date.now()) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "OTP expired or invalid",
+//       });
+//     }
+
+//     if (user.otp !== otp) {
+//       return res.status(400).json({ success: false, message: "Invalid OTP" });
+//     }
+
+//     user.otp = null;
+//     user.expires = null;
+//     await user.save();
+
+//     res.status(200).json({
+//       success: true,
+//       message: "OTP verified",
+//       userId: user._id,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+// // ======================
+// // LIKE / UNLIKE (Proper with likedBy)
+// // ======================
+// const toggleLike = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { email, userId } = req.body;
+
+//     let user = null;
+//     if (userId) {
+//       user = await PopUser.findById(userId);
+//     } else if (email) {
+//       user = await PopUser.findOne({ email: email.toLowerCase().trim() });
+//     }
+
+//     if (!user) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "User email or userId is required for liking",
+//       });
+//     }
+
+//     const post = await Product.findById(id);
+//     if (!post) {
+//       return res
+//         .status(404)
+//         .json({ success: false, message: "Post not found" });
+//     }
+
+//     const hasLiked = post.likedBy.some(
+//       (uid) => uid.toString() === user._id.toString(),
+//     );
+
+//     if (hasLiked) {
+//       post.likedBy = post.likedBy.filter(
+//         (uid) => uid.toString() !== user._id.toString(),
+//       );
+//       post.likes = Math.max(0, post.likes - 1);
+//       user.likedPosts = user.likedPosts.filter(
+//         (pid) => pid.toString() !== post._id.toString(),
+//       );
+//     } else {
+//       post.likedBy.push(user._id);
+//       post.likes += 1;
+//       if (
+//         !user.likedPosts.some((pid) => pid.toString() === post._id.toString())
+//       ) {
+//         user.likedPosts.push(post._id);
+//       }
+//     }
+
+//     await Promise.all([post.save(), user.save()]);
+
+//     res.status(200).json({
+//       success: true,
+//       likes: post.likes,
+//       liked: !hasLiked,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+
+// const UserBlog = async (req, res) => {
+//   try {
+//     const { name, email, phone } = req.body;
+//     if (!name || !email || !phone) {
+//       return res
+//         .status(400)
+//         .json({ success: false, message: "All fields are required" });
+//     }
+
+//     const newUser = new PopUser({ name, email, phone });
+//     await newUser.save();
+//     res
+//       .status(201)
+//       .json({ success: true, message: "User created successfully" });
+//   } catch (error) {
+//     console.error("User Creation Error:", error);
+//     res.status(500).json({ success: false, message: "Failed to create user" });
+//   }
+// };
+
+// const sendOtp = async (req, res) => {
+//   try {
+//     const { email, name, phone } = req.body;
+
+//     if (!email || !name || !phone) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Name, email, and phone are required",
+//       });
+//     }
+
+//     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid email format",
+//       });
+//     }
+
+//     const otp = otpGenerator.generate(6, {
+//       upperCaseAlphabets: false,
+//       specialChars: false,
+//       digits: true,
+//     });
+
+//     const user = await PopUser.findOneAndUpdate(
+//       { email: email.toLowerCase().trim() },
+//       {
+//         user: name.trim(),
+//         email: email.toLowerCase().trim(),
+//         phone: phone.trim(),
+//         otp,
+//         expires: Date.now() + 10 * 60 * 1000,
+//       },
+//       { upsert: true, new: true, setDefaultsOnInsert: true },
+//     );
+
+//     await transporter.sendMail({
+//       from: `"Your Blog" <${process.env.EMAIL_USER}>`,
+//       to: user.email,
+//       subject: "Your OTP for Comment Verification",
+//       html: `
+//         <h2>Hello ${user.user},</h2>
+//         <p>Your OTP for commenting is: <strong>${otp}</strong></p>
+//         <p>This OTP will expire in 10 minutes.</p>
+//         <p>Thank you for engaging with our blog!</p>
+//       `,
+//     });
+
+//     console.log(`✅ OTP sent to ${user.email} → ${otp}`);
+
+//     res.status(200).json({
+//       success: true,
+//       message: "OTP sent successfully",
+//       userId: user._id,
+//     });
+//   } catch (error) {
+//     console.error("❌ Send OTP Error:", error);
+
+//     res.status(500).json({
+//       success: false,
+//       message: "Failed to send OTP. Please check server logs.",
+//       error: process.env.NODE_ENV === "development" ? error.message : undefined,
+//     });
+//   }
+// };
+
+// const verifyOtpAndComment = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { email, otp, comment } = req.body;
+
+//     if (!email || !otp || !comment) {
+//       return res
+//         .status(400)
+//         .json({ success: false, message: "All fields are required" });
+//     }
+
+//     const user = await PopUser.findOne({ email: email.toLowerCase().trim() });
+//     if (!user || !user.otp || !user.expires || user.expires < Date.now()) {
+//       return res
+//         .status(400)
+//         .json({ success: false, message: "OTP expired or invalid" });
+//     }
+//     if (user.otp !== otp) {
+//       return res.status(400).json({ success: false, message: "Invalid OTP" });
+//     }
+
+//     const post = await Product.findByIdAndUpdate(
+//       id,
+//       {
+//         $push: {
+//           comments: {
+//             user: user._id,
+//             comment: comment.trim(),
+//           },
+//         },
+//       },
+//       { new: true },
+//     ).populate("category", "name");
+
+//     if (!post) {
+//       return res
+//         .status(404)
+//         .json({ success: false, message: "Post not found" });
+//     }
+
+//     user.comments.push({ postId: post._id, comment: comment.trim() });
+//     user.otp = null;
+//     user.expires = null;
+//     await user.save();
+
+//     res.status(201).json({
+//       success: true,
+//       message: "Comment posted successfully",
+//       comments: post.comments,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ success: false, message: error.message });
+//   }
+// };
+
+// module.exports = {
+//   createContent,
+//   getHomeData,
+//   getSingleContent,
+//   deletedContent,
+//   updateHomeData,
+//   incrementView, // ← New
+//   toggleLike, // ← New
+//   addComment,
+//   sendOtp,
+//   verifyOtp,
+//   verifyOtpAndComment,
+//   getAdminProducts,
+// };
+
+
+const imagekit = require("../../utils/imagekit.js");
+const Product = require("../../module/homemodule/homemodule");
+const Category = require("../../module/BlogModule/caetgorymodule.js");
+const slugify = require("slugify");
+const nodemailer = require("nodemailer");
+const otpGenerator = require("otp-generator");
+const PopUser = require("../../module/popmodule.js");
+
+// ==================== SLUG HELPER ====================
+const generateUniqueSlug = async (name, excludeId = null) => {
+  let baseSlug = slugify(name || "", { lower: true, strict: true });
+  if (!baseSlug) baseSlug = `blog-${Date.now()}`;
+
+  let slug = baseSlug;
+  let counter = 1;
+
+  while (true) {
+    const existing = await Product.findOne({
+      slug,
+      _id: { $ne: excludeId }
+    });
+    if (!existing) break;
+
+    slug = `${baseSlug}-${counter}`;
+    counter++;
+  }
+  return slug;
+};
+
+// ====================== NODEMAILER TRANSPORTER ======================
+const transporter = nodemailer.createTransport({
+  host: "smtpout.secureserver.net",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+// ============================ CREATE BLOG ============================
+const createContent = async (req, res) => {
+  try {
+    const { name, description, category, author } = req.body;
+
+    if (!name || !description || !category) {
+      return res.status(400).json({
+        success: false,
+        message: "Name, description & category are required",
+      });
+    }
+
+    const categoryExists = await Category.findById(category);
+    if (!categoryExists) {
+      return res.status(404).json({ success: false, message: "Category not found" });
+    }
+
+    const slug = await generateUniqueSlug(name);
+
+    // Image Handling
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).json({ success: false, message: "Image is required" });
+    }
+
+    const getFiles = () => {
+      const keys = ["images", "image", "files", "images[]"];
+      for (const key of keys) {
+        if (req.files[key]) return req.files[key];
+      }
+      const firstKey = Object.keys(req.files)[0];
+      return firstKey ? req.files[firstKey] : null;
+    };
+
+    const incomingFiles = getFiles();
+    if (!incomingFiles) {
+      return res.status(400).json({ success: false, message: "Image is required" });
+    }
+
+    const files = Array.isArray(incomingFiles) ? incomingFiles : [incomingFiles];
+    const uploadedImages = [];
+
+    for (let file of files) {
+      const uploadResponse = await imagekit.upload({
+        file: file.data.toString("base64"),
+        fileName: `blog-${Date.now()}-${file.name}`,
+        folder: "/blogImages",
+      });
+      uploadedImages.push(uploadResponse.url);
+    }
+
+    const newProduct = await Product.create({
+      name,
+      slug,
+      description,
+      category,
+      author: author || "Admin",
+      images: uploadedImages,
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Blog created successfully",
+      data: newProduct,
+    });
+  } catch (error) {
+    console.error("Create Error:", error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ============================ GET ALL BLOGS ============================
+const getHomeData = async (req, res) => {
+  try {
+    const products = await Product.find()
+      .populate("category", "name slug")
+      .select("name slug description images views likes createdAt author")
+      .sort({ createdAt: -1 })
+      .lean();
+
+    return res.status(200).json({ success: true, data: products });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ============================ GET SINGLE BY SLUG ============================
+const getSingleContent = async (req, res) => {
+  try {
+    const { slug } = req.params;
+
+    const product = await Product.findOne({ slug })
+      .populate("category", "name slug")
+      .populate({
+        path: "comments.user",
+        select: "name email avatar",
+      })
+      .lean();
+
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Blog not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: product,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ============================ UPDATE BLOG ============================
+const updateHomeData = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, description, author, category, updateSlug = true } = req.body;
+
+    const updateFields = {};
+
+    if (name?.trim()) {
+      updateFields.name = name.trim();
+      if (updateSlug) {
+        updateFields.slug = await generateUniqueSlug(name.trim(), id);
+      }
+    }
+
+    if (description?.trim()) updateFields.description = description.trim();
+    if (author?.trim()) updateFields.author = author.trim();
+
+    if (category) {
+      const catExists = await Category.findById(category);
+      if (!catExists) return res.status(404).json({ success: false, message: "Category not found" });
+      updateFields.category = category;
+    }
+
+    // Image Update
+    if (req.files?.images) {
+      const files = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
+      const uploadedImages = [];
+      for (const file of files) {
+        const uploadRes = await imagekit.upload({
+          file: file.data.toString("base64"),
+          fileName: `blog-update-${Date.now()}-${file.name}`,
+          folder: "/blogImages",
+        });
+        uploadedImages.push(uploadRes.url);
+      }
+      updateFields.images = uploadedImages;
+    }
+
+    const updated = await Product.findByIdAndUpdate(id, updateFields, { new: true })
+      .populate("category", "name slug");
+
+    if (!updated) return res.status(404).json({ success: false, message: "Blog not found" });
+
+    res.status(200).json({ 
+      success: true, 
+      message: "Blog updated successfully", 
+      data: updated 
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ============================ DELETE BLOG ============================
+const deletedContent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedProduct = await Product.findByIdAndDelete(id);
+
+    if (!deletedProduct) {
+      return res.status(404).json({ success: false, message: "Blog not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Blog deleted successfully",
+      data: deletedProduct,
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ============================ ADMIN GET ALL ============================
+const getAdminProducts = async (req, res) => {
+  try {
+    const { limit = 15, page = 1, search = "", category = "" } = req.query;
+
+    const limitNum = parseInt(limit, 10);
+    const pageNum = parseInt(page, 10);
+
+    if (isNaN(limitNum) || limitNum < 1 || limitNum > 100) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid limit parameter. Must be between 1 and 100.",
+      });
+    }
+    if (isNaN(pageNum) || pageNum < 1) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid page parameter.",
+      });
+    }
+
+    let query = {};
+
+    if (search && typeof search === "string" && search.trim()) {
+      const searchTerm = search.trim();
+      query.$or = [
+        { name: { $regex: searchTerm, $options: "i" } },
+        { description: { $regex: searchTerm, $options: "i" } },
+      ];
+    }
+
+    if (category && typeof category === "string" && category.trim()) {
+      query.category = category.trim();
+    }
+
+    const products = await Product.find(query)
+      .populate("category", "name slug")
+      .select("name title category author description images views likes content createdAt updatedAt comments")
+      .sort({ createdAt: -1 })
+      .limit(limitNum)
+      .skip((pageNum - 1) * limitNum)
+      .lean();
+
+    const total = await Product.countDocuments(query);
+
+    return res.status(200).json({
+      success: true,
+      data: products,
+      pagination: {
+        total,
+        currentPage: pageNum,
+        totalPages: Math.ceil(total / limitNum),
+        limit: limitNum,
+      },
+    });
+  } catch (error) {
+    console.error("Error in getAdminProducts:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Server error while fetching products",
+      error: error.message,
+    });
+  }
+};
+
+// ============================ INCREMENT VIEW ============================
+const incrementView = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const updated = await Product.findByIdAndUpdate(
+      id,
+      { $inc: { views: 1 } },
+      { new: true }
+    ).populate("category", "name");
+
+    if (!updated) {
+      return res.status(404).json({ success: false, message: "Post not found" });
+    }
+
+    res.status(200).json({ success: true, views: updated.views });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ============================ TOGGLE LIKE ============================
+const toggleLike = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { email, userId } = req.body;
+
+    let user = null;
+    if (userId) user = await PopUser.findById(userId);
+    else if (email) user = await PopUser.findOne({ email: email.toLowerCase().trim() });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User email or userId is required",
+      });
+    }
+
+    const post = await Product.findById(id);
+    if (!post) {
+      return res.status(404).json({ success: false, message: "Post not found" });
+    }
+
+    const hasLiked = post.likedBy.some(uid => uid.toString() === user._id.toString());
+
+    if (hasLiked) {
+      post.likedBy = post.likedBy.filter(uid => uid.toString() !== user._id.toString());
+      post.likes = Math.max(0, post.likes - 1);
+      user.likedPosts = user.likedPosts.filter(pid => pid.toString() !== post._id.toString());
+    } else {
+      post.likedBy.push(user._id);
+      post.likes += 1;
+      if (!user.likedPosts.some(pid => pid.toString() === post._id.toString())) {
+        user.likedPosts.push(post._id);
+      }
+    }
+
+    await Promise.all([post.save(), user.save()]);
+
+    res.status(200).json({
+      success: true,
+      likes: post.likes,
+      liked: !hasLiked,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ============================ ADD COMMENT ============================
+const addComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { comment, userEmail, userId, email, otp } = req.body;
+    const resolvedEmail = userEmail || email;
+
+    if (!comment || (!resolvedEmail && !userId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Comment and userEmail/email/userId are required",
+      });
+    }
+
+    let user = null;
+    if (userId) {
+      user = await PopUser.findById(userId);
+    } else if (resolvedEmail) {
+      user = await PopUser.findOne({ email: resolvedEmail.toLowerCase().trim() });
+    }
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found. Send OTP first.",
+      });
+    }
+
+    if (otp) {
+      if (!user.otp || !user.expires || user.expires < Date.now()) {
+        return res.status(400).json({ success: false, message: "OTP expired or invalid" });
+      }
+      if (user.otp !== otp) {
+        return res.status(400).json({ success: false, message: "Invalid OTP" });
+      }
+      user.otp = null;
+      user.expires = null;
+      await user.save();
+    }
+
+    const post = await Product.findById(id);
+    if (!post) {
+      return res.status(404).json({ success: false, message: "Post not found" });
+    }
+
+    post.comments.push({ user: user._id, comment: comment.trim() });
+    await post.save();
+
+    user.comments.push({ postId: post._id, comment: comment.trim() });
+    await user.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Comment added successfully",
+      comments: post.comments,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ============================ SEND OTP ============================
+const sendOtp = async (req, res) => {
+  try {
+    const { email, name, phone } = req.body;
+
+    if (!email || !name || !phone) {
+      return res.status(400).json({
+        success: false,
+        message: "Name, email, and phone are required",
+      });
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ success: false, message: "Invalid email format" });
+    }
+
+    const otp = otpGenerator.generate(6, {
+      upperCaseAlphabets: false,
+      specialChars: false,
+      digits: true,
+    });
+
+    const user = await PopUser.findOneAndUpdate(
+      { email: email.toLowerCase().trim() },
+      {
+        user: name.trim(),
+        email: email.toLowerCase().trim(),
+        phone: phone.trim(),
+        otp,
+        expires: Date.now() + 10 * 60 * 1000,
+      },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
+
+    await transporter.sendMail({
+      from: `"AI Knots Blog" <${process.env.EMAIL_USER}>`,
+      to: user.email,
+      subject: "Your OTP for Comment Verification",
+      html: `
+        <h2>Hello ${user.user},</h2>
+        <p>Your OTP is: <strong>${otp}</strong></p>
+        <p>This OTP will expire in 10 minutes.</p>
+      `,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "OTP sent successfully",
+      userId: user._id,
+    });
+  } catch (error) {
+    console.error("Send OTP Error:", error);
+    res.status(500).json({ success: false, message: "Failed to send OTP" });
+  }
+};
+
+// ============================ VERIFY OTP ============================
+const verifyOtp = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+      return res.status(400).json({ success: false, message: "Email and OTP are required" });
+    }
+
+    const user = await PopUser.findOne({ email: email.toLowerCase().trim() });
+    if (!user || !user.otp || !user.expires || user.expires < Date.now()) {
+      return res.status(400).json({ success: false, message: "OTP expired or invalid" });
+    }
+    if (user.otp !== otp) {
+      return res.status(400).json({ success: false, message: "Invalid OTP" });
+    }
+
+    user.otp = null;
+    user.expires = null;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: "OTP verified successfully",
+      userId: user._id,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ============================ VERIFY OTP + COMMENT ============================
+const verifyOtpAndComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { email, otp, comment } = req.body;
+
+    if (!email || !otp || !comment) {
+      return res.status(400).json({ success: false, message: "All fields are required" });
+    }
+
+    const user = await PopUser.findOne({ email: email.toLowerCase().trim() });
+    if (!user || !user.otp || !user.expires || user.expires < Date.now()) {
+      return res.status(400).json({ success: false, message: "OTP expired or invalid" });
+    }
+    if (user.otp !== otp) {
+      return res.status(400).json({ success: false, message: "Invalid OTP" });
+    }
+
+    const post = await Product.findByIdAndUpdate(
+      id,
+      { $push: { comments: { user: user._id, comment: comment.trim() } } },
+      { new: true }
+    ).populate("category", "name");
+
+    if (!post) {
+      return res.status(404).json({ success: false, message: "Post not found" });
+    }
+
+    user.comments.push({ postId: post._id, comment: comment.trim() });
+    user.otp = null;
+    user.expires = null;
+    await user.save();
+
+    res.status(201).json({
+      success: true,
+      message: "Comment posted successfully",
+      comments: post.comments,
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// ============================ EXPORT ALL ============================
+module.exports = {
+  createContent,
+  getHomeData,
+  getSingleContent,
+  updateHomeData,
+  deletedContent,
+  getAdminProducts,
+  incrementView,
+  toggleLike,
+  addComment,
+  sendOtp,
+  verifyOtp,
+  verifyOtpAndComment,
+};
