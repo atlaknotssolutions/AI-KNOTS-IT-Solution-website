@@ -48,8 +48,7 @@ import PrivacyPolicy from "../Component/PrivacyPolicy/PrivacyPolicy";
 import CookiePolicy from "../Component/CookiePolicy/CookiePolicy";
 import TermsOfService from "../Component/TermsOfService/TermsOfService";
 import Cart from "../Component/SoftwareDevelopment/Cart/Cart";
-import ProductForSells from "../Component/ProductForSells/ProductForSells";
-import ProductForSellsDetail from "../Component/ProductForSells/ProductForSellsDetail";
+
 import Landingpage from "../Component/Landingpage/Landingpage";
 
 export const router = createBrowserRouter([
@@ -116,9 +115,7 @@ export const router = createBrowserRouter([
       { path: "privacypolicy", element: <PrivacyPolicy /> },
       { path: "cookiepolicy", element: <CookiePolicy /> },
       { path: "termsofservice", element: <TermsOfService /> },
-      // { path: "cart", element: <Cart /> }, // Added Cart route
-      { path: "productforsells", element: <ProductForSells /> },
-      { path: "productforsells/:id", element: <ProductForSellsDetail /> },
+     
     ],
   },
 ]);
