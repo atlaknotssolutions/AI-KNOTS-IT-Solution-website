@@ -112,7 +112,7 @@ const Footer = () => {
           isDark
             ? "bg-gradient-to-b from-black to-zinc-950 border-[#8B6B4A]/30"
             : "bg-gradient-to-b from-gray-50 to-white border-gray-200"
-        }`
+        }`}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
