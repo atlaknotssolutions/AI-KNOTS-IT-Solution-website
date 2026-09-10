@@ -32,7 +32,6 @@ const Chatbot = () => {
   const quickReplies = [
     "Tell me about your services",
     "How can you help my business?",
-    "What is your pricing?",
     "Contact information",
   ];
 
