@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import
-{
+import {
   ArrowRight,
   Code,
   Globe,
@@ -19,8 +18,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { useTheme } from "../../context/ThemeContext";
 
-import
-{
+import {
   Play,
   Target,
   Instagram,
@@ -137,16 +135,13 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
-export default function SoftwareDevelopment()
-{
+export default function SoftwareDevelopment() {
   const { isDark } = useTheme();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() =>
-  {
-    const handleScroll = () =>
-    {
+  useEffect(() => {
+    const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
     };
 
@@ -154,8 +149,7 @@ export default function SoftwareDevelopment()
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () =>
-  {
+  const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -222,20 +216,26 @@ export default function SoftwareDevelopment()
 
             <motion.p
               variants={fadeInUp}
-              className={`text-lg md:text-xl mb-12 max-w-5xl mx-auto leading-relaxed ${isDark ? "text-gray-300" : "text-gray-200"
-                }`}
+              className={`text-lg md:text-xl mb-12 max-w-5xl mx-auto leading-relaxed ${
+                isDark ? "text-gray-300" : "text-gray-200"
+              }`}
             >
               We provide high-quality{" "}
               <>
-                <HashLink smooth
-                  to="/software#software-development-services" className={serviceLink}>
+                <HashLink
+                  smooth
+                  to="/software#software-development-services"
+                  className={serviceLink}
+                >
                   software development services
                 </HashLink>{" "}
               </>
-              to businesses by building secure, scalable, and high-performance software solutions with excellent{" "}
+              to businesses by building secure, scalable, and high-performance
+              software solutions with excellent{" "}
               <Link to="/uidesign" className={serviceLink}>
                 user experience
-              </Link>.
+              </Link>
+              .
             </motion.p>
 
             <motion.div
@@ -293,50 +293,44 @@ export default function SoftwareDevelopment()
               viewport={{ once: true }}
               className={`text-xl mb-12 max-w-5xl mx-auto leading-relaxed text-center ${isDark ? "text-gray-300" : "text-[#704d34]"}`}
             >
-              Access a skilled team of{" "}
-              <Link to="/software" >
-                developers
-              </Link>{" "}
+              Access a skilled team of <Link to="/software">developers</Link>{" "}
               who can transform your business and help you adapt to evolving{" "}
               <Link to="/technology" className={serviceLink}>
                 technologies
               </Link>
               .
-
               <br />
               <br />
-
-              By partnering with AI Knots, businesses can gain a strong competitive advantage.
-              Our team delivers reliable and efficient{" "}
+              By partnering with AI Knots, businesses can gain a strong
+              competitive advantage. Our team delivers reliable and efficient{" "}
               <>
-                <HashLink smooth
-                  to="/software#software-development-services" className={serviceLink}>
+                <HashLink
+                  smooth
+                  to="/software#software-development-services"
+                  className={serviceLink}
+                >
                   software development services
                 </HashLink>{" "}
               </>{" "}
               that help increase productivity and business growth.
-
               <br />
               <br />
-
               We offer a wide range of services including{" "}
               <Link to="/uidesign" className={serviceLink}>
                 software design
               </Link>
-              ,{" "}
-              <Link to="/software" >
-                custom development
-              </Link>
-              , software testing, legacy system migration,
-              {" "}
+              , <Link to="/software">custom development</Link>, software
+              testing, legacy system migration,{" "}
               <>
-                <HashLink smooth
-                  to="/software#our-development-process" className={serviceLink}>
+                <HashLink
+                  smooth
+                  to="/software#our-development-process"
+                  className={serviceLink}
+                >
                   product development
                 </HashLink>{" "}
               </>
-              , and many more
-              solutions tailored to business requirements.
+              , and many more solutions tailored to business requirements.
             </motion.p>
 
             <div className="grid md:grid-cols-4 gap-8 mb-16">
@@ -494,10 +488,11 @@ export default function SoftwareDevelopment()
                       y: -4,
                       transition: { duration: 0.2 },
                     }}
-                    className={`px-8 py-4 rounded-2xl text-base md:text-lg font-medium cursor-pointer transition-all duration-300 shadow-md ${isDark
-                      ? "bg-zinc-900 border border-[#8B6B4A]/40 text-gray-200 hover:border-[#3D220E] hover:bg-[#3D220E]/60 hover:shadow-[#8B6B4A]/20"
-                      : "bg-white border border-gray-200 text-gray-800 hover:border-[#3D220E] hover:bg-[#F5EDE4] hover:shadow-lg hover:shadow-[#E8D9C2]/40"
-                      }`}
+                    className={`px-8 py-4 rounded-2xl text-base md:text-lg font-medium cursor-pointer transition-all duration-300 shadow-md ${
+                      isDark
+                        ? "bg-zinc-900 border border-[#8B6B4A]/40 text-gray-200 hover:border-[#3D220E] hover:bg-[#3D220E]/60 hover:shadow-[#8B6B4A]/20"
+                        : "bg-white border border-gray-200 text-gray-800 hover:border-[#3D220E] hover:bg-[#F5EDE4] hover:shadow-lg hover:shadow-[#E8D9C2]/40"
+                    }`}
                   >
                     {ind}
                   </motion.span>
@@ -512,7 +507,9 @@ export default function SoftwareDevelopment()
               className="text-4xl md:text-5xl font-black text-center mb-12"
             >
               Technology{" "}
-              <span className="text-[#9F714E] : text-black">Stack</span>
+              <span className={isDark ? "text-[#e7cebb]" : "text-[#3D220E]"}>
+                Stack
+              </span>
             </motion.h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -557,10 +554,11 @@ export default function SoftwareDevelopment()
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={staggerContainer}
-                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${isDark
-                  ? "bg-zinc-900 border-[#8B6B4A]/40 hover:border-[#3D220E]"
-                  : "bg-white border-[#E8D9C2] hover:border-[#3D220E] hover:shadow-gray-200"
-                  }`}
+                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${
+                  isDark
+                    ? "bg-zinc-900 border-[#8B6B4A]/40 hover:border-[#3D220E]"
+                    : "bg-white border-[#E8D9C2] hover:border-[#3D220E] hover:shadow-gray-200"
+                }`}
               >
                 <h2
                   className={`text-3xl md:text-4xl font-black mb-8 ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}
@@ -595,10 +593,11 @@ export default function SoftwareDevelopment()
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={staggerContainer}
-                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${isDark
-                  ? "bg-zinc-900 border-[#8B6B4A]/40 hover:border-[#3D220E]"
-                  : "bg-white border-[#E8D9C2] hover:border-[#3D220E] hover:shadow-inner-gray-200"
-                  }`}
+                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${
+                  isDark
+                    ? "bg-zinc-900 border-[#8B6B4A]/40 hover:border-[#3D220E]"
+                    : "bg-white border-[#E8D9C2] hover:border-[#3D220E] hover:shadow-inner-gray-200"
+                }`}
               >
                 <h2
                   className={`text-3xl md:text-4xl font-black mb-8 ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}
@@ -633,10 +632,11 @@ export default function SoftwareDevelopment()
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={staggerContainer}
-                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${isDark
-                  ? "bg-zinc-900 border-[#8B6B4A]/40 hover:border-[#3D220E]"
-                  : "bg-white border-[#E8D9C2] hover:border-[#3D220E] hover:shadow-gray-200"
-                  }`}
+                className={`p-8 rounded-2xl border flex flex-col h-full transition-all duration-300 hover:shadow-xl ${
+                  isDark
+                    ? "bg-zinc-900 border-[#8B6B4A]/40 hover:border-[#3D220E]"
+                    : "bg-white border-[#E8D9C2] hover:border-[#3D220E] hover:shadow-gray-200"
+                }`}
               >
                 <h2
                   className={`text-3xl md:text-4xl font-black mb-8 ${isDark ? "text-[#9F714E]" : "text-[#9F714E]"}`}
@@ -775,8 +775,9 @@ export default function SoftwareDevelopment()
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className={`text-4xl md:text-5xl font-bold text-center mb-12 ${isDark ? "text-white" : "text-[#573010]"
-                }`}
+              className={`text-4xl md:text-5xl font-bold text-center mb-12 ${
+                isDark ? "text-white" : "text-[#573010]"
+              }`}
             >
               Frequently Asked <span className="text-[#8B6B4A]">Questions</span>
             </motion.h2>
@@ -806,14 +807,16 @@ export default function SoftwareDevelopment()
               ].map((faq, idx) => (
                 <details
                   key={idx}
-                  className={`group rounded-xl p-6 border ${isDark
+                  className={`group rounded-xl p-6 border ${
+                    isDark
                       ? "bg-gray-900 border-gray-800"
                       : "bg-white border-gray-100"
-                    }`}
+                  }`}
                 >
                   <summary
-                    className={`font-semibold text-lg cursor-pointer flex justify-between items-center gap-4 ${isDark ? "text-white" : "text-[#573010]"
-                      }`}
+                    className={`font-semibold text-lg cursor-pointer flex justify-between items-center gap-4 ${
+                      isDark ? "text-white" : "text-[#573010]"
+                    }`}
                   >
                     {faq.q}
 
@@ -821,8 +824,9 @@ export default function SoftwareDevelopment()
                   </summary>
 
                   <p
-                    className={`mt-4 ${isDark ? "text-gray-400" : "text-gray-600"
-                      }`}
+                    className={`mt-4 ${
+                      isDark ? "text-gray-400" : "text-gray-600"
+                    }`}
                   >
                     {faq.a}
                   </p>

@@ -449,15 +449,15 @@ const blogSlice = createSlice({
     builder
       // Categories
       .addCase(fetchCategories.pending, (state) => {
-        state.status = "loading";
+        state.categoriesStatus = "loading";
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.categoriesStatus = "succeeded";
         state.categories = action.payload;
       })
       .addCase(fetchCategories.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload;
+        state.categoriesStatus = "failed";
+        state.categoriesError = action.payload;
       })
 
       // All Posts

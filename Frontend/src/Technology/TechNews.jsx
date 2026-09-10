@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from "../context/ThemeContext";
-import
-  {
-    Newspaper,
-    ExternalLink,
-    Clock,
-    Cpu,
-    Zap,
-    Globe,
-    ArrowUp,
-  } from "lucide-react";
+import {
+  Newspaper,
+  ExternalLink,
+  Clock,
+  Cpu,
+  Zap,
+  Globe,
+  ArrowUp,
+} from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import DOMPurify from "dompurify";
 
-import
-  {
-    fetchTechNews,
-    setSelectedCategory,
-  } from "./techNewsSlice/techNewsSlice.js";
+import {
+  fetchTechNews,
+  setSelectedCategory,
+} from "./techNewsSlice/techNewsSlice.js";
 
-const TechNews = () =>
-{
+const NEWS_PER_PAGE = 6;
+
+const TechNews = () => {
   const { isDark } = useTheme();
   const dispatch = useDispatch();
 
@@ -33,20 +32,17 @@ const TechNews = () =>
   } = useSelector((state) => state.techNews);
 
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() =>
-  {
-    if (status === "idle")
-    {
+  useEffect(() => {
+    if (status === "idle") {
       dispatch(fetchTechNews());
     }
   }, [status, dispatch]);
 
   // Scroll to top
-  useEffect(() =>
-  {
-    const handleScroll = () =>
-    {
+  useEffect(() => {
+    const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
     };
 
@@ -54,8 +50,7 @@ const TechNews = () =>
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () =>
-  {
+  const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -69,8 +64,25 @@ const TechNews = () =>
       ? newsItems
       : newsItems.filter((item) => item.category === selectedCategory);
 
-  const getIconForCategory = (category) =>
-  {
+  const totalPages = Math.ceil(filteredNews.length / NEWS_PER_PAGE);
+  const startIndex = (currentPage - 1) * NEWS_PER_PAGE;
+  const currentNews = filteredNews.slice(
+    startIndex,
+    startIndex + NEWS_PER_PAGE,
+  );
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory]);
+
+  const goToPage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const getIconForCategory = (category) => {
     const cat = (category || "").toLowerCase();
     if (cat.includes("ai") || cat.includes("artificial intelligence"))
       return <Cpu className="w-5 h-5" />;
@@ -94,8 +106,7 @@ const TechNews = () =>
   const accentClass = "text-accent";
 
   // Sanitize function
-  const sanitize = (html) =>
-  {
+  const sanitize = (html) => {
     return DOMPurify.sanitize(html, {
       ALLOWED_TAGS: [
         "b",
@@ -113,8 +124,7 @@ const TechNews = () =>
     });
   };
 
-  if (status === "loading")
-  {
+  if (status === "loading") {
     return (
       <div
         className={`min-h-screen flex flex-col items-center justify-center p-6 transition-colors duration-700
@@ -143,8 +153,7 @@ const TechNews = () =>
     );
   }
 
-  if (status === "failed")
-  {
+  if (status === "failed") {
     return (
       <div
         className={`min-h-screen flex items-center justify-center p-6 transition-colors duration-700
@@ -196,12 +205,13 @@ const TechNews = () =>
               <button
                 key={category}
                 onClick={() => dispatch(setSelectedCategory(category))}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${selectedCategory === category
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  selectedCategory === category
                     ? "bg-[#8B6B4A] text-white shadow-lg shadow-[#8B6B4A]/40"
                     : isDark
                       ? "bg-gray-900 text-gray-300 hover:bg-[#3D2A1E] hover:text-[#D9C5B5] border border-gray-700 hover:border-[#8B6B4A]/50"
                       : "bg-white text-[#8B6B4A] hover:bg-[#F5EDE4] border border-gray-300 hover:border-[#8B6B4A] hover:text-[#3D220E]"
-                  }`}
+                }`}
               >
                 {category}
               </button>
@@ -210,7 +220,7 @@ const TechNews = () =>
 
           {/* News Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredNews.map((item) => (
+            {currentNews.map((item) => (
               <div
                 key={item.id}
                 className={`group rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl ${cardClass}`}
@@ -220,7 +230,9 @@ const TechNews = () =>
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${isDark ? "bg-[#3D220E]/40 text-[#D9C5B5]" : "bg-[#F5EDE4] text-[#8B6B4A]"}`}>
+                      <div
+                        className={`p-2 rounded-lg ${isDark ? "bg-[#3D220E]/40 text-[#D9C5B5]" : "bg-[#F5EDE4] text-[#8B6B4A]"}`}
+                      >
                         {getIconForCategory(item.category)}
                       </div>
                       <span
@@ -278,6 +290,72 @@ const TechNews = () =>
             ))}
           </div>
 
+          {totalPages > 1 && (
+            <div className="flex flex-col items-center gap-4 mt-10">
+              <nav
+                className="flex items-center gap-2"
+                aria-label="News pagination"
+              >
+                <button
+                  onClick={() => goToPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all border ${
+                    currentPage === 1
+                      ? isDark
+                        ? "bg-gray-800 text-gray-500 border-gray-800 cursor-not-allowed"
+                        : "bg-gray-200 text-gray-400 border-gray-200 cursor-not-allowed"
+                      : isDark
+                        ? "bg-gray-900 text-gray-300 border-gray-700 hover:bg-gray-800"
+                        : "bg-white text-[#8B6B4A] border-gray-300 hover:bg-[#F5EDE4]"
+                  }`}
+                >
+                  Previous
+                </button>
+
+                {Array.from(
+                  { length: totalPages },
+                  (_, index) => index + 1,
+                ).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => goToPage(page)}
+                    aria-current={page === currentPage ? "page" : undefined}
+                    className={`min-w-10 h-10 px-3 rounded-lg text-sm font-medium transition-all border ${
+                      page === currentPage
+                        ? "bg-[#8B6B4A] text-white border-[#8B6B4A] shadow-lg shadow-[#8B6B4A]/30"
+                        : isDark
+                          ? "bg-gray-900 text-gray-300 border-gray-700 hover:bg-gray-800"
+                          : "bg-white text-[#8B6B4A] border-gray-300 hover:bg-[#F5EDE4]"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() => goToPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all border ${
+                    currentPage === totalPages
+                      ? isDark
+                        ? "bg-gray-800 text-gray-500 border-gray-800 cursor-not-allowed"
+                        : "bg-gray-200 text-gray-400 border-gray-200 cursor-not-allowed"
+                      : isDark
+                        ? "bg-gray-900 text-gray-300 border-gray-700 hover:bg-gray-800"
+                        : "bg-white text-[#8B6B4A] border-gray-300 hover:bg-[#F5EDE4]"
+                  }`}
+                >
+                  Next
+                </button>
+              </nav>
+
+              <p className={`text-sm ${bodyClass}`}>
+                Page {currentPage} of {totalPages} - {filteredNews.length} news
+                items
+              </p>
+            </div>
+          )}
+
           {filteredNews.length === 0 && (
             <div className={`text-center text-lg mt-12 ${bodyClass}`}>
               No news found in this category.
@@ -286,7 +364,6 @@ const TechNews = () =>
         </div>
 
         {/* Scroll to Top Button */}
-
       </div>
     </>
   );
