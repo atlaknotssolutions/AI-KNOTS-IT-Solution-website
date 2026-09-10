@@ -466,7 +466,7 @@ export default function About()
         <title>About AI Knots IT | IT Solutions Company Bhopal</title>
         <meta
           name="description"
-          content="Learn about Atla Inteligent Knots Solution, a trusted IT company offering web, software & digital solution."
+          content="Learn about AI Inteligent Knots Solution, a trusted IT company offering web, software & digital solution."
         />
         <meta
           name="keywords"

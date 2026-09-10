@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.atlaknots.com/sitemap.xml
-Host: https://www.atlaknots.com
+Sitemap: https://www.aiknotsit.comsitemap.xml
+Host: https://www.aiknotsit.com
 
 Disallow: /admin/
 Disallow: /dashboard/

@@ -13,7 +13,7 @@ const Chatbot = () => {
     {
       id: "welcome",
       type: "bot",
-      text: "Hi! I'm Atlas, your AI assistant at AI Knots IT Solution. How can I help you today?",
+      text: "Hi! I'm AI Knots, your AI assistant at AI Knots IT Solution. How can I help you today?",
     },
     {
       //type hello
