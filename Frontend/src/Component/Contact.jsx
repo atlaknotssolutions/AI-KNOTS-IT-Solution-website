@@ -295,10 +295,10 @@ const Contact = () => {
                           className={`mt-1.5 ${isDark ? "text-gray-300" : "text-gray-600"}`}
                         >
                           <a
-                            href="mailto:Support@aiknotsit.com"
+                            href="mailto:support@aiknotsit.com"
                             className="hover:text-accent transition"
                           >
-                            Support@aiknotsit.com
+                            support@aiknotsit.com
                           </a>
                         </p>
                       </div>

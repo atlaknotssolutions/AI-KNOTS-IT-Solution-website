@@ -103,7 +103,7 @@ const Footer = () => {
               addressCountry: "IN",
             },
             telephone: "+91-78696-36070",
-            email: "Support@aiknotsit.com",
+            email: "support@aiknotsit.com",
           })}
         </script>
       </Helmet>
@@ -247,10 +247,10 @@ const Footer = () => {
                 <li className="flex items-center gap-3">
                   <Mail size={18} className="text-accent shrink-0" />
                   <a
-                    href="mailto:Support@aiknotsit.com"
+                    href="mailto:support@aiknotsit.com"
                     className={`transition-colors break-all ${isDark ? "hover:text-[#D9C5B5]" : "hover:text-[#8B6B4A]"}`}
                   >
-                    Support@aiknotsit.com
+                    support@aiknotsit.com
                   </a>
                 </li>
               </ul>
